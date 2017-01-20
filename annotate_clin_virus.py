@@ -129,7 +129,8 @@ def write_a_virus(metadata_list, virus_name, virus_dna, virus_annot, virus_strai
     iso_source += metadata_list[4]
 
     fsa = open(virus_name + '/' + virus_name + '.fsa', 'w')
-    fsa.write('>' + virus_name + ' [organism=' + virus_strain + '] [collection-date=2016] [country=USA] [moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + virus_name +']\n')
+    fsa.write('>' + virus_name + ' [organism=' + virus_strain + '] [collection-date=2016] [country=USA] '
+              '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + virus_name +']\n')
     fsa.write(virus_dna)
     fsa.close()
 
