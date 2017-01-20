@@ -94,9 +94,9 @@ def grab_name_of_virus(sample_name, genome_string):
         file_to_blast.write(genome_string)
         file_to_blast.close()
         # Actually do the blasting and save the results in a file sample_name.result
-        subprocess.call('blastn -query ' + sample_name + '/temp.fasta -db /Users/uwvirongs/Downloads/surpi-master/nt '
-                        '-num_threads 8 -num_descriptions 0 -num_alignments 1 -word_size 28 | tee ' + sample_name + '/'
-                        + sample_name + '.result', shell=True)
+        subprocess.call('blastn -query ' + sample_name + '/temp.fasta -db ' + BLAST_DB_LOCATION + '-num_threads 8 '
+                        '-num_descriptions 0 -num_alignments 1 -word_size 28 | tee ' + sample_name + '/' + sample_name
+                        + '.result', shell=True)
         # Remove the temporary file to clean up the directory just a little
         subprocess.call('rm ' + sample_name + '/temp.fasta', shell=True)
 
@@ -193,6 +193,7 @@ def write_a_virus(metadata_list, sample_name, virus_genome, virus_annotation):
                     '/assembly.cmt -V vb', shell=True)
 
 if __name__ == '__main__':
+    BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
     start = timeit.default_timer()
     # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
     parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
