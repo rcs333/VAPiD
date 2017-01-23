@@ -192,6 +192,20 @@ def write_a_virus(metadata_list, sample_name, virus_genome, virus_annotation):
     subprocess.call('tbl2asn -p ' + sample_name + '/ -t ' + sample_name + '/template.sbt -Y ' + sample_name +
                     '/assembly.cmt -V vb', shell=True)
 
+    check_for_stops(sample_name)
+
+
+# Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
+# wrong. NOTE: requires tbl2asn to have successfully created a .gbf file or this will fail catastrophically
+def check_for_stops(sample_name):
+    stops = 0
+    for line in open(sample_name + '/' + sample_name + '.gbf'):
+        if '*' in line:
+            stops += 1
+    if stops > 0:
+        print('WARNING: ' + sample_name + ' contains ' + str(stops) + 'stop codon(s)!')
+
+
 if __name__ == '__main__':
     BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
     start = timeit.default_timer()
