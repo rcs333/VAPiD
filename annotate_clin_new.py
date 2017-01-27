@@ -193,8 +193,6 @@ def write_a_virus(metadata_list, sample_name, virus_genome, virus_annotation):
     subprocess.call('tbl2asn -p ' + sample_name + '/ -t ' + sample_name + '/' + args.sbt_file_loc.split('/')[-1] +
                     ' -Y ' + sample_name + '/assembly.cmt -V vb', shell=True)
 
-    check_for_stops(sample_name)
-
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
 # wrong. NOTE: requires tbl2asn to have successfully created a .gbf file or this will fail catastrophically
@@ -225,3 +223,8 @@ if __name__ == '__main__':
     for x in range(0, len(sample_name_list)):
         write_a_virus(pull_metadata(sample_name_list[x]), sample_name_list[x], genome_list[x],
                       annot_map[sample_name_list[x]])
+
+    # This way we do them all and spit it all out at the end and not seperated by 8000000 lines of blast output
+    for name in sample_name_list:
+        check_for_stops(name)
+
