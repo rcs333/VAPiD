@@ -64,8 +64,9 @@ def parse_gff(gff_location):
 # Grab the coverage data from the imported metadata, if there is no coverage information randomly generate it and add
 # .1x so that we know that it was randomly generated
 def pull_coverage(data_list):
-    if data_list[20] != '':
-        coverage = data_list[20]
+    # This protects us from when the metadata list doesn't contain any info on the virus
+    if data_list is not None and data_list[20] != '':
+            coverage = data_list[20]
     else:
         coverage = str(randint(20,100)) + '.1x'
     return coverage
@@ -87,14 +88,14 @@ def write_cmt(sample_name, coverage):
 # just grab it again. Otherwise, blast the virus and pull the strain name out and return it.
 def grab_name_of_virus(sample_name, genome_string):
     # Check to see if we've already blasted, there's no need to reblast if the file already exists
-    if os.path.isfile(sample_name + '/' + sample_name + '.result'):
+    if not os.path.isfile(sample_name + '/' + sample_name + '.result'):
         # Write a temporary file that we'll blast to find the name of the virus
         file_to_blast = open(sample_name + '/temp.fasta', 'w')
         file_to_blast.write('>' + sample_name + '\n')
         file_to_blast.write(genome_string)
         file_to_blast.close()
         # Actually do the blasting and save the results in a file sample_name.result
-        subprocess.call('blastn -query ' + sample_name + '/temp.fasta -db ' + BLAST_DB_LOCATION + '-num_threads 8 '
+        subprocess.call('blastn -query ' + sample_name + '/temp.fasta -db ' + BLAST_DB_LOCATION + ' -num_threads 8 '
                         '-num_descriptions 0 -num_alignments 1 -word_size 28 | tee ' + sample_name + '/' + sample_name
                         + '.result', shell=True)
         # Remove the temporary file to clean up the directory just a little
@@ -179,7 +180,7 @@ def write_a_virus(metadata_list, sample_name, virus_genome, virus_annotation):
 
     # Create the .cmt and .sbt files in the directory for this virus
     write_cmt(sample_name, coverage)
-    subprocess.call('cp ' + args.sbt_file_loc + sample_name + '/', shell=True)
+    subprocess.call('cp ' + args.sbt_file_loc + ' ' + sample_name + '/', shell=True)
 
     # Grab the strain name of the virus from blast
     virus_strain_name = grab_name_of_virus(sample_name, virus_genome)
@@ -189,8 +190,8 @@ def write_a_virus(metadata_list, sample_name, virus_genome, virus_annotation):
 
     write_tbl(sample_name, virus_annotation, virus_genome)
 
-    subprocess.call('tbl2asn -p ' + sample_name + '/ -t ' + sample_name + '/template.sbt -Y ' + sample_name +
-                    '/assembly.cmt -V vb', shell=True)
+    subprocess.call('tbl2asn -p ' + sample_name + '/ -t ' + sample_name + '/' + args.sbt_file_loc.split('/')[-1] +
+                    ' -Y ' + sample_name + '/assembly.cmt -V vb', shell=True)
 
     check_for_stops(sample_name)
 
@@ -221,7 +222,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     sample_name_list, genome_list, annot_map = parse_gff(args.gff_file)
-
     for x in range(0, len(sample_name_list)):
         write_a_virus(pull_metadata(sample_name_list[x]), sample_name_list[x], genome_list[x],
                       annot_map[sample_name_list[x]])
