@@ -15,6 +15,17 @@ tbl2asn error checking outputs
 """
 
 
+# This opens a fasta file containing a single genome and pulls the name and genome in a way that we like
+def parse_fasta(file_loc):
+    genome = ''
+    for line in open(file_loc):
+        if line[0] == '>':
+            fasta_name = line[1:]
+        else:
+            genome += line
+    return fasta_name, genome
+
+
 # Takes the name of one of the virus samples and returns a list of all the metadata we have in the sheet
 def pull_metadata(virus_name):
     for line in open(args.metadata_info_sheet):
