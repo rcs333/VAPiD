@@ -35,6 +35,20 @@ BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
 
 # read through the top 25 hits and save the top hit that has the word complete in it - if we don't do this fail miserably
 
+def read_fasta(fasta_file_loc):
+    strain_list = []
+    genome_list = []
+    dna_string = ''
+    for line in open(fasta_file_loc):
+        if line[0] == '>':
+            strain_list.append(line[:-1])
+            if dna_string != '':
+                genome_list.append(dna_string)
+                dna_string = ''
+        else:
+            dna_string += line[:-1]
+    genome_list.append(dna_string)
+    return strain_list, genome_list
 
 def blast_n_shit(strain, our_fasta_loc):
     our_fasta_loc = 'SC261.fasta'
