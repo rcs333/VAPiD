@@ -5,6 +5,7 @@ Annotates clinical virus sequences and creates genbank approved files for submis
 
 # Installation
 Installation should be very straight forward.
+
 1. Clone repository and change locataion of BLAST_DB
 
 2. You'll also probobly want to just create a blank .csv file for metadata so the program will skip it - the variable for this is metadata_sheet_location
