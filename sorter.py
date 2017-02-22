@@ -50,12 +50,12 @@ def blast_n_shit(strain, our_fasta_loc):
         if line[0] == '>':
             name_of_virus = line.split('|')[4].split('strain')[0].split('isolate')[0].strip()
             ref_seq_gb = line.split('|')[3]
-            if 'complete' in line:
+            if 'complete genome' in line:
                 break
             else:
                 read_next = True
         elif read_next:
-            if 'complete' in line:
+            if 'complete genome' in line or 'genome' in line:
                 break
             else:
                 read_next = False
@@ -202,10 +202,10 @@ def write_fasta(strain, genome):
 # .1x so that we know that it was randomly generated
 def pull_coverage(data_list):
     # This protects us from when the metadata list doesn't contain any info on the virus
-    if data_list is not None and data_list[20] != '':
-            coverage = data_list[20]
+    if data_list is not None and data_list[4] != '':
+            coverage = data_list[4]
     else:
-        coverage = str(randint(20,100)) + '.1x'
+        coverage = str(randint(20, 100)) + '.1x'
     return coverage
 
 
@@ -363,7 +363,8 @@ def check_for_stops(sample_name):
 if __name__ == '__main__':
 
     # Set this to where you want your
-    fasta_loc = 'HarvestSeqJ1-J2-J4-J5.fasta'
+    fasta_loc = '16-I4.fasta'
+    metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
     # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
@@ -380,7 +381,7 @@ if __name__ == '__main__':
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     for x in range(0, len(virus_strain_list)):
-        annotate_a_virus(virus_strain_list[x], virus_genome_list[x], 'UWVIROCLINSEQ.csv', 'template.sbt')
+        annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, 'template.sbt')
 
     for name in virus_strain_list:
         check_for_stops(name)
