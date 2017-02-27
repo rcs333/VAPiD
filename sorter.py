@@ -40,16 +40,16 @@ def read_fasta(fasta_file_loc):
 def blast_n_shit(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
     if not os.path.isfile(strain + '/' + strain +'.blastresults'):
-        subprocess.call('blastn -query ' + our_fasta_loc + ' -db ' + BLAST_DB_LOCATION + ' -num_threads 8 '
-                        '-num_descriptions 0 -num_alignments 35 -word_size 28 | tee ' + strain + '/' + strain +
+        subprocess.call('ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote '
+                        '-num_descriptions 0 -num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain +
                         '.blastresults', shell=True)
 
     # read through the top 25 hits saved earlier and save the acsession number of the best hit that's complete
     read_next = False
     for line in open(strain + '/' + strain + '.blastresults'):
         if line[0] == '>':
-            name_of_virus = line.split('|')[4].split('strain')[0].split('isolate')[0].strip()
-            ref_seq_gb = line.split('|')[3]
+            name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+            ref_seq_gb = line.split()[0][1:]
             if 'complete genome' in line:
                 break
             else:
@@ -170,7 +170,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
     # Read the reference gff file and extract lists of all of the protein locations and annotations!
     gene_loc_list = []
     gene_product_list = []
-
+    allow_one = False
     for line in open(strain + '/' + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
@@ -285,23 +285,23 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
     gene_of_interest = 'XFNDKLS:NLFKSD:FJNSDLKFJDSLKFJDLFUHE:OPUHFE:LUHILDLKFJNSDLFKJBNDLKFUHSLDUBFKNLKDFJBLSKDJFBLDKS'
     if 'parainfluenza virus' in name_of_virus.lower():
         if '3' in name_of_virus:
-            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templeted ' \
+            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
                           'Gs\n\t\t\tprotein_id\t69'
             gene_of_interest = 'D protein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'D protein', 'HP3')
-        elif '4' or '1' in name_of_virus:
-            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templeted ' \
+        elif '4' in name_of_virus:
+            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                           'Gs\n\t\t\tprotein_id\t69'
             gene_of_interest = 'phosphoprotein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
-        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templeted ' \
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
                       'G\n\t\t\tprotein_id\t69'
         gene_of_interest = 'V protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'V protein', 'MEAS')
     if 'mumps' in name_of_virus.lower():
-        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templeted ' \
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\t69'
         gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
@@ -363,7 +363,7 @@ def check_for_stops(sample_name):
 if __name__ == '__main__':
 
     # Set this to where you want your
-    fasta_loc = '16-I4.fasta'
+    fasta_loc = '3_hku1.fasta'
     metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
