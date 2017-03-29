@@ -282,7 +282,7 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     #TODO: this should all be moved into a seperate function
     extra_stuff = ''
-    # No fucking protein had better be named this
+    # No protein had better be named this
     gene_of_interest = 'XFNDKLS:NLFKSD:FJNSDLKFJDSLKFJDLFUHE:OPUHFE:LUHILDLKFJNSDLFKJBNDLKFUHSLDUBFKNLKDFJBLSKDJFBLDKS'
     if 'parainfluenza virus' in name_of_virus.lower():
         if '3' in name_of_virus:
