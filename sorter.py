@@ -37,12 +37,13 @@ def read_fasta(fasta_file_loc):
 # are saved - then we run a mafft alignment on the two and return two strings one of them our sequence with '-' and the
 # other of our new reference sequence
 # TODO: probobly split this into multiple functions or at least rename this one
-def blast_n_shit(strain, our_fasta_loc):
+def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
     if not os.path.isfile(strain + '/' + strain +'.blastresults'):
-        subprocess.call('ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote '
-                        '-num_descriptions 0 -num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain +
-                        '.blastresults', shell=True)
+        cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
+                '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
+        bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+        bs.communicate()
 
     # read through the top 25 hits saved earlier and save the acsession number of the best hit that's complete
     read_next = False
@@ -265,7 +266,7 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     write_fasta(strain, genome)
 
-    name_of_virus, our_seq, ref_seq = blast_n_shit(strain, strain + '/' + strain + '.fasta')
+    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + '/' + strain + '.fasta')
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
 
@@ -344,7 +345,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome):
     fsa = open(strain + '/' + strain + '.fsa', 'w')
-    fsa.write('>' + strain + ' [organism=' + name_of_virus + '] [collection-date=2016] [country=USA] '
+    fsa.write('>' + strain + ' [organism=' + name_of_virus + '] [collection-date=2015] [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
     fsa.close()
@@ -363,7 +364,7 @@ def check_for_stops(sample_name):
 if __name__ == '__main__':
 
     # Set this to where you want your
-    fasta_loc = '3_hku1.fasta'
+    fasta_loc = 'N07-262B.fasta'
     metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
