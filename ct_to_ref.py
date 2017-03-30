@@ -17,8 +17,29 @@ for fastq in glob.glob(input_dir + '*.fastq'):
         if float(line.split('\t')[6]) > abund:
             line_of_interest = line
             abund = float(line.split('\t')[6])
-        # I think maybe we go through the report and save the 1best - grab the GI and then we've got the reference
-        # genome and then all we'd need to be getting is the fasta to pass onwards
+            ref_id = line.split('\t')[1]
+            # Pull the GI from the map we loaded in memory
+
+            # Download the reference .gbk and .fasta
 
     # maybe we should mkdir at this phase - but we don't even have a real FASTA yet which we NEED
     # save the results
+
+
+def grab_ref(taxid, sample):
+
+    tru_id = 'unknown'
+    max = -999999999.0
+
+    for line in open(input_dir + sample + '_report.txt'):
+        id = line.split()[0]
+        abundance = line.split()[6]
+        if float(abundance) > max:
+            tru_id = id
+            max = float(abundance)
+    return(tru_id)
+
+
+
+# load the map of gi to taxid into memory -
+# then when we pull the taxid we can immideatly download a .gbk file for annotations

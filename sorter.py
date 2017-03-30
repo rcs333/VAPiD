@@ -155,9 +155,6 @@ def adjust(given_num, our_num_array, ref_num_array):
     # Go through our number array and search for the number of interest
     for x in range(0, len(our_num_array)):
         if ref_num_array[x] == given_num:
-            #print('what should be equal to ' + str(given_num) + ' is ' + str(ref_num_array[x]))
-            #print('and this is the index ' + str(x))
-            #print('and array at position ' + str(x) + ' is ' + str(our_num_array[x]))
             index = x
             break
 
@@ -369,22 +366,25 @@ if __name__ == '__main__':
     start_time = timeit.default_timer()
 
     # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
-#    parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
-#                                                 'virus name information from blast and annotations are contained '
-#                                                 'inside the .gff file passed to the script originally')
- #   parser.add_argument('gff_file', help='Input file in .gff format, should contain annotations and genome information '
- #                                        'for each virus to be processed')
- #   parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
- #   parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
-#
- #   args = parser.parse_args()
+    parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
+                                                 'virus name information from blast and annotations are contained '
+                                                 'inside the .fasta file passed to the script originally')
+    parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
+                                           'viruses that you want to have annotated - they should also be known viruses')
+    parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
+    parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
+
+    args = parser.parse_args()
+    fasta_loc = args.fasta_file
+    metadata_sheet_location = args.metadata_info_sheet
+    sbt_file_loc = args.sbt_file_loc
 
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     for x in range(0, len(virus_strain_list)):
-        annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, 'template.sbt')
+        annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, sbt_file_loc)
 
     for name in virus_strain_list:
         check_for_stops(name)
 
-    print('WOOO! only took ' + str(timeit.default_timer() - start_time))
+    print('WOOO! only took ' + str(timeit.default_timer() - start_time) + ' seconds')
