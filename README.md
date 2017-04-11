@@ -21,21 +21,21 @@ Installation should be straightforward - It's been tested on ubuntu and mac
   
   tbl2asn https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
   
-2. Clone repository and change locataion of BLAST_DB (line 14 of sorter.py) (provided you have a local setup) if you don't then you can edit the blast command to be remote - this is almost always faster unless you're running from a pretty powerful workstation or server. 
+2. Clone repository and change locataion of BLAST_DB (line 14 of ClinVirusSeq.py) (provided you have a local setup) if you don't then you can edit the blast command to be remote - this is almost always faster unless you're running from a pretty powerful workstation or server. 
 
 3. You'll also probobly want to just create a blank .csv file for metadata so the program will skip it - the variable for this is metadata_sheet_location. Although if you have metadata (coverage is probobly the most common) you could load it into a csv and point the program there and to the correct column.
 
-4. I guess because all of the paths are hardcoded because it makes it easier for me to actually use this program to get it working yourself you'll need to find all the subprocess commands and edit the locations of the programs to where they are on your actual machine. For example I have blastn in ct-test/ncbi-blast-2.6.0+/bin/blastn (relative to the directory that you're running the script from) you'd need to change this path to where blast is installed on your personal system. (and do this for the other programs) Line 43, Lines 71-82, and Line 309 of sorter.py
+4. I guess because all of the paths are hardcoded because it makes it easier for me to actually use this program to get it working yourself you'll need to find all the subprocess commands and edit the locations of the programs to where they are on your actual machine. For example I have blastn in ct-test/ncbi-blast-2.6.0+/bin/blastn (relative to the directory that you're running the script from) you'd need to change this path to where blast is installed on your personal system. (and do this for the other programs) Line 43, Lines 71-82, and Line 309 of ClinVirusSeq.py
 
 4. Put a template.sbt and comment.cmt file into the folder that this program will be running from - This is necessary for generating a useable .sqn file that you can send to genbank 
 
 
-# Usage - Sorter
+# Usage - ClinVirusSeq.py
 Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after >) what you would like the strain of the virus to be. 
 
-Then you would need to run the sorter.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
+Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
-You can run it with no arguments or the -h flag and it'll print out some usage information. But basically the way you run this is to type (without quotes) "sorter.py fasta_file metadata_info_sheet sbt_file_loc" where fasta_file is the location of all your sequences, metadata_info_sheet is the location of the semi-optional metadata sheet, and sbt_file_loc is the location of your .sbt file. I have it set to take a specified .sbt file so that you can create them with different author lists if you need to to make it easier.
+You can run it with no arguments or the -h flag and it'll print out some usage information. But basically the way you run this is to type (without quotes) "ClinVirusSeq.py fasta_file metadata_info_sheet sbt_file_loc" where fasta_file is the location of all your sequences, metadata_info_sheet is the location of the semi-optional metadata sheet, and sbt_file_loc is the location of your .sbt file. I have it set to take a specified .sbt file so that you can create them with different author lists if you need to to make it easier.
 
 Then hit enter! Your .sqn files should each be in a folder named what you named your strains. (so if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf .tbl and ect files that you need and love)
 
