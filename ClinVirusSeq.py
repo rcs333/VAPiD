@@ -361,8 +361,8 @@ def check_for_stops(sample_name):
 if __name__ == '__main__':
 
     # Set this to where you want your
-    fasta_loc = 'N07-262B.fasta'
-    metadata_sheet_location = 'UWVIROCLINSEQ.csv'
+    # fasta_loc = 'N07-262B.fasta'
+    # metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
     # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
