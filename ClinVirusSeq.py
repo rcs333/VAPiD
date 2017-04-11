@@ -287,23 +287,23 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
     if 'parainfluenza virus' in name_of_virus.lower():
         if '3' in name_of_virus:
             extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
-                          'Gs\n\t\t\tprotein_id\t69'
+                          'Gs\n\t\t\tprotein_id\t333'
             gene_of_interest = 'D protein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'D protein', 'HP3')
         elif '4' in name_of_virus:
             extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
-                          'Gs\n\t\t\tprotein_id\t69'
+                          'Gs\n\t\t\tprotein_id\t333'
             gene_of_interest = 'phosphoprotein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
-                      'G\n\t\t\tprotein_id\t69'
+                      'G\n\t\t\tprotein_id\t333'
         gene_of_interest = 'V protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'V protein', 'MEAS')
     if 'mumps' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
-                      'G\n\t\t\tprotein_id\t69'
+                      'G\n\t\t\tprotein_id\t333'
         gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
 
@@ -337,7 +337,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
     new_translation = str(Seq(nts_of_gene).translate())
 
     pep = open(strain + '/' + strain + '.pep', 'w')
-    pep.write('>69\n' + new_translation)
+    pep.write('>333\n' + new_translation)
     pep.close()
 
 
