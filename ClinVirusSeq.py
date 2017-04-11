@@ -61,9 +61,12 @@ def blast_n_stuff(strain, our_fasta_loc):
             else:
                 read_next = False
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
-    # Should become obsolete when we own the coronaviruses
+    # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
+    # put a lot of in - should be able to remove these eventually
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
+    if 'Human parainfluenza virus 3' in name_of_virus.upper():
+        ref_seq_bg = 'KY674977'
 
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
     cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
