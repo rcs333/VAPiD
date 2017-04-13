@@ -206,7 +206,7 @@ def pull_coverage(data_list):
     if data_list is not None and data_list[4] != '':
             coverage = data_list[4]
     else:
-        coverage = str(randint(20, 100)) + '.1x'
+        coverage = 0
     return coverage
 
 
@@ -214,11 +214,12 @@ def pull_coverage(data_list):
 # NOTE: This NEEDS the virus sample directory to have been already created
 def write_cmt(sample_name, coverage):
     cmt = open(sample_name + '/assembly.cmt', 'w')
-    cmt.write('StructuredCommentPrefix\t##Assembly-Data-START##\n')
+    cmt.write('##Assembly-Data-START##\n')
     cmt.write('Assembly Method\tGeneious v. 9.1\n')
-    cmt.write('Coverage\t' + coverage + '\n')
+    if coverage != 0:
+        cmt.write('Coverage\t' + coverage + '\n')
     cmt.write('Sequencing Technology\tIllumina\n')
-    cmt.write('StructuredCommentPrefix\t##Assembly-Data-END##\n')
+    cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 
 
