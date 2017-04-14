@@ -202,10 +202,10 @@ def write_fasta(strain, genome):
 # .cmt file in the write_cmt() function
 def pull_coverage(data_list):
     # This protects us from when the metadata list doesn't contain any info on the virus or there's no coverage
+    coverage = ''
     if data_list is not None and data_list[4] != '':
             coverage = data_list[4]
-    else:
-        coverage = 0
+
     return coverage
 
 
@@ -214,7 +214,7 @@ def write_cmt(sample_name, coverage):
     cmt = open(sample_name + '/assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
     cmt.write('Assembly Method\tGeneious v. 9.1\n')
-    if coverage != 0:
+    if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
     cmt.write('Sequencing Technology\tIllumina\n')
     cmt.write('##Assembly-Data-END##\n')
