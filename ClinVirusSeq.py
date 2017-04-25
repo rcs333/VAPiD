@@ -184,7 +184,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
 
     # Adjust every locus so that we actually put in correct annotations
     for entry in range(0, len(gene_loc_list)):
-        for y in range(0, len(gene_loc_list[x])):
+        for y in range(0, len(gene_loc_list[entry])):
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array)
 
     return gene_loc_list, gene_product_list
@@ -253,9 +253,14 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                     flag = ''
                 else:
                     flag = '>'
+            # This code is kinda sketchy - but this assumes that we'll allow it to start at zero - idk if this will
+            # make a huge amount of stop codons or not...
+            if start < 1:
+                start = 1
             tbl.write('\n' + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
         xtra = ''
+    tbl.write('\n')
     tbl.close()
 
 
@@ -285,23 +290,23 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
     if 'parainfluenza virus' in name_of_virus.lower():
         if '3' in name_of_virus:
             extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
-                          'Gs\n\t\t\tprotein_id\t333'
+                          'Gs\n\t\t\tprotein_id\tn_' + strain
             gene_of_interest = 'D protein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'D protein', 'HP3')
         elif '4' in name_of_virus:
             extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
-                          'Gs\n\t\t\tprotein_id\t333'
+                          'Gs\n\t\t\tprotein_id\tn_' + strain
             gene_of_interest = 'phosphoprotein'
             process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
-                      'G\n\t\t\tprotein_id\t333'
+                      'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'V protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'V protein', 'MEAS')
     if 'mumps' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
-                      'G\n\t\t\tprotein_id\t333'
+                      'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
 
@@ -311,22 +316,43 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
                     ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
 
 
+def pick_correct_frame(one, two):
+    while len(one) % 3 != 0:
+        one = one[:-1]
+    while len(two) % 3 != 0:
+        two = two[:-1]
+    one_trans = str(Seq(one).translate())
+    two_trans = str(Seq(two).translate())
+    one_count = one_trans.count('*')
+    two_count = two_trans.count('*')
+    print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
+    print(two_trans)
+    print('adding one G gives ' + str(one_count) + ' stop codon(s)')
+    print(one_trans)
+    if one_count < two_count:
+        print('chose one')
+        return one
+    else:
+        print('chose two')
+        return two
+
+
 # Takes a virus that has GGGGGG RNA editing and based on the gene that you send it and the name of the virus will
 # find that gene in our annotations - add the correct number of G's and then translate the new 'mRNA' and write the
 # translation to a .pep file where we can overwrite the sequin auto-translation
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
-    # Extract the gene
-    for x in range(0, len(gene_product_list)):
-        if gene_of_interest in gene_product_list[x]:
-            nts_of_gene = genome[int(gene_loc_list[x][0]) - 1:int(gene_loc_list[x][1]) - 1]
+    # Extract the gene protected by the fact that all things we throw in here are garunteed to have the gene of interest
+    for g in range(0, len(gene_product_list)):
+        if gene_of_interest in gene_product_list[g]:
+            nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
     start_of_poly_g = nts_of_gene.find('GGGGG')
 
     # add the correct number of Gs
     if v == 'HP3':
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
-        while len(nts_of_gene) % 3 != 0:
-            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g+1:]
+        nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+        nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
     elif v == 'HP4-1' or v == 'MUMP':
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
     elif v == 'MEAS' or v == 'SENDAI' or v == 'NIPAH':
@@ -335,7 +361,8 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
     new_translation = str(Seq(nts_of_gene).translate())
 
     pep = open(strain + '/' + strain + '.pep', 'w')
-    pep.write('>333\n' + new_translation)
+    pep.write('>n_' + strain + '\n' + new_translation)
+    pep.write('\n')
     pep.close()
 
 
@@ -346,6 +373,7 @@ def write_fsa(strain, name_of_virus, virus_genome):
     fsa.write('>' + strain + ' [organism=' + name_of_virus + '] [collection-date=2015] [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
+    fsa.write('\n')
     fsa.close()
 
 
