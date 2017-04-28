@@ -408,11 +408,12 @@ if __name__ == '__main__':
                                            'viruses that you want to have annotated - they should also be known viruses')
     parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
+    # parser.add_argument('run_name', help='Name of the folder that all the output will get stuffed into')
     parser.add_argument('-r', action='store_true', help='Completely changes the function of the code - runs '
                                                                   'tbl2asn on all the samples contained in the fasta '
                                                                   'file, using the supplied sbt_file')
     args = parser.parse_args()
-
+    # run_name = args.run_name
     fasta_loc = args.fasta_file
     metadata_sheet_location = args.metadata_info_sheet
     sbt_file_loc = args.sbt_file_loc
