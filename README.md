@@ -1,6 +1,6 @@
 # ClinSeq
 Automatic Annotation and deposition of UW Virology clinical sequencing data
-This repository contains scripts for analysis of assembled fasta files of known human viruses. This program annotates these viruses and then packages them up for NCBI deposition. This repository is under active development and I also use the code here very frequently. 
+This repository contains scripts for analysis of assembled fasta files of known human viruses. This program annotates these viruses and then packages them up for NCBI deposition. This repository is under active development and I also use the code here very frequently. Although now I'm starting to develop in the dev branch - I'll try to keep the main branch from breaking so at all times someone could come on here and download working code
 
 If anything breaks, or issues come up, or even if you just need help installing it please feel free to open issues or email me at either rcs333@uw.edu or uwvirongs@gmail.com.
 
