@@ -47,7 +47,7 @@ Right now we accomplish the annotation by searching blast for the best hit that 
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 IMPORTANT SECURITY NOTE: DO NOT PUT THIS CODE ON A SERVER AND LET IT FACE UNKNOWN CLIENTS!!! 
-This code uses direct subprocess commands with user supplied input so it would be trivial to insert bash commands into the .fasta file and completely destroy a server. I don't see any reason why anyone would do this but if you are putting it on a server make sure that only people you know won't destroy your server will use it. Also - I guess don't name your strains really stupid things like >rm -rf / or >:(){ :|: & };: I doubt this would work as I've written it so you'll be fine as long as you name your strains normal alphanumeric strings or normal human words. Just don't let potentially malicious users run this code.
+This code uses direct subprocess commands with user supplied input so it would be trivial to insert bash commands into the .fasta file and completely destroy a server. I don't see any reason why anyone would do this but if you are putting it on a server make sure that only people you know won't destroy your server will use it. Also - I guess don't name your strains really stupid things like & rm -rf / or & :(){ :|: & };: I doubt this would work as I've written it so you'll be fine as long as you name your strains normal alphanumeric strings or normal human words. Just don't let potentially malicious users run this code.
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 # Future directions
