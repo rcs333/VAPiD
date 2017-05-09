@@ -427,6 +427,7 @@ if __name__ == '__main__':
 
     else:
         for x in range(0, len(virus_strain_list)):
+            path = ''
             annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, sbt_file_loc)
 
         for name in virus_strain_list:
