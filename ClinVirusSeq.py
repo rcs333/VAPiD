@@ -9,6 +9,7 @@ import argparse
 import timeit
 import os
 from Bio.Seq import Seq
+import datetime
 
 BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
 
@@ -314,7 +315,7 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
                     ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
-
+    return name_of_virus
 
 def pick_correct_frame(one, two):
     while len(one) % 3 != 0:
@@ -385,6 +386,7 @@ def re_tbl2asn(strain, sbt_loc):
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
 # wrong. NOTE: requires tbl2asn to have successfully created a .gbf file or this will fail catastrophically
+# Now also returns if stop codons are in it or not so they'll be ommited during the pacakging phase
 def check_for_stops(sample_name):
     stops = 0
     for line in open(sample_name + '/' + sample_name + '.gbf'):
@@ -392,7 +394,9 @@ def check_for_stops(sample_name):
             stops += 1
     if stops > 0:
         print('WARNING: ' + sample_name + ' contains ' + str(stops) + 'stop codon(s)!')
-
+        return True
+    else:
+        return False
 if __name__ == '__main__':
 
     # Set this to where you want your
@@ -400,7 +404,6 @@ if __name__ == '__main__':
     # metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
-    # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
     parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
                                                  'virus name information from blast and annotations are contained '
                                                  'inside the .fasta file passed to the script originally')
@@ -421,17 +424,53 @@ if __name__ == '__main__':
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     # this allows us to use the -r flag to simply run tbl2asn with default arguments on all the folders
+    # TODO: Make this still work after running - i.e. fix it to work on the consolidated .sqn files
     if args.r:
         for item in virus_strain_list:
             re_tbl2asn(item, sbt_file_loc)
 
     else:
+        strain2species = {}
+        strain2stops = {}
         for x in range(0, len(virus_strain_list)):
-            path = ''
-            annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, sbt_file_loc)
+            strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, sbt_file_loc,)
+            # now we've got a map of [strain] -> name of virus (with whitespace)
 
         for name in virus_strain_list:
-            check_for_stops(name)
+            # now we've got a map of [strain] -> boolean value if there are stops or not
+            strain2stops[name] = check_for_stops(name)
 
+        strain2species_nostops = {}
+        for item in strain2species.keys():
+            if not strain2stops[item]:
+                strain2species_nostops[item] = strain2species[item]
+        # now we've got map of strain 'folder names' to virus names with no stops
+        virus_species_list = []
+        for item in strain2species_nostops.values():
+            if '_'.join(item.split()) not in virus_species_list:
+                virus_species_list.append('_'.join(item.split()))
+        # now we've got a list of all the viruses in our fasta file
+        now = datetime.datetime.now()
+        date = now.strftime("%Y_%m-%d")
+        subprocess.call('mkdir -p ' + date, shell=True)
+        for item in virus_species_list:
+            subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+        # now we've got all the folders for the viruses to go into
+        for strain in strain2species_nostops.keys():
+            # TODO: factor these redunant lines out
+
+            species = '_'.join(strain2species_nostops[strain].split())
+            # DAMN BOI ARE YOU CRAZY???
+            cmd = 'mv ' + strain + '/ ' + date + '/' + species
+            print('trying mv command with the following:')
+            print(cmd)
+            subprocess.call(cmd, shell=True)
+        # now we gotta extract the files and tbl2asn the fuck outta em'
+        # This is absolutely disgusting
+        for item in virus_species_list:
+            subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl', shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
+            subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -a s -V vb', shell=True)
         print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
               ' seconds')
