@@ -209,9 +209,19 @@ def pull_coverage(data_list):
     # also means you can just pass a blank csv file if you don't have coverages
     coverage = ''
     if data_list is not None and data_list[4] != '':
-            coverage = data_list[4]
+        coverage = data_list[4]
 
     return coverage
+
+
+# grab the collection date from the imported metadata - if nothing is put in the metadata sheet collection date will not
+# be included in the meta data
+def pull_col_date(data_list):
+    col_date = ''
+    if data_list is not None and data_list[5] != '':
+        # formatted a bit differently because this goes in the fsa file header not the comment file
+        col_date = ' [collection-date=' + data_list[5] + ']'
+    return col_date
 
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
@@ -284,14 +294,17 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     coverage = pull_coverage(metadata_list)
 
+    col_date = pull_col_date(metadata_list)
+
     write_cmt(strain, coverage)
 
     subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
 
-    write_fsa(strain, name_of_virus, genome)
+    write_fsa(strain, name_of_virus, genome, col_date)
 
     extra_stuff = ''
     # No protein had better be named this
+    # TODO: add support for respirovirus D protein RNA editing
     gene_of_interest = 'XFNDKLS:NLFKSD:FJNSDLKFJDSLKFJDLFUHE:OPUHFE:LUHILDLKFJNSDLFKJBNDLKFUHSLDUBFKNLKDFJBLSKDJFBLDKS'
     if 'parainfluenza virus' in name_of_virus.lower():
         if '3' in name_of_virus:
@@ -315,6 +328,11 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
                       'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
+    if 'respirovirus' in name_of_virus.lower():
+        extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'D protein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'SENDAI')
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
 
@@ -382,10 +400,10 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
-def write_fsa(strain, name_of_virus, virus_genome):
+def write_fsa(strain, name_of_virus, virus_genome, col_date):
     fsa = open(strain + '/' + strain + '.fsa', 'w')
     # TODO: have the collection date pulled from the metadata sheet
-    fsa.write('>' + strain + ' [organism=' + name_of_virus + '] [collection-date=2015] [country=USA] '
+    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + col_date + ' [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
     fsa.write('\n')
@@ -418,7 +436,8 @@ if __name__ == '__main__':
                                            'viruses that you want to have annotated - they should also be known viruses')
     parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
-
+    parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
+                                                        'produce the consolidated sequin files for submission')
     args = parser.parse_args()
 
     fasta_loc = args.fasta_file
@@ -438,34 +457,38 @@ if __name__ == '__main__':
         # now we've got a map of [strain] -> boolean value if there are stops or not
         strain2stops[name] = check_for_stops(name)
 
-    strain2species_nostops = {}
-    for item in strain2species.keys():
-        if not strain2stops[item]:
-            strain2species_nostops[item] = strain2species[item]
-    # now we've got map of strain 'folder names' to virus names with no stops
-    virus_species_list = []
-    for item in strain2species_nostops.values():
-        if '_'.join(item.split()) not in virus_species_list:
-            virus_species_list.append('_'.join(item.split()))
-    # now we've got a list of all the viruses in our fasta file
-    now = datetime.datetime.now()
-    date = now.strftime("%Y_%m-%d")
-    subprocess.call('mkdir -p ' + date, shell=True)
-    for item in virus_species_list:
-        subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
-    # now we've got all the folders for the viruses to go into
-    for strain in strain2species_nostops.keys():
-        # TODO: factor out this redundant loops and logic and data structures, however it *does* work
-        species = '_'.join(strain2species_nostops[strain].split())
-        cmd = 'mv ' + strain + '/ ' + date + '/' + species
-        subprocess.call(cmd, shell=True)
+    # now we only consolidate the sequin files if the flag is passed, which will save time if I have to blast stuff
+    # multiple times for troubleshooting
+    if args.r:
+        strain2species_nostops = {}
+        for item in strain2species.keys():
+            if not strain2stops[item]:
+                strain2species_nostops[item] = strain2species[item]
+        # now we've got map of strain 'folder names' to virus names with no stops
+        virus_species_list = []
+        for item in strain2species_nostops.values():
+            if '_'.join(item.split()) not in virus_species_list:
+                virus_species_list.append('_'.join(item.split()))
+        # now we've got a list of all the viruses in our fasta file
+        now = datetime.datetime.now()
+        date = now.strftime("%Y_%m-%d")
+        subprocess.call('mkdir -p ' + date, shell=True)
+        for item in virus_species_list:
+            subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+        # now we've got all the folders for the viruses to go into
+        for strain in strain2species_nostops.keys():
+            # TODO: factor out this redundant loops and logic and data structures, however it *does* work
+            species = '_'.join(strain2species_nostops[strain].split())
+            cmd = 'mv ' + strain + '/ ' + date + '/' + species
+            subprocess.call(cmd, shell=True)
 
-    # now we gotta extract the files and tbl2asn em'
-    # This is absolutely disgusting code and I really really need to factor this out into it's own method
-    for item in virus_species_list:
-        subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl', shell=True)
-        subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
-        subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
-        subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -a s -V vb', shell=True)
+        # now we gotta extract the files and tbl2asn em'
+        # This is absolutely disgusting code and I really really need to factor this out into it's own method
+        for item in virus_species_list:
+            subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl', shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
+            subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -a s -V vb', shell=True)
+
     print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
           ' seconds')
