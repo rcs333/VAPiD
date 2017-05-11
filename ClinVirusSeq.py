@@ -1,6 +1,5 @@
 # Automatically annotates fastas of well known viruses based off maaft alignment to best blast hits
 # currently all you need to do is set your blastdb location, make a blank metadata sheet, and set an input fasta
-# coverage is automatically generated if we don't have information on our sheet so be aware of that
 # Can currently handle - Coronavirus ribosomal slippage, HPIV/Measels/Mumps RNA editing
 
 import subprocess
@@ -9,6 +8,7 @@ import argparse
 import timeit
 import os
 from Bio.Seq import Seq
+import datetime
 
 BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
 
@@ -37,6 +37,7 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
+    # TODO: this now doesn't work with the consolidated sequin files
     if not os.path.isfile(strain + '/' + strain +'.blastresults'):
         cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
                 '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
@@ -103,7 +104,7 @@ def pull_metadata(virus_name, meta_data_info_sheet_loc):
             return line.split(',')
 
 
-# Takes in two alinged sequences, searches for a specific place in the unaligned reference sequence - marks an index
+# Takes in two aligned sequences, searches for a specific place in the unaligned reference sequence - marks an index
 # Then goes to that exact index in our sequence and counts the relative location for our own sequence - should annotate
 # correctly
 def find_loc_in_our_seq_from_reference(start, our_seq, reference_seq):
@@ -127,7 +128,10 @@ def find_loc_in_our_seq_from_reference(start, our_seq, reference_seq):
 
 # Takes in two sequences with gaps inserted inside of them and returns arrays that have a -1 in the gap locations and
 # count up from 1 in the nucleotide areas - This data structure allows for extremely rapid conversion between relative
-# locations in the two sequences
+# locations in the two sequences although does assume that these genes are of uniform length
+# NOTE: This means that when we have reads that like don't have the start codons of the first gene or something we'll
+# get a -1 for the start location on our annotation
+# TODO: put in some way of detecting this and putting a <0 on the .tbl file
 def build_num_arrays(our_seq, ref_seq):
     ref_count = 0
     our_count = 0
@@ -202,6 +206,7 @@ def write_fasta(strain, genome):
 # .cmt file in the write_cmt() function
 def pull_coverage(data_list):
     # This protects us from when the metadata list doesn't contain any info on the virus or there's no coverage
+    # also means you can just pass a blank csv file if you don't have coverages
     coverage = ''
     if data_list is not None and data_list[4] != '':
             coverage = data_list[4]
@@ -265,6 +270,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
 
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
+# returns the "species" of the virus for consolidated .sqn packaging
 def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
     subprocess.call('mkdir -p ' + strain, shell=True)
 
@@ -314,9 +320,16 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
                     ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+    return name_of_virus
 
 
+# This function takes a nucleotide sequence that has non-templated G's inserted an unknown number of times and trims
+# Them from the end to read into a correct frame  - translates the sequence and picks the one with the least number of
+# stop codons returns the raw sequence
 def pick_correct_frame(one, two):
+
+    # we already added the G's to the start - and generally we hit the stop codon exactly where the annotation says we
+    # will so this just avoids some weirdness with passing sequences of length not divisible by three to seq.translate()
     while len(one) % 3 != 0:
         one = one[:-1]
     while len(two) % 3 != 0:
@@ -325,10 +338,11 @@ def pick_correct_frame(one, two):
     two_trans = str(Seq(two).translate())
     one_count = one_trans.count('*')
     two_count = two_trans.count('*')
-    print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
-    print(two_trans)
-    print('adding one G gives ' + str(one_count) + ' stop codon(s)')
-    print(one_trans)
+    # Troubleshooting code that I'm keeping in for when we add more viruses that have non templated G's
+    # print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
+    # print(two_trans)
+    # print('adding one G gives ' + str(one_count) + ' stop codon(s)')
+    # print(one_trans)
     if one_count < two_count:
         print('chose one')
         return one
@@ -341,7 +355,7 @@ def pick_correct_frame(one, two):
 # find that gene in our annotations - add the correct number of G's and then translate the new 'mRNA' and write the
 # translation to a .pep file where we can overwrite the sequin auto-translation
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
-    # Extract the gene protected by the fact that all things we throw in here are garunteed to have the gene of interest
+    # Extract the gene protected by the fact that all things we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
@@ -370,6 +384,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome):
     fsa = open(strain + '/' + strain + '.fsa', 'w')
+    # TODO: have the collection date pulled from the metadata sheet
     fsa.write('>' + strain + ' [organism=' + name_of_virus + '] [collection-date=2015] [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
@@ -377,14 +392,9 @@ def write_fsa(strain, name_of_virus, virus_genome):
     fsa.close()
 
 
-# Runs tbl2asn with defualt settings on all the strains specified by your fasta file
-def re_tbl2asn(strain, sbt_loc):
-    subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
-                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
-
-
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
 # wrong. NOTE: requires tbl2asn to have successfully created a .gbf file or this will fail catastrophically
+# Now also returns if stop codons are in it or not so they'll be omitted during the packaging phase
 def check_for_stops(sample_name):
     stops = 0
     for line in open(sample_name + '/' + sample_name + '.gbf'):
@@ -392,15 +402,15 @@ def check_for_stops(sample_name):
             stops += 1
     if stops > 0:
         print('WARNING: ' + sample_name + ' contains ' + str(stops) + 'stop codon(s)!')
+        return True
+    else:
+        return False
+
 
 if __name__ == '__main__':
 
-    # Set this to where you want your
-    # fasta_loc = 'N07-262B.fasta'
-    # metadata_sheet_location = 'UWVIROCLINSEQ.csv'
     start_time = timeit.default_timer()
 
-    # TODO: add a flag for redoing tbl2asn that ONLY does that - i.e. you could manually edit files then crank em out
     parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
                                                  'virus name information from blast and annotations are contained '
                                                  'inside the .fasta file passed to the script originally')
@@ -408,29 +418,54 @@ if __name__ == '__main__':
                                            'viruses that you want to have annotated - they should also be known viruses')
     parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
-    # parser.add_argument('run_name', help='Name of the folder that all the output will get stuffed into')
-    parser.add_argument('-r', action='store_true', help='Completely changes the function of the code - runs '
-                                                                  'tbl2asn on all the samples contained in the fasta '
-                                                                  'file, using the supplied sbt_file')
+
     args = parser.parse_args()
-    # run_name = args.run_name
+
     fasta_loc = args.fasta_file
     metadata_sheet_location = args.metadata_info_sheet
     sbt_file_loc = args.sbt_file_loc
 
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
-    # this allows us to use the -r flag to simply run tbl2asn with default arguments on all the folders
-    if args.r:
-        for item in virus_strain_list:
-            re_tbl2asn(item, sbt_file_loc)
+    strain2species = {}
+    strain2stops = {}
+    for x in range(0, len(virus_strain_list)):
+        strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x],
+                                                                metadata_sheet_location, sbt_file_loc,)
+        # now we've got a map of [strain] -> name of virus (with whitespace)
 
-    else:
-        for x in range(0, len(virus_strain_list)):
-            annotate_a_virus(virus_strain_list[x], virus_genome_list[x], metadata_sheet_location, sbt_file_loc)
+    for name in virus_strain_list:
+        # now we've got a map of [strain] -> boolean value if there are stops or not
+        strain2stops[name] = check_for_stops(name)
 
-        for name in virus_strain_list:
-            check_for_stops(name)
+    strain2species_nostops = {}
+    for item in strain2species.keys():
+        if not strain2stops[item]:
+            strain2species_nostops[item] = strain2species[item]
+    # now we've got map of strain 'folder names' to virus names with no stops
+    virus_species_list = []
+    for item in strain2species_nostops.values():
+        if '_'.join(item.split()) not in virus_species_list:
+            virus_species_list.append('_'.join(item.split()))
+    # now we've got a list of all the viruses in our fasta file
+    now = datetime.datetime.now()
+    date = now.strftime("%Y_%m-%d")
+    subprocess.call('mkdir -p ' + date, shell=True)
+    for item in virus_species_list:
+        subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+    # now we've got all the folders for the viruses to go into
+    for strain in strain2species_nostops.keys():
+        # TODO: factor out this redundant loops and logic and data structures, however it *does* work
+        species = '_'.join(strain2species_nostops[strain].split())
+        cmd = 'mv ' + strain + '/ ' + date + '/' + species
+        subprocess.call(cmd, shell=True)
 
-        print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
-              ' seconds')
+    # now we gotta extract the files and tbl2asn em'
+    # This is absolutely disgusting code and I really really need to factor this out into it's own method
+    for item in virus_species_list:
+        subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl', shell=True)
+        subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
+        subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
+        subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -a s -V vb', shell=True)
+    print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
+          ' seconds')
