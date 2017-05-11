@@ -489,7 +489,8 @@ if __name__ == '__main__':
             subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
             subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
             subprocess.call('cat ' + date + '/' + item + '/*/*.cmt > ' + date + '/' + item + '/' + item + '.cmt', shell=True)
-            subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -a s -V vb', shell=True)
+            subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -Y ' + date + '/' + item +
+                            '.cmt -a s -V vb', shell=True)
 
     print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
           ' seconds')
