@@ -1,6 +1,6 @@
 # Automatically annotates fastas of well known viruses based off maaft alignment to best blast hits
 # currently all you need to do is set your blastdb location, make a blank metadata sheet, and set an input fasta
-# Can currently handle - Coronavirus ribosomal slippage, HPIV/Measels/Mumps RNA editing
+# Can currently handle - Coronavirus ribosomal slippage, HPIV/Measels/Mumps/Sendai RNA editing
 
 import subprocess
 import re
@@ -38,7 +38,7 @@ def read_fasta(fasta_file_loc):
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
     # TODO: this now doesn't work with the consolidated sequin files
-    if not os.path.isfile(strain + '/' + strain +'.blastresults'):
+    if not os.path.isfile(strain + '/' + strain + '.blastresults'):
         cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
                 '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
         bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
