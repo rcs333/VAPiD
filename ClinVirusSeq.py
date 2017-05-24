@@ -37,7 +37,6 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
-    # TODO: this now doesn't work with the consolidated sequin files
     if not os.path.isfile(strain + '/' + strain + '.blastresults'):
         cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
                 '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
@@ -50,12 +49,14 @@ def blast_n_stuff(strain, our_fasta_loc):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
             ref_seq_gb = line.split()[0][1:]
-            if 'complete genome' in line:
+            # last part of these two logic checks is so we avoid the misassembled/mutated chinese viruses
+            # This is going to get really out of hand if we have to keep blacklisting records
+            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
                 break
             else:
                 read_next = True
         elif read_next:
-            if 'complete genome' in line or 'genome' in line:
+            if 'complete genome' in line or 'genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
                 break
             else:
                 read_next = False
@@ -67,6 +68,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'KY369913.1'
     if 'HUMAN PARAINFLUENZA VIRUS 3' in name_of_virus.upper():
         ref_seq_gb = 'KY674977'
+    if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
+        ref_seq_gb = 'KY369864'
 
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
     cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
@@ -243,10 +246,11 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
     tbl = open(strain + '/' + strain + '.tbl', 'w')
     tbl.write('>Feature ' + strain)
-    flag = ''
-    xtra = ''
-    # TODO: add the ribosomal slippage line here
+
     for x in range(0, len(gene_product_list)):
+        flag = ''
+        xtra = ''
+        sflag = ''
         product = gene_product_list[x]
         if gene_of_intrest in product:
             xtra = note
@@ -268,11 +272,16 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                     flag = ''
                 else:
                     flag = '>'
-            # This code is kinda sketchy - but this assumes that we'll allow it to start at zero - idk if this will
-            # make a huge amount of stop codons or not...
-            if start < 1:
-                start = 1
-            tbl.write('\n' + str(start) + '\t' + flag + str(end) + '\tCDS\n')
+
+            # This should now correctly annotate assemblies that come in with the very edges chopped off
+            if int(start) < 1:
+                sflag = '<'
+                start = (int(end) % 3) + 1
+
+            if int(end) < 1:
+                end = len(genome)
+                flag = '>'
+            tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
         xtra = ''
     tbl.write('\n')
@@ -357,10 +366,10 @@ def pick_correct_frame(one, two):
     one_count = one_trans.count('*')
     two_count = two_trans.count('*')
     # Troubleshooting code that I'm keeping in for when we add more viruses that have non templated G's
-    # print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
-    # print(two_trans)
-    # print('adding one G gives ' + str(one_count) + ' stop codon(s)')
-    # print(one_trans)
+    print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
+    print(two_trans)
+    print('adding one G gives ' + str(one_count) + ' stop codon(s)')
+    print(one_trans)
     if one_count < two_count:
         print('chose one')
         return one
@@ -373,21 +382,29 @@ def pick_correct_frame(one, two):
 # find that gene in our annotations - add the correct number of G's and then translate the new 'mRNA' and write the
 # translation to a .pep file where we can overwrite the sequin auto-translation
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
-    # Extract the gene protected by the fact that all things we throw in here are guaranteed to have the gene of interest
+    # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
+    # Since we now have a priori knowledge of where this RNA editing takes place we can safely search within a substring
     start_of_poly_g = nts_of_gene.find('GGGGG')
 
     # add the correct number of Gs
     if v == 'HP3':
+        start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
+        nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+        nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
+    # despite viral zone saying SENDAI adds 1 G adding two removes stop codon's - remains tbd if variable
+    elif v == 'SENDAI':
+        start_of_poly_g = nts_of_gene.find('AAAAGGG')
         nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
     elif v == 'HP4-1' or v == 'MUMP':
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
-    elif v == 'MEAS' or v == 'SENDAI' or v == 'NIPAH':
+    elif v == 'MEAS' or v == 'NIPAH':
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
 
     new_translation = str(Seq(nts_of_gene).translate())
@@ -402,7 +419,6 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome, col_date):
     fsa = open(strain + '/' + strain + '.fsa', 'w')
-    # TODO: have the collection date pulled from the metadata sheet
     fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + col_date + ' [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
@@ -433,8 +449,8 @@ if __name__ == '__main__':
                                                  'virus name information from blast and annotations are contained '
                                                  'inside the .fasta file passed to the script originally')
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
-                                           'viruses that you want to have annotated - they should also be known viruses')
-    parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have on these samples')
+                                           'viruses that you want to have annotated - they should be known viruses')
+    parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
     parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
                                                         'produce the consolidated sequin files for submission')
@@ -485,10 +501,14 @@ if __name__ == '__main__':
         # now we gotta extract the files and tbl2asn em'
         # This is absolutely disgusting code and I really really need to factor this out into it's own method
         for item in virus_species_list:
-            subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl', shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa', shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep', shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.cmt > ' + date + '/' + item + '/' + item + '.cmt', shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl',
+                            shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa',
+                            shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep',
+                            shell=True)
+            subprocess.call('cat ' + date + '/' + item + '/*/*.cmt > ' + date + '/' + item + '/' + item + '.cmt',
+                            shell=True)
             subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -Y ' + date + '/' + item +
                             '.cmt -a s -V vb', shell=True)
 
