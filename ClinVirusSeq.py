@@ -11,6 +11,7 @@ from Bio.Seq import Seq
 import datetime
 
 BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
+VERSION = 'v0.9'
 
 
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number
@@ -185,7 +186,11 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
             allow_one = True
         if '/product="' in line and allow_one:
             allow_one = False
-            gene_product_list.append(line.split('=')[1][1:-2])
+            # Inconsistent naming of protein products
+            px = line.split('=')[1][1:-2]
+            if px == 'phospho protein':
+                px = 'phosphoprotein'
+            gene_product_list.append(px)
 
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
 
@@ -384,6 +389,8 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
+        # flipping this covers whack spacing in protein products
+
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
@@ -445,17 +452,21 @@ if __name__ == '__main__':
 
     start_time = timeit.default_timer()
 
-    parser = argparse.ArgumentParser(description='Package a set of UW clinical virus sequences for submission, pulling '
-                                                 'virus name information from blast and annotations are contained '
-                                                 'inside the .fasta file passed to the script originally')
+    parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of UW clinical virus sequences'
+                                                 ' for submission, pulling virus name information from blast and '
+                                                 'annotations are contained inside the .fasta file passed to the script'
+                                                 ' originally')
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
                                            'viruses that you want to have annotated - they should be known viruses')
     parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
     parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
                                                         'produce the consolidated sequin files for submission')
-    args = parser.parse_args()
 
+    args = parser.parse_args()
+    if args.v:
+        print(VERSION)
+        exit()
     fasta_loc = args.fasta_file
     metadata_sheet_location = args.metadata_info_sheet
     sbt_file_loc = args.sbt_file_loc
