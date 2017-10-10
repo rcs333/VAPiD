@@ -57,13 +57,14 @@ def blast_n_stuff(strain, our_fasta_loc):
             else:
                 read_next = True
         elif read_next:
-            # Blacklisting here for falsely annotated metapneumoviruses
             if 'complete genome' in line or 'genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
                 break
             else:
                 read_next = False
 
-    # This skips us the fact that genbank put a laboratory strain as the ref_seq and we get clinicals
+    # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
+    # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
+    # put a lot of in - should be able to remove these eventually
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
     if 'HUMAN PARAINFLUENZA VIRUS 3' in name_of_virus.upper():
@@ -134,6 +135,7 @@ def find_loc_in_our_seq_from_reference(start, our_seq, reference_seq):
 # locations in the two sequences although does assume that these genes are of uniform length
 # NOTE: This means that when we have reads that like don't have the start codons of the first gene or something we'll
 # get a -1 for the start location on our annotation
+# TODO: put in some way of detecting this and putting a <0 on the .tbl file
 def build_num_arrays(our_seq, ref_seq):
     ref_count = 0
     our_count = 0
@@ -159,6 +161,7 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array):
+
     # Go through our number array and search for the number of interest
     for x in range(0, len(our_num_array)):
         if ref_num_array[x] == given_num:
@@ -285,6 +288,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 flag = '>'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
+        xtra = ''
     tbl.write('\n')
     tbl.close()
 
@@ -312,7 +316,51 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     write_fsa(strain, name_of_virus, genome, col_date)
 
-    extra_stuff, gene_of_interest = handle_exceptions(name_of_virus.lower(), strain, genome, gene_loc_list, gene_product_list)
+    extra_stuff = ''
+    # No protein had better be named this
+    gene_of_interest = 'XFNDKLS:NLFKSD:FJNSDLKFJDSLKFJDLFUHE:OPUHFE:LUHILDLKFJNSDLFKJBNDLKFUHSLDUBFKNLKDFJBLSKDJFBLDKS'
+    if 'respirovirus' in name_of_virus.lower() or 'parainfluenza virus 3' in name_of_virus.lower():
+        if '3' in name_of_virus:
+            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
+                          'Gs\n\t\t\tprotein_id\tn_' + strain
+            gene_of_interest = 'D protein'
+            process_para(strain, genome, gene_loc_list, gene_product_list, 'D protein', 'HP3')
+        elif '1' in name_of_virus:
+            extra_stuff = 'WEGOTAPARA1'
+            gene_of_interest ='C\' protein'
+
+    # Sorta adding more - although I think this should definitely be handled elsewhere
+    if 'measles' in name_of_virus.lower():
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'V protein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'V protein', 'MEAS')
+    if 'mumps' in name_of_virus.lower():
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'phosphoprotein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
+    if 'rubulavirus 4' in name_of_virus:
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'Gs\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'phosphoprotein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
+    #if 'respirovirus' in name_of_virus.lower():
+    #    extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+    #                  'G\n\t\t\tprotein_id\tn_' + strain
+    #    gene_of_interest = 'D protein'
+    #    process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'SENDAI')
+    if 'metapneumovirus' in name_of_virus.lower():
+        put_start = int(gene_loc_list[7][0])
+        print('start of gene is ' + str(put_start))
+        orf = genome[put_start - 1:put_start + 4000]
+        print('orf length is ' + str(len(orf)))
+        print('genome length is ' + str(len(genome)))
+        orf_trans = str(Seq(orf).translate())
+        print('orf translation is ' + orf_trans)
+        put_end = (orf_trans.find('*') * 3)
+        print('putative end is ' + str(put_end))
+        gene_loc_list[7][1] = put_start + put_end
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
 
@@ -321,43 +369,9 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
     return name_of_virus
 
 
-# takes a virus name, strain name, genome, and the annotation list and handles all the exceptions that I'm currently
-# aware that we run into - parainfluenza 3 and 4, measeles, mumps, and respiroviruses are all handled returns the gene
-# with editing (or a garbage alphanumeric string to protect the checks later) as well as returns the exact text
-# including whitespace of what should be added to the .tbl file, also writes the .pep for different protein translations
-def handle_exceptions(virus_name, strain, genome, gene_loc_list, gene_product_list):
-    # set dummy values so when we don't have to do this we won't
-    gene_of_interest = 'XFNDKLS:NLFKSD:FJNSDLKFJDSLKFJDLFUHE:OPUHFE:LUHILDLKFJNSDLFKJBNDLKFUHSLDUBFKNLKDFJBLSKDJFBLDKS'
-    extra_stuff = ''
-    if 'parainfluenza virus' in virus_name:
-        if '3' in virus_name:
-            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
-                          'Gs\n\t\t\tprotein_id\tn_' + strain
-            gene_of_interest = 'D protein'
-            process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HP3')
-        elif '4' in virus_name:
-            extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
-                          'Gs\n\t\t\tprotein_id\tn_' + strain
-            gene_of_interest = 'phosphoprotein'
-            process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HP4-1')
-    # Sorta adding more - although I think this should definitely be handled elsewhere
-    if 'measles' in virus_name:
-        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
-                      'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'V protein'
-        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MEAS')
-    if 'mumps' in virus_name:
-        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
-                      'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phosphoprotein'
-        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
-    if 'respirovirus' in virus_name:
-        extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds non templated ' \
-                      'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'D protein'
-        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'SENDAI')
-
-    return extra_stuff, gene_of_interest
+# this is now a dummy function for if I ever have to do c term scanning for stop codons again
+def fix_orf(start, len):
+    return start
 
 
 # This function takes a nucleotide sequence that has non-templated G's inserted an unknown number of times and trims
@@ -469,9 +483,7 @@ if __name__ == '__main__':
                                                         'produce the consolidated sequin files for submission')
 
     args = parser.parse_args()
-    if args.v:
-        print(VERSION)
-        exit()
+
     fasta_loc = args.fasta_file
     metadata_sheet_location = args.metadata_info_sheet
     sbt_file_loc = args.sbt_file_loc
