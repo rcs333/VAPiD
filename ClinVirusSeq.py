@@ -39,8 +39,8 @@ def read_fasta(fasta_file_loc):
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
     if not os.path.isfile(strain + '/' + strain + '.blastresults'):
-        cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
-                '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
+        cmd = 'blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
+                '-num_alignments 15 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
         bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
         bs.communicate()
 
@@ -73,13 +73,13 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'KY369864'
 
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
-    cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | /Users/uwvirongs/edirect/efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
+    cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+          ' | efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
     ps = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
     ps.communicate()
 
-    cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | /Users/uwvirongs/edirect/efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
+    cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+          ' | efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
 
     ds = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
     ds.communicate()
