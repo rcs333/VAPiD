@@ -10,7 +10,6 @@ import os
 from Bio.Seq import Seq
 import datetime
 
-BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
 VERSION = 'v0.9'
 
 
@@ -27,7 +26,7 @@ def read_fasta(fasta_file_loc):
                 genome_list.append(dna_string)
                 dna_string = ''
         else:
-            dna_string += line[:-1]
+            dna_string += line.strip()
     genome_list.append(dna_string)
     return strain_list, genome_list
 
@@ -40,11 +39,11 @@ def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
     if not os.path.isfile(strain + '/' + strain + '.blastresults'):
         cmd = 'blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
-                '-num_alignments 15 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
+                '-num_alignments 35 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
         bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
         bs.communicate()
 
-    # read through the top 25 hits saved earlier and save the accession number of the best hit that's complete
+    # read through the top hits saved earlier and save the accession number of the best hit that's complete
     read_next = False
     for line in open(strain + '/' + strain + '.blastresults'):
         if line[0] == '>':
@@ -61,7 +60,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                 break
             else:
                 read_next = False
-
+    # TODO: put a function in here that error checks and does blacklisting conversions as well as renaminings
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
     # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
     # put a lot of in - should be able to remove these eventually
@@ -135,7 +134,6 @@ def find_loc_in_our_seq_from_reference(start, our_seq, reference_seq):
 # locations in the two sequences although does assume that these genes are of uniform length
 # NOTE: This means that when we have reads that like don't have the start codons of the first gene or something we'll
 # get a -1 for the start location on our annotation
-# TODO: put in some way of detecting this and putting a <0 on the .tbl file
 def build_num_arrays(our_seq, ref_seq):
     ref_count = 0
     our_count = 0
@@ -288,6 +286,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 flag = '>'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
+        # TODO: examine the effects of this line is it necessary - is it deleting important info? I thnk it does nothing
         xtra = ''
     tbl.write('\n')
     tbl.close()
@@ -370,6 +369,7 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
 
 # this is now a dummy function for if I ever have to do c term scanning for stop codons again
+# TODO: get some test fastas and get this working
 def fix_orf(start, len):
     return start
 
@@ -450,6 +450,32 @@ def write_fsa(strain, name_of_virus, virus_genome, col_date):
     fsa.write(virus_genome)
     fsa.write('\n')
     fsa.close()
+
+# TODO: document how to use this functinoality, provide a example document from which to fill shit out and also write up a tutorial for using the program and actually producing something of value
+def do_meta_data(strain):
+    meta_data = ''
+    first = True
+    s = ''
+    coverage = ''
+    for line in open(metadata_sheet_location):
+        if first:
+            names = line.split(',')
+            first = False
+        if line.split(',')[0] == strain:
+            for dex in range(0, len(names)):
+                if names[dex] == 'coverage':
+                    coverage = line.split(',')[dex]
+                else:
+                    s = s + ' [' + names[dex] + '=' + line.split(',')[dex] + ']'
+            break
+
+    if s == '':
+        # TODO: finish this line with all the required metadata
+        s = ' [strain=' + raw_input('Enter Strain (sample) name: ') + ']'
+
+        # TODO: prompt for coverage here too
+
+    return meta_data, coverage
 
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went

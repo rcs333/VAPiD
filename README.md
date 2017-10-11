@@ -7,17 +7,19 @@ If anything breaks, or issues come up, or even if you just need help installing 
 The only information you need to supply is a fasta with as many viruses as you'd like to annotate in it as well as an optional metadata sheet and a .sbt file for author lists in the .sqn and .gbf files that NCBI likes. 
 
 # Installation
-Installation should be straightforward - It's been tested on ubuntu and mac
+Installation should be straightforward 
 
 1. Install all dependencies (Shoutout to the wonderful people who wrote these!)
 
-  BLAST+ https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download
+Python and Perl (should already be installed on most computers)
+
+BLAST+ https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download
   
-  maaft http://mafft.cbrc.jp/alignment/software/ 
+maaft http://mafft.cbrc.jp/alignment/software/ 
   
-  edirect utilities https://www.ncbi.nlm.nih.gov/books/NBK179288/
+edirect utilities https://www.ncbi.nlm.nih.gov/books/NBK179288/
   
-  tbl2asn https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
+tbl2asn https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
   
 3. You'll also probably want to just create a blank .csv file for metadata so the program will skip it - the variable for this is metadata_sheet_location. Although if you have metadata (coverage is probably the most common) you could load it into a csv and point the program there and to the correct column. (line 212 for the column) Collection date is also pulled from this .csv file. You'd want the csv file to have in the first column the strain name and then collection date in the 6th column and coverage in the 5th (assuming we're calling the first column column 1)
 
@@ -25,7 +27,7 @@ Installation should be straightforward - It's been tested on ubuntu and mac
 
 5. I guess you also need to make sure you have read/write permissions in the folder you run this from as this script utilizes subprocess and bash commands like mv and cp like way too much.
 
-6. Try running #THETESTSCRIPT# and it'll print out what is working and what isn't...
+6. Run test.sh by going into this directory in the console and typing bash test.sh
 
 # Usage - ClinVirusSeq.py
 Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after >) what you would like the strain of the virus (In your NCBI Genbank records) to be. 
