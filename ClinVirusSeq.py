@@ -21,7 +21,7 @@ def read_fasta(fasta_file_loc):
     dna_string = ''
     for line in open(fasta_file_loc):
         if line[0] == '>':
-            strain_list.append(line[1:-1])
+            strain_list.append(line[1:].strip())
             if dna_string != '':
                 genome_list.append(dna_string)
                 dna_string = ''
