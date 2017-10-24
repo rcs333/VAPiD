@@ -110,17 +110,35 @@ def blast_n_stuff(strain, our_fasta_loc):
     e.write(h2.read())
     e.close()
 
-    subprocess.call('cat ' + strain + '/' + strain + '_ref.fasta ' + strain + '/' + strain + '.fasta > ' + strain +
-                    '/' + strain + '.aligner', shell=True)
-    subprocess.call('mafft --auto ' + strain + '/' + strain + '.aligner > ' + strain + '/' + strain + '.ali',
-                    shell=True)
+    # cat x-platform code lol
+    #subprocess.call('cat ' + strain + '/' + strain + '_ref.fasta ' + strain + '/' + strain + '.fasta > ' + strain +
+    #                '/' + strain + '.aligner', shell=True)
+    # this code should be completely unecessary
+    g = open(strain + SLASH + strain + '.aligner', 'w')
+    t1 = open(strain + SLASH + strain + '_ref.fasta')
+    t2 = open(strain + SLASH + strain + '.fasta', 'w')
+    for line in t1:
+        g.write(line)
+    for line in t2:
+        g.write(line)
+    g.close()
+
+
+    #subprocess.call('mafft --auto ' + strain + '/' + strain + '.aligner > ' + strain + '/' + strain + '.ali',
+    #                shell=True)
     # returns name of virus - and has saved .ali file as well as a .gbk file
 
     # simply splits the aligned data into two different strings
-    ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
-    ref_seq = ali_genomes[0]
-    our_seq = ali_genomes[1]
+    #ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
+    #ref_seq = ali_genomes[0]
+    #our_seq = ali_genomes[1]
     # The two strings returned have gap information in the form '-' use "genome" variable for the actual viral genome
+    from Bio import pairwise2
+    seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
+    seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
+    alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq)
+    ref_seq = alignments[0][0]
+    our_seq = alignments[0][1]
     return name_of_virus, our_seq, ref_seq
 
 
@@ -392,9 +410,11 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
         gene_loc_list[7][1] = put_start + put_end
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
-
-    subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
-                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+    if SLASH == '/':
+        subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
+                        ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+    else:
+        subprocess.call('tbl2asn -p ' + strain + SLASH + '-t ' + strain + SLASH + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb', shell=True)
     return name_of_virus
 
 
@@ -566,6 +586,7 @@ if __name__ == '__main__':
 
     # now we only consolidate the sequin files if the flag is passed, which will save time if I have to blast stuff
     # multiple times for troubleshooting
+    # TODO: make this x-platform
     if args.r:
         strain2species_nostops = {}
         for item in strain2species.keys():
