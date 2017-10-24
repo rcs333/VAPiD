@@ -8,7 +8,15 @@ import argparse
 import timeit
 import os
 from Bio.Seq import Seq
+from Bio import SeqIO
+from Bio.Blast import NCBIWWW
 import datetime
+import platform
+import shutil
+from Bio import Entrez
+Entrez.email = 'uwvirongs@gmail.com'
+Entrez.tool = 'ClinVirusSeq'
+
 
 VERSION = 'v0.9'
 
@@ -37,15 +45,21 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
-    if not os.path.isfile(strain + '/' + strain + '.blastresults'):
-        cmd = 'blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
-                '-num_alignments 35 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
-        bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-        bs.communicate()
+    if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
+        #cmd = 'blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
+        #        '-num_alignments 35 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
+        #bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+        #bs.communicate()
+        # This should cross platform the results and just save the blast results straight up in the same format as before
+        record = SeqIO.read(our_fasta_loc, format='fasta')
+        result_handle = NCBIWWW.qblast('blastn', 'nt', record.seq, word_size=28, descriptions=0, alignments=35, format_type='Text')
+        with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
+            out_handle.write(result_handle.read())
+        result_handle.close()
 
     # read through the top hits saved earlier and save the accession number of the best hit that's complete
     read_next = False
-    for line in open(strain + '/' + strain + '.blastresults'):
+    for line in open(strain + SLASH + strain + '.blastresults'):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
             ref_seq_gb = line.split()[0][1:]
@@ -72,16 +86,29 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'KY369864'
 
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
-    cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
-    ps = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-    ps.communicate()
+    #
+    #cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+    #      ' | efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
+    #ps = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+    #ps.communicate()
 
-    cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
+    # This replacement code should work I think
+    record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
+    h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
+    d = open(strain + SLASH + strain + '_ref.fasta', 'w')
+    d.write(h.read())
+    d.close()
 
-    ds = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-    ds.communicate()
+    #cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+    #      ' | efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
+
+    #ds = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+    #ds.communicate()
+
+    h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
+    e = open(strain + SLASH + strain + '_ref.gbk', 'w')
+    e.write(h2.read())
+    e.close()
 
     subprocess.call('cat ' + strain + '/' + strain + '_ref.fasta ' + strain + '/' + strain + '.fasta > ' + strain +
                     '/' + strain + '.aligner', shell=True)
@@ -90,7 +117,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     # returns name of virus - and has saved .ali file as well as a .gbk file
 
     # simply splits the aligned data into two different strings
-    ali_list, ali_genomes = read_fasta(strain + '/' + strain + '.ali')
+    ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
     ref_seq = ali_genomes[0]
     our_seq = ali_genomes[1]
     # The two strings returned have gap information in the form '-' use "genome" variable for the actual viral genome
@@ -177,7 +204,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
     gene_loc_list = []
     gene_product_list = []
     allow_one = False
-    for line in open(strain + '/' + strain + '_ref.gbk'):
+    for line in open(strain + SLASH + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
             gene_loc_list.append(re.findall(r'\d+', line))
@@ -202,7 +229,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
 
 # takes a strain name and a genome and writes and saves a fasta to the correct directory
 def write_fasta(strain, genome):
-    w = open(strain + '/' + strain + '.fasta', 'w')
+    w = open(strain + SLASH + strain + '.fasta', 'w')
     w.write('>' + strain + '\n')
     w.write(genome)
     w.close()
@@ -232,7 +259,7 @@ def pull_col_date(data_list):
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
 def write_cmt(sample_name, coverage):
-    cmt = open(sample_name + '/assembly.cmt', 'w')
+    cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
     cmt.write('Assembly Method\tGeneious v. 9.1\n')
     if coverage != '':
@@ -247,7 +274,7 @@ def write_cmt(sample_name, coverage):
 # editing
 def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note):
 
-    tbl = open(strain + '/' + strain + '.tbl', 'w')
+    tbl = open(strain + SLASH + strain + '.tbl', 'w')
     tbl.write('>Feature ' + strain)
 
     for x in range(0, len(gene_product_list)):
@@ -295,11 +322,13 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
 def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
-    subprocess.call('mkdir -p ' + strain, shell=True)
+    # subprocess.call('mkdir -p ' + strain, shell=True) below code should replicate mkdir -p
+    if not os.path.exists(strain):
+        os.makedirs(strain)
 
     write_fasta(strain, genome)
 
-    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + '/' + strain + '.fasta')
+    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
 
@@ -311,7 +340,8 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     write_cmt(strain, coverage)
 
-    subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
+    # subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
+    shutil.copyfile(sbt_loc, strain + SLASH)
 
     write_fsa(strain, name_of_virus, genome, col_date)
 
@@ -435,7 +465,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 
     new_translation = str(Seq(nts_of_gene).translate())
 
-    pep = open(strain + '/' + strain + '.pep', 'w')
+    pep = open(strain + SLASH + strain + '.pep', 'w')
     pep.write('>n_' + strain + '\n' + new_translation)
     pep.write('\n')
     pep.close()
@@ -444,7 +474,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome, col_date):
-    fsa = open(strain + '/' + strain + '.fsa', 'w')
+    fsa = open(strain + SLASH + strain + '.fsa', 'w')
     fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + col_date + ' [country=USA] '
               '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
     fsa.write(virus_genome)
@@ -483,7 +513,7 @@ def do_meta_data(strain):
 # Now also returns if stop codons are in it or not so they'll be omitted during the packaging phase
 def check_for_stops(sample_name):
     stops = 0
-    for line in open(sample_name + '/' + sample_name + '.gbf'):
+    for line in open(sample_name + SLASH + sample_name + '.gbf'):
         if '*' in line:
             stops += 1
     if stops > 0:
@@ -493,10 +523,17 @@ def check_for_stops(sample_name):
         return False
 
 
+def check_os():
+    if platform.system() == 'Linux' or platform.system() == 'Darwin':
+        return '/'
+    else:
+        return '\\'
+
+
 if __name__ == '__main__':
 
     start_time = timeit.default_timer()
-
+    SLASH = check_os()
     parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of UW clinical virus sequences'
                                                  ' for submission, pulling virus name information from blast and '
                                                  'annotations are contained inside the .fasta file passed to the script'
@@ -542,15 +579,19 @@ if __name__ == '__main__':
         # now we've got a list of all the viruses in our fasta file
         now = datetime.datetime.now()
         date = now.strftime("%Y_%m-%d")
-        subprocess.call('mkdir -p ' + date, shell=True)
+        # subprocess.call('mkdir -p ' + date, shell=True) Changed to os.
+        os.makedirs(date)
         for item in virus_species_list:
-            subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+            # subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+            os.makedirs(date + SLASH + item)
         # now we've got all the folders for the viruses to go into
         for strain in strain2species_nostops.keys():
             # TODO: factor out this redundant loops and logic and data structures, however it *does* work
             species = '_'.join(strain2species_nostops[strain].split())
-            cmd = 'mv ' + strain + '/ ' + date + '/' + species
-            subprocess.call(cmd, shell=True)
+            # cmd = 'mv ' + strain + '/ ' + date + '/' + species
+            # subprocess.call(cmd, shell=True)
+            shutil.move(strain + SLASH, date + SLASH + species)
+
 
         # now we gotta extract the files and tbl2asn em'
         # This is absolutely disgusting code and I really really need to factor this out into it's own method
