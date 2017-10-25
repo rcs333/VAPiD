@@ -15,7 +15,6 @@ import platform
 import shutil
 from Bio import Entrez
 Entrez.email = 'uwvirongs@gmail.com'
-Entrez.tool = 'ClinVirusSeq'
 
 
 VERSION = 'v0.9'
@@ -51,8 +50,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         #bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
         #bs.communicate()
         # This should cross platform the results and just save the blast results straight up in the same format as before
-        record = SeqIO.read(our_fasta_loc, format='fasta')
-        result_handle = NCBIWWW.qblast('blastn', 'nt', record.seq, word_size=28, descriptions=0, alignments=35, format_type='Text')
+        record = open(our_fasta_loc).read()
+        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, format_type='Text')
         with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
             out_handle.write(result_handle.read())
         result_handle.close()
@@ -116,7 +115,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     # this code should be completely unecessary
     g = open(strain + SLASH + strain + '.aligner', 'w')
     t1 = open(strain + SLASH + strain + '_ref.fasta')
-    t2 = open(strain + SLASH + strain + '.fasta', 'w')
+    t2 = open(strain + SLASH + strain + '.fasta')
     for line in t1:
         g.write(line)
     for line in t2:
@@ -276,6 +275,8 @@ def pull_col_date(data_list):
 
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
+# This is something that only we'll know for sure and don't want to reuire it, - so I'll keep it untill release
+# TODO: remove the assembly data and method and technology before release
 def write_cmt(sample_name, coverage):
     cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
@@ -339,7 +340,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
-def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
+def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     # subprocess.call('mkdir -p ' + strain, shell=True) below code should replicate mkdir -p
     if not os.path.exists(strain):
         os.makedirs(strain)
@@ -350,18 +351,18 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
 
-    metadata_list = pull_metadata(strain, metadata_location)
+    #metadata_list = pull_metadata(strain, metadata_location)
 
-    coverage = pull_coverage(metadata_list)
+    #coverage = pull_coverage(metadata_list)
 
-    col_date = pull_col_date(metadata_list)
+    #col_date = pull_col_date(metadata_list)
 
     write_cmt(strain, coverage)
 
     # subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
-    shutil.copyfile(sbt_loc, strain + SLASH)
+    # shutil.copyfile(sbt_loc, strain + SLASH + strain + '.sbt')
 
-    write_fsa(strain, name_of_virus, genome, col_date)
+    write_fsa(strain, name_of_virus, genome, metadata)
 
     extra_stuff = ''
     # No protein had better be named this
@@ -410,11 +411,14 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
         gene_loc_list[7][1] = put_start + put_end
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
-    if SLASH == '/':
-        subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
-                        ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
-    else:
-        subprocess.call('tbl2asn -p ' + strain + SLASH + '-t ' + strain + SLASH + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb', shell=True)
+    #if SLASH == '/':
+   #     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
+    #                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+   # else:
+    # replaced it all with an x-platform call
+
+    cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
+    subprocess.call(cmd, shell=True)
     return name_of_virus
 
 
@@ -495,36 +499,41 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome, col_date):
     fsa = open(strain + SLASH + strain + '.fsa', 'w')
-    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + col_date + ' [country=USA] '
-              '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
+    # new metadata input strat
+    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA]' + metadata + '\n')
     fsa.write(virus_genome)
     fsa.write('\n')
     fsa.close()
 
 # TODO: document how to use this functinoality, provide a example document from which to fill shit out and also write up a tutorial for using the program and actually producing something of value
-def do_meta_data(strain):
+def do_meta_data(strain, sheet_exists):
     meta_data = ''
     first = True
     s = ''
     coverage = ''
-    for line in open(metadata_sheet_location):
-        if first:
-            names = line.split(',')
-            first = False
-        if line.split(',')[0] == strain:
-            for dex in range(0, len(names)):
-                if names[dex] == 'coverage':
-                    coverage = line.split(',')[dex]
-                else:
-                    s = s + ' [' + names[dex] + '=' + line.split(',')[dex] + ']'
-            break
+    if sheet_exists:
+        for line in open(metadata_sheet_location):
+            if first:
+                names = line.split(',')
+                first = False
+            elif line.split(',')[0] == strain:
+                for dex in range(0, len(names)):
+                    if names[dex].strip() == 'coverage':
+                        coverage = line.split(',')[dex].strip()
+                    else:
+                        s = s + ' [' + names[dex].strip() + '=' + line.split(',')[dex].strip() + ']'
+                break
 
     if s == '':
-        # TODO: finish this line with all the required metadata
-        s = ' [strain=' + raw_input('Enter Strain (sample) name: ') + ']'
-
-        # TODO: prompt for coverage here too
-
+        print('metadata not found in provided .csv or .csv not created -  time for manual entry for sequence - ' + strain)
+        col = ' [collection-date=' + raw_input('Enter collection date in the format (23-Mar-2005, Mar-2005, or 2005): ').strip() + ']'
+        con = ' [country=' + raw_input('Enter country sample was collected in (example - USA): ').strip() + ']'
+        st = ' [strain=' + raw_input('Enter strain name - if unknown just put ' + strain + ': ').strip() + ']'
+        cov = raw_input('Enter coverage as a number example 42.3, if unknown just leave this blank and hit enter: ')
+        coverage = cov
+        meta_data = col + con + st
+    else:
+        meta_data = s
     return meta_data, coverage
 
 
@@ -560,24 +569,43 @@ if __name__ == '__main__':
                                                  ' originally')
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
                                            'viruses that you want to have annotated - they should be known viruses')
-    parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
+    #parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
+    parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
                                                         'produce the consolidated sequin files for submission')
 
     args = parser.parse_args()
 
     fasta_loc = args.fasta_file
-    metadata_sheet_location = args.metadata_info_sheet
+
+
+
     sbt_file_loc = args.sbt_file_loc
 
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     strain2species = {}
     strain2stops = {}
+
+
+    meta_list = []
+    coverage_list = []
+    if args.metadata_loc:
+        metadata_sheet_location = args.metadata_loc
+        for x in range(0, len(virus_strain_list)):
+            metadata, coverage = do_meta_data(virus_strain_list[x], True)
+            meta_list.append(metadata)
+            coverage_list.append(coverage)
+    else:
+        for x in range(0, len(virus_strain_list)):
+            metadata, coverage = do_meta_data(virus_strain_list[x], False)
+            meta_list.append(metadata)
+            coverage_list.append(coverage)
+
     for x in range(0, len(virus_strain_list)):
         strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x],
-                                                                metadata_sheet_location, sbt_file_loc,)
+                                                                meta_list[x], coverage_list[x], sbt_file_loc)
         # now we've got a map of [strain] -> name of virus (with whitespace)
 
     for name in virus_strain_list:
