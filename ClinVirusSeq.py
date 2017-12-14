@@ -322,6 +322,15 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 else:
                     flag = '>'
 
+            it_count = 0
+            while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                end += 3
+                it_count += 1
+                if it_count > 3:
+                    end -= it_count * 3
+                    break
+
+
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             if int(start) < 1:
                 sflag = '<'
