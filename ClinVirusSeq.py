@@ -83,7 +83,10 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'KY674977'
     if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
         ref_seq_gb = 'KY369864'
-
+    if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
+        ref_seq_gb = 'L20587.1'
+    if 'MEASLES' in name_of_virus.upper():
+        ref_seq_gb = 'EU293548'
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
     #
     #cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
@@ -231,10 +234,10 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
             if px == 'phospho protein':
-                px = 'phosphoprotein'
+                px = 'phoshoprotein'
             gene_product_list.append(px)
-
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
+
 
     # Adjust every locus so that we actually put in correct annotations
     for entry in range(0, len(gene_loc_list)):
@@ -303,6 +306,9 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         product = gene_product_list[x]
         if gene_of_intrest in product:
             xtra = note
+        #TODO: this is inelegant, need to make it HIV specific i think
+        if 'Pol polyprotein' == product or 'Pol' == product:
+            sflag = '<'
         location_info = gene_locations[x]
         if len(location_info) == 4:
             start_1 = str(location_info[0])
@@ -314,8 +320,8 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             tbl.write('\t\t\tproduct\t' + product + '\n')
             tbl.write('\t\t\texception\tRibosomal Slippage\n')
         else:
-            start = location_info[0]
-            end = location_info[1]
+            start = int(location_info[0])
+            end = int(location_info[1])
             if end == len(genome):
                 if ((end - start) + 1 % 3) == 0 and genome[end - 3:end].upper() in 'TGA,TAA,TAG,UGA,UAA,UAG':
                     flag = ''
@@ -324,6 +330,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             it_count = 0
             while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                print('THIS HAPPENED!!!!!!!')
                 end += 3
                 it_count += 1
                 if it_count > 3:
@@ -385,7 +392,11 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         elif '1' in name_of_virus:
             extra_stuff = 'WEGOTAPARA1'
             gene_of_interest ='C\' protein'
-
+    if 'parainfluenza virus 4a' in name_of_virus.lower():
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'phoshoprotein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HPIV4a')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
@@ -395,13 +406,13 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     if 'mumps' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phosphoprotein'
+        gene_of_interest = 'phoshoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
     if 'rubulavirus 4' in name_of_virus:
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'Gs\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phosphoprotein'
-        process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
+        gene_of_interest = 'phoshoprotein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HP4-1')
     #if 'respirovirus' in name_of_virus.lower():
     #    extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
     #                  'G\n\t\t\tprotein_id\tn_' + strain
@@ -472,7 +483,6 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
         # flipping this covers whack spacing in protein products
-
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
@@ -491,10 +501,22 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
         nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
-    elif v == 'HP4-1' or v == 'MUMP':
+    elif v == 'HP4-1':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 435, 460)
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
-    elif v == 'MEAS' or v == 'NIPAH':
+    elif v == 'MUMP':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 445, 465)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+    elif v == 'MEAS':
+        start_of_poly_g = nts_of_gene.find('AAAAAGG', 674, 695)
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+    elif v == 'NIPAH':
+        start_of_poly_g = nts_of_gene.find('AAAAAAGG', 705, 725)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+    elif v ==  'HPIV4a':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+
 
     new_translation = str(Seq(nts_of_gene).translate())
 
