@@ -395,7 +395,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     if 'parainfluenza virus 4a' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phoshoprotein'
+        gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HPIV4a')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
@@ -406,12 +406,12 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     if 'mumps' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phoshoprotein'
+        gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'MUMP')
     if 'rubulavirus 4' in name_of_virus:
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'Gs\n\t\t\tprotein_id\tn_' + strain
-        gene_of_interest = 'phoshoprotein'
+        gene_of_interest = 'phosphoprotein'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HP4-1')
     #if 'respirovirus' in name_of_virus.lower():
     #    extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
@@ -482,12 +482,18 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
+        print(gene_of_interest)
+        print(gene_product_list[g])
         # flipping this covers whack spacing in protein products
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
+        if v == 'MUMP':
+            if 'V' in gene_product_list[g]:
+                nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
+                break
     # Since we now have a priori knowledge of where this RNA editing takes place we can safely search within a substring
-    start_of_poly_g = nts_of_gene.find('GGGGG')
+    # start_of_poly_g = nts_of_gene.find('GGGGG')
 
     # add the correct number of Gs
     if v == 'HP3':
