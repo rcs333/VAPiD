@@ -14,6 +14,8 @@ Mac or Linux
 
 Python - tested almost exclusively on 2.7.4 but there's nothing in here that shouldn't work on later versions.
 The numpy and biopython module for Python which can generally be install by opening the terminal and typing 
+If you're running a lower verison of python follow this guide to install pip
+https://pip.pypa.io/en/stable/installing/
 pip install numpy 
 pip install biopython
 
