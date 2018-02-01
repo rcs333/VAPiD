@@ -431,10 +431,10 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         gene_loc_list[7][1] = put_start + put_end
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
-    #if SLASH == '/':
-   #     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
+    #     if SLASH == '/':
+    #     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
     #                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
-   # else:
+    # else:
     # replaced it all with an x-platform call
 
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
@@ -488,10 +488,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
-        if v == 'MUMP':
-            if 'V' in gene_product_list[g]:
-                nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
-                break
+
     # Since we now have a priori knowledge of where this RNA editing takes place we can safely search within a substring
     # start_of_poly_g = nts_of_gene.find('GGGGG')
 

@@ -4,6 +4,7 @@
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ClinVirusSeq.py" afterPath="$PROJECT_DIR$/ClinVirusSeq.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ClinVirusSeq.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ClinVirusSeq.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="491" column="17" lean-forward="false" selection-start-line="491" selection-start-column="17" selection-end-line="491" selection-end-column="17" />
+            <state relative-caret-position="0">
+              <caret line="0" column="66" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="66" />
               <folding>
                 <element signature="e#309#326#0" expanded="true" />
                 <element signature="e#580#689#0" expanded="false" />
@@ -48,14 +49,27 @@
                 <element signature="e#12548#12876#0" expanded="false" />
                 <element signature="e#12879#12969#0" expanded="false" />
                 <element signature="e#15381#15493#0" expanded="false" />
-                <element signature="e#20227#20343#0" expanded="false" />
-                <element signature="e#20541#21458#0" expanded="false" />
-                <element signature="e#21458#21571#0" expanded="false" />
-                <element signature="e#24656#24765#0" expanded="false" />
-                <element signature="e#26713#26830#0" expanded="false" />
-                <element signature="e#27077#27356#0" expanded="false" />
-                <element signature="e#27659#28006#0" expanded="false" />
+                <element signature="e#20234#20350#0" expanded="false" />
+                <element signature="e#20548#21465#0" expanded="false" />
+                <element signature="e#21465#21578#0" expanded="false" />
+                <element signature="e#24478#24587#0" expanded="false" />
+                <element signature="e#26535#26652#0" expanded="false" />
+                <element signature="e#26899#27178#0" expanded="false" />
+                <element signature="e#27481#27828#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="767">
+                <caret line="57" column="11" lean-forward="true" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+                <folding />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -85,6 +99,9 @@
       <find>build_num_arrays</find>
       <find>print</find>
       <find>pol</find>
+      <find>v protein</find>
+      <find>V</find>
+      <find>V</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -99,15 +116,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/test.sh" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/get_metadata.py" />
         <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-29" />
-    <option name="y" value="67" />
+    <option name="x" value="-24" />
+    <option name="y" value="23" />
     <option name="width" value="2572" />
     <option name="height" value="1307" />
   </component>
@@ -146,6 +163,116 @@
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ApexTest" factoryName="Apex Test">
@@ -378,7 +505,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516154637611</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="test">
+      <created>1517364919029</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1517364919029</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -391,13 +525,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-29" y="67" width="2572" height="1307" extended-state="0" />
+    <frame x="-24" y="23" width="2572" height="1307" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1736672" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -449,32 +583,32 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>684</line>
+          <line>681</line>
           <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>687</line>
+          <line>684</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>689</line>
+          <line>686</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>690</line>
+          <line>687</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>691</line>
+          <line>688</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ClinVirusSeq.py</url>
-          <line>686</line>
+          <line>683</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
@@ -506,13 +640,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -540,13 +674,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -574,13 +708,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -608,13 +742,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -642,13 +776,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -676,13 +810,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -710,13 +844,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -744,13 +878,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -778,13 +912,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -829,13 +963,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -863,13 +997,13 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -897,34 +1031,19 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="435">
-            <caret line="29" column="82" lean-forward="false" selection-start-line="29" selection-start-column="82" selection-end-line="29" selection-end-column="82" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
@@ -946,8 +1065,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="491" column="17" lean-forward="false" selection-start-line="491" selection-start-column="17" selection-end-line="491" selection-end-column="17" />
+        <state relative-caret-position="0">
+          <caret line="0" column="66" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="66" />
           <folding>
             <element signature="e#309#326#0" expanded="true" />
             <element signature="e#580#689#0" expanded="false" />
@@ -967,14 +1086,30 @@
             <element signature="e#12548#12876#0" expanded="false" />
             <element signature="e#12879#12969#0" expanded="false" />
             <element signature="e#15381#15493#0" expanded="false" />
-            <element signature="e#20227#20343#0" expanded="false" />
-            <element signature="e#20541#21458#0" expanded="false" />
-            <element signature="e#21458#21571#0" expanded="false" />
-            <element signature="e#24656#24765#0" expanded="false" />
-            <element signature="e#26713#26830#0" expanded="false" />
-            <element signature="e#27077#27356#0" expanded="false" />
-            <element signature="e#27659#28006#0" expanded="false" />
+            <element signature="e#20234#20350#0" expanded="false" />
+            <element signature="e#20548#21465#0" expanded="false" />
+            <element signature="e#21465#21578#0" expanded="false" />
+            <element signature="e#24478#24587#0" expanded="false" />
+            <element signature="e#26535#26652#0" expanded="false" />
+            <element signature="e#26899#27178#0" expanded="false" />
+            <element signature="e#27481#27828#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="767">
+            <caret line="57" column="11" lean-forward="true" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
