@@ -61,19 +61,28 @@ Create your fasta file with all of the sequences that you would like to annotate
 
 Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
-You can run it with no arguments or the -h flag and it'll print out some usage information. But basically the way you run this is to type (without quotes) "ClinVirusSeq.py fasta_file metadata_info_sheet sbt_file_loc" where fasta_file is the location of all your sequences, metadata_info_sheet is the location of the semi-optional metadata sheet, and sbt_file_loc is the location of your .sbt file. I have it set to take a specified .sbt file so that you can create them with different author lists if you need to to make it easier.
+`python ClinVirusSeq.py -h` prints out a list of arguments and some help information
 
-Running the script without the -r flag all of your records will be in individual folders named by "strain" (what came after > in your fasta file). As a side note - please don't put whitespace or backslashes in your strain names. I would recommend doing this if you know you'll need to run this several times due to bugs or other issues. For example if you're debugging otherwise just use -r the first time
+Normal usage will be `python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
 
-If you're feeling bold just put the -r flag on the first time and all your .sqn files will get consolidated. Your output will be in a folder with the date YEAR_MONTH_DAY/virus_species/ The script creates consolidated .sqn files by virus species because that's what the lovely people at Genbank asked us to do. So you'll have a date folder for each fasta file - then another sub folder for each virus species and inside these folders will be species.sqn which should be what you wanna submit to NCBI. You can find individual records inside the subfolders (named by strains)  (so if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf .tbl and ect files that you need and love) Note that this does not (yet) protect against the same virus blasting to separate records that other people (sometimes me honestly) named two different things. (This is actually a pretty hard problem to solve without hard coding every virus, which I may end up doing)
+The last argument is optional and if you don't provide a metadata location the program will prompt you for it.
 
-Also - any records that had stop codons will not be moved into the species folders - they'll be left out in your main directory for you to examine - most often this comes from errors with coverage but sometimes it's because I introduced a catastrophic bug.
-tbl2asn will also spit out some errors and warnings onto the command line which are obviously pretty helpful. One known bug is that if you pass a sequence that doesn't contain every orf in its entirety you'll get start codons of 1< which obviously tbl2asn doesn't like
+You can just put relative paths to your sbt and fasta file, I find it is easiest to store everything in the ClinvVirusSeq folder - that way you don't have to worry about typing paths. 
+
+I would also reccomend not putting whitespace or escape characters in your strain names.
+
+The program will run for a bit and generate a folder for each sequence in your fasta file. The folder will be named the same as you named the strain in the fasta file. (so if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf .tbl and ect files that you need and love) 
+
+Inside each folder will be some files, the .sqn file is what you email to gb-sub@ncbi.nlm.nih.gov and then shortly after your sequences will be deposited on NCBI. 
+
+tbl2asn will also spit out some errors and warnings onto the command line which are obviously pretty helpful. 
+
+The program itself will also examine each sequence record for stop codons and notify you of which ones contain stops.
 
 # Implementation Details and Important Notes
 
-Right now we accomplish the annotation by searching blast for the best hit that is a complete genome and using a maaft alignment to generate annotations for the supplied sequence. Basing the annotations off the best blast hit. We can handle some ribosomal slippage as well as RNA editing in HPIV/Measles/Mumps/Sendai with support for more and more viruses as I end up having to deal with them. Coronavirus 229E and HPIV3 are annotated off hardcoded records due to variability in accuracy for these records in blast.
+Right now we accomplish the annotation by searching blast for the best hit that is a complete genome and using a maaft alignment to generate annotations for the supplied sequence. Basing the annotations off the best blast hit. We can handle some ribosomal slippage as well as RNA editing in all human viruses Coronavirus 229E and HPIV3 are annotated off hardcoded records due to variability in accuracy for these records in blast. - Following this note - a large problem is actually inconsistent spelling in genbank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
 
 
 # Future directions
-Currently developing a way of going directly from NGS reads coming straight off the Illumina to reference, assemble off the reference and then annotate, although this is in no way working right now stay tuned! :) Also going to try to have some way of consolidating gene product annotations because NCBI was complaining about that and I agree it's kinda bad and right now I'm manually reviewing all my annotations, which is slow.
+Mainly just bugfixing and streamlining, paper writing in progress.
