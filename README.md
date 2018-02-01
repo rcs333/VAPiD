@@ -15,7 +15,9 @@ Installation differs greatly for Unix systems and for Windows
 Python - tested almost exclusively on 2.7.4 but there's nothing in here that shouldn't work on later versions.
 
 If you're running a lower version of python follow this guide to install pip (You may need administrator pillages)
-https://pip.pypa.io/en/stable/installing/
+https://pip.pypa.io/en/stable/installing/ 
+
+Download the get-pip.py and run it from the command line by typing `pthon get-pip.py`
 
 Then open a command line and type
 
@@ -55,7 +57,7 @@ An example metadata file has been provided under the name example_metadata.csv
 
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads) you must fill out strain name, collection date and location or NCBI will not accept your submission, coverage is not necessary and if skipped during the automatic prompting will not create any issues 
 # Usage - ClinVirusSeq.py
-Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after >) what you would like the strain of the virus (In your NCBI Genbank records) to be. 
+Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after > like >Strain_1 - this sequences name would be Strain_1) what you would like the strain of the virus (In your NCBI Genbank records) to be. 
 
 Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
