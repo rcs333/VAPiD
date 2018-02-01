@@ -8,9 +8,15 @@ import argparse
 import timeit
 import os
 from Bio.Seq import Seq
+from Bio import SeqIO
+from Bio.Blast import NCBIWWW
 import datetime
+import platform
+import shutil
+from Bio import Entrez
+Entrez.email = 'uwvirongs@gmail.com'
 
-BLAST_DB_LOCATION = '/Users/uwvirongs/Downloads/surpi-master/nt'
+
 VERSION = 'v0.9'
 
 
@@ -22,12 +28,12 @@ def read_fasta(fasta_file_loc):
     dna_string = ''
     for line in open(fasta_file_loc):
         if line[0] == '>':
-            strain_list.append(line[1:-1])
+            strain_list.append(line[1:].strip())
             if dna_string != '':
                 genome_list.append(dna_string)
                 dna_string = ''
         else:
-            dna_string += line[:-1]
+            dna_string += line.strip()
     genome_list.append(dna_string)
     return strain_list, genome_list
 
@@ -38,15 +44,21 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, should speed up error checking in the future
-    if not os.path.isfile(strain + '/' + strain + '.blastresults'):
-        cmd = 'ct-test/ncbi-blast-2.6.0+/bin/blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
-                '-num_alignments 15 -word_size 30 | tee ' + strain + '/' + strain + '.blastresults'
-        bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-        bs.communicate()
+    if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
+        #cmd = 'blastn -query ' + our_fasta_loc + ' -db nt -remote -num_descriptions 0 ' \
+        #        '-num_alignments 35 -word_size 28 | tee ' + strain + '/' + strain + '.blastresults'
+        #bs = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+        #bs.communicate()
+        # This should cross platform the results and just save the blast results straight up in the same format as before
+        record = open(our_fasta_loc).read()
+        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, format_type='Text')
+        with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
+            out_handle.write(result_handle.read())
+        result_handle.close()
 
-    # read through the top 25 hits saved earlier and save the accession number of the best hit that's complete
+    # read through the top hits saved earlier and save the accession number of the best hit that's complete
     read_next = False
-    for line in open(strain + '/' + strain + '.blastresults'):
+    for line in open(strain + SLASH + strain + '.blastresults'):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
             ref_seq_gb = line.split()[0][1:]
@@ -61,7 +73,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                 break
             else:
                 read_next = False
-
+    # TODO: put a function in here that error checks and does blacklisting conversions as well as renaminings
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
     # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
     # put a lot of in - should be able to remove these eventually
@@ -71,30 +83,64 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'KY674977'
     if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
         ref_seq_gb = 'KY369864'
-
+    if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
+        ref_seq_gb = 'L20587.1'
+    if 'MEASLES' in name_of_virus.upper():
+        ref_seq_gb = 'EU293548'
     #  here we take the blast results and save both the fasta and the gbk file for pulling of annotations
-    cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | /Users/uwvirongs/edirect/efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
-    ps = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-    ps.communicate()
+    #
+    #cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+    #      ' | efetch -format fasta > ' + strain + '/' + strain + '_ref.fasta'
+    #ps = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+    #ps.communicate()
 
-    cmd = '/Users/uwvirongs/edirect/esearch -db nucleotide -query ' + ref_seq_gb + \
-          ' | /Users/uwvirongs/edirect/efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
+    # This replacement code should work I think
+    record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
+    h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
+    d = open(strain + SLASH + strain + '_ref.fasta', 'w')
+    d.write(h.read())
+    d.close()
 
-    ds = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
-    ds.communicate()
+    #cmd = 'esearch -db nucleotide -query ' + ref_seq_gb + \
+    #      ' | efetch -format gb > ' + strain + '/' + strain + '_ref.gbk'
 
-    subprocess.call('cat ' + strain + '/' + strain + '_ref.fasta ' + strain + '/' + strain + '.fasta > ' + strain +
-                    '/' + strain + '.aligner', shell=True)
-    subprocess.call('mafft --auto ' + strain + '/' + strain + '.aligner > ' + strain + '/' + strain + '.ali',
-                    shell=True)
+    #ds = subprocess.Popen(cmd, stdin=subprocess.PIPE, shell=True)
+    #ds.communicate()
+
+    h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
+    e = open(strain + SLASH + strain + '_ref.gbk', 'w')
+    e.write(h2.read())
+    e.close()
+
+    # cat x-platform code lol
+    #subprocess.call('cat ' + strain + '/' + strain + '_ref.fasta ' + strain + '/' + strain + '.fasta > ' + strain +
+    #                '/' + strain + '.aligner', shell=True)
+    # this code should be completely unecessary
+    g = open(strain + SLASH + strain + '.aligner', 'w')
+    t1 = open(strain + SLASH + strain + '_ref.fasta')
+    t2 = open(strain + SLASH + strain + '.fasta')
+    for line in t1:
+        g.write(line)
+    for line in t2:
+        g.write(line)
+    g.close()
+
+
+    #subprocess.call('mafft --auto ' + strain + '/' + strain + '.aligner > ' + strain + '/' + strain + '.ali',
+    #                shell=True)
     # returns name of virus - and has saved .ali file as well as a .gbk file
 
     # simply splits the aligned data into two different strings
-    ali_list, ali_genomes = read_fasta(strain + '/' + strain + '.ali')
-    ref_seq = ali_genomes[0]
-    our_seq = ali_genomes[1]
+    #ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
+    #ref_seq = ali_genomes[0]
+    #our_seq = ali_genomes[1]
     # The two strings returned have gap information in the form '-' use "genome" variable for the actual viral genome
+    from Bio import pairwise2
+    seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
+    seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
+    alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq)
+    ref_seq = alignments[0][0]
+    our_seq = alignments[0][1]
     return name_of_virus, our_seq, ref_seq
 
 
@@ -135,7 +181,6 @@ def find_loc_in_our_seq_from_reference(start, our_seq, reference_seq):
 # locations in the two sequences although does assume that these genes are of uniform length
 # NOTE: This means that when we have reads that like don't have the start codons of the first gene or something we'll
 # get a -1 for the start location on our annotation
-# TODO: put in some way of detecting this and putting a <0 on the .tbl file
 def build_num_arrays(our_seq, ref_seq):
     ref_count = 0
     our_count = 0
@@ -179,7 +224,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
     gene_loc_list = []
     gene_product_list = []
     allow_one = False
-    for line in open(strain + '/' + strain + '_ref.gbk'):
+    for line in open(strain + SLASH + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
             gene_loc_list.append(re.findall(r'\d+', line))
@@ -189,10 +234,10 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
             if px == 'phospho protein':
-                px = 'phosphoprotein'
+                px = 'phoshoprotein'
             gene_product_list.append(px)
-
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
+
 
     # Adjust every locus so that we actually put in correct annotations
     for entry in range(0, len(gene_loc_list)):
@@ -204,7 +249,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
 
 # takes a strain name and a genome and writes and saves a fasta to the correct directory
 def write_fasta(strain, genome):
-    w = open(strain + '/' + strain + '.fasta', 'w')
+    w = open(strain + SLASH + strain + '.fasta', 'w')
     w.write('>' + strain + '\n')
     w.write(genome)
     w.close()
@@ -233,8 +278,10 @@ def pull_col_date(data_list):
 
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
+# This is something that only we'll know for sure and don't want to reuire it, - so I'll keep it untill release
+# TODO: remove the assembly data and method and technology before release
 def write_cmt(sample_name, coverage):
-    cmt = open(sample_name + '/assembly.cmt', 'w')
+    cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
     cmt.write('Assembly Method\tGeneious v. 9.1\n')
     if coverage != '':
@@ -249,7 +296,7 @@ def write_cmt(sample_name, coverage):
 # editing
 def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note):
 
-    tbl = open(strain + '/' + strain + '.tbl', 'w')
+    tbl = open(strain + SLASH + strain + '.tbl', 'w')
     tbl.write('>Feature ' + strain)
 
     for x in range(0, len(gene_product_list)):
@@ -259,6 +306,9 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         product = gene_product_list[x]
         if gene_of_intrest in product:
             xtra = note
+        #TODO: this is inelegant, need to make it HIV specific i think
+        if 'Pol polyprotein' == product or 'Pol' == product:
+            sflag = '<'
         location_info = gene_locations[x]
         if len(location_info) == 4:
             start_1 = str(location_info[0])
@@ -270,13 +320,23 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             tbl.write('\t\t\tproduct\t' + product + '\n')
             tbl.write('\t\t\texception\tRibosomal Slippage\n')
         else:
-            start = location_info[0]
-            end = location_info[1]
+            start = int(location_info[0])
+            end = int(location_info[1])
             if end == len(genome):
                 if ((end - start) + 1 % 3) == 0 and genome[end - 3:end].upper() in 'TGA,TAA,TAG,UGA,UAA,UAG':
                     flag = ''
                 else:
                     flag = '>'
+
+            it_count = 0
+            while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                print('THIS HAPPENED!!!!!!!')
+                end += 3
+                it_count += 1
+                if it_count > 3:
+                    end -= it_count * 3
+                    break
+
 
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             if int(start) < 1:
@@ -288,6 +348,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 flag = '>'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
+        # TODO: examine the effects of this line is it necessary - is it deleting important info? I thnk it does nothing
         xtra = ''
     tbl.write('\n')
     tbl.close()
@@ -295,26 +356,29 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
-def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
-    subprocess.call('mkdir -p ' + strain, shell=True)
+def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
+    # subprocess.call('mkdir -p ' + strain, shell=True) below code should replicate mkdir -p
+    if not os.path.exists(strain):
+        os.makedirs(strain)
 
     write_fasta(strain, genome)
 
-    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + '/' + strain + '.fasta')
+    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
 
-    metadata_list = pull_metadata(strain, metadata_location)
+    #metadata_list = pull_metadata(strain, metadata_location)
 
-    coverage = pull_coverage(metadata_list)
+    #coverage = pull_coverage(metadata_list)
 
-    col_date = pull_col_date(metadata_list)
+    #col_date = pull_col_date(metadata_list)
 
     write_cmt(strain, coverage)
 
-    subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
+    # subprocess.call('cp ' + sbt_loc + ' ' + strain + '/', shell=True)
+    # shutil.copyfile(sbt_loc, strain + SLASH + strain + '.sbt')
 
-    write_fsa(strain, name_of_virus, genome, col_date)
+    write_fsa(strain, name_of_virus, genome, metadata)
 
     extra_stuff = ''
     # No protein had better be named this
@@ -328,7 +392,11 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
         elif '1' in name_of_virus:
             extra_stuff = 'WEGOTAPARA1'
             gene_of_interest ='C\' protein'
-
+    if 'parainfluenza virus 4a' in name_of_virus.lower():
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'phosphoprotein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HPIV4a')
     # Sorta adding more - although I think this should definitely be handled elsewhere
     if 'measles' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 1 non templated ' \
@@ -344,7 +412,7 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'Gs\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'phosphoprotein'
-        process_para(strain, genome, gene_loc_list, gene_product_list, 'phosphoprotein', 'HP4-1')
+        process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HP4-1')
     #if 'respirovirus' in name_of_virus.lower():
     #    extra_stuff = '\n\t\texception\tRNA Editing\n\t\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
     #                  'G\n\t\t\tprotein_id\tn_' + strain
@@ -363,13 +431,19 @@ def annotate_a_virus(strain, genome, metadata_location, sbt_loc):
         gene_loc_list[7][1] = put_start + put_end
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
+    #     if SLASH == '/':
+    #     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
+    #                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+    # else:
+    # replaced it all with an x-platform call
 
-    subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
-                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
+    cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
+    subprocess.call(cmd, shell=True)
     return name_of_virus
 
 
 # this is now a dummy function for if I ever have to do c term scanning for stop codons again
+# TODO: get some test fastas and get this working
 def fix_orf(start, len):
     return start
 
@@ -408,13 +482,15 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     for g in range(0, len(gene_product_list)):
+        print(gene_of_interest)
+        print(gene_product_list[g])
         # flipping this covers whack spacing in protein products
-
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             break
+
     # Since we now have a priori knowledge of where this RNA editing takes place we can safely search within a substring
-    start_of_poly_g = nts_of_gene.find('GGGGG')
+    # start_of_poly_g = nts_of_gene.find('GGGGG')
 
     # add the correct number of Gs
     if v == 'HP3':
@@ -428,14 +504,26 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
         nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
         nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
-    elif v == 'HP4-1' or v == 'MUMP':
+    elif v == 'HP4-1':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 435, 460)
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
-    elif v == 'MEAS' or v == 'NIPAH':
+    elif v == 'MUMP':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 445, 465)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+    elif v == 'MEAS':
+        start_of_poly_g = nts_of_gene.find('AAAAAGG', 674, 695)
         nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+    elif v == 'NIPAH':
+        start_of_poly_g = nts_of_gene.find('AAAAAAGG', 705, 725)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+    elif v ==  'HPIV4a':
+        start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
+        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+
 
     new_translation = str(Seq(nts_of_gene).translate())
 
-    pep = open(strain + '/' + strain + '.pep', 'w')
+    pep = open(strain + SLASH + strain + '.pep', 'w')
     pep.write('>n_' + strain + '\n' + new_translation)
     pep.write('\n')
     pep.close()
@@ -444,12 +532,43 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
 def write_fsa(strain, name_of_virus, virus_genome, col_date):
-    fsa = open(strain + '/' + strain + '.fsa', 'w')
-    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + col_date + ' [country=USA] '
-              '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA] [strain=' + strain + ']\n')
+    fsa = open(strain + SLASH + strain + '.fsa', 'w')
+    # new metadata input strat
+    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] [molecule=RNA]' + metadata + '\n')
     fsa.write(virus_genome)
     fsa.write('\n')
     fsa.close()
+
+# TODO: document how to use this functinoality, provide a example document from which to fill shit out and also write up a tutorial for using the program and actually producing something of value
+def do_meta_data(strain, sheet_exists):
+    meta_data = ''
+    first = True
+    s = ''
+    coverage = ''
+    if sheet_exists:
+        for line in open(metadata_sheet_location):
+            if first:
+                names = line.split(',')
+                first = False
+            elif line.split(',')[0] == strain:
+                for dex in range(0, len(names)):
+                    if names[dex].strip() == 'coverage':
+                        coverage = line.split(',')[dex].strip()
+                    else:
+                        s = s + ' [' + names[dex].strip() + '=' + line.split(',')[dex].strip() + ']'
+                break
+
+    if s == '':
+        print('metadata not found in provided .csv or .csv not created -  time for manual entry for sequence - ' + strain)
+        col = ' [collection-date=' + raw_input('Enter collection date in the format (23-Mar-2005, Mar-2005, or 2005): ').strip() + ']'
+        con = ' [country=' + raw_input('Enter country sample was collected in (example - USA): ').strip() + ']'
+        st = ' [strain=' + raw_input('Enter strain name - if unknown just put ' + strain + ': ').strip() + ']'
+        cov = raw_input('Enter coverage as a number example 42.3, if unknown just leave this blank and hit enter: ')
+        coverage = cov
+        meta_data = col + con + st
+    else:
+        meta_data = s
+    return meta_data, coverage
 
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
@@ -457,7 +576,7 @@ def write_fsa(strain, name_of_virus, virus_genome, col_date):
 # Now also returns if stop codons are in it or not so they'll be omitted during the packaging phase
 def check_for_stops(sample_name):
     stops = 0
-    for line in open(sample_name + '/' + sample_name + '.gbf'):
+    for line in open(sample_name + SLASH + sample_name + '.gbf'):
         if '*' in line:
             stops += 1
     if stops > 0:
@@ -467,34 +586,60 @@ def check_for_stops(sample_name):
         return False
 
 
+def check_os():
+    if platform.system() == 'Linux' or platform.system() == 'Darwin':
+        return '/'
+    else:
+        return '\\'
+
+
 if __name__ == '__main__':
 
     start_time = timeit.default_timer()
-
+    SLASH = check_os()
     parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of UW clinical virus sequences'
                                                  ' for submission, pulling virus name information from blast and '
                                                  'annotations are contained inside the .fasta file passed to the script'
                                                  ' originally')
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
                                            'viruses that you want to have annotated - they should be known viruses')
-    parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
+    #parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
+    parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
                                                         'produce the consolidated sequin files for submission')
 
     args = parser.parse_args()
 
     fasta_loc = args.fasta_file
-    metadata_sheet_location = args.metadata_info_sheet
+
+
+
     sbt_file_loc = args.sbt_file_loc
 
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     strain2species = {}
     strain2stops = {}
+
+
+    meta_list = []
+    coverage_list = []
+    if args.metadata_loc:
+        metadata_sheet_location = args.metadata_loc
+        for x in range(0, len(virus_strain_list)):
+            metadata, coverage = do_meta_data(virus_strain_list[x], True)
+            meta_list.append(metadata)
+            coverage_list.append(coverage)
+    else:
+        for x in range(0, len(virus_strain_list)):
+            metadata, coverage = do_meta_data(virus_strain_list[x], False)
+            meta_list.append(metadata)
+            coverage_list.append(coverage)
+
     for x in range(0, len(virus_strain_list)):
         strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x],
-                                                                metadata_sheet_location, sbt_file_loc,)
+                                                                meta_list[x], coverage_list[x], sbt_file_loc)
         # now we've got a map of [strain] -> name of virus (with whitespace)
 
     for name in virus_strain_list:
@@ -503,6 +648,7 @@ if __name__ == '__main__':
 
     # now we only consolidate the sequin files if the flag is passed, which will save time if I have to blast stuff
     # multiple times for troubleshooting
+    # TODO: make this x-platform
     if args.r:
         strain2species_nostops = {}
         for item in strain2species.keys():
@@ -516,15 +662,19 @@ if __name__ == '__main__':
         # now we've got a list of all the viruses in our fasta file
         now = datetime.datetime.now()
         date = now.strftime("%Y_%m-%d")
-        subprocess.call('mkdir -p ' + date, shell=True)
+        # subprocess.call('mkdir -p ' + date, shell=True) Changed to os.
+        os.makedirs(date)
         for item in virus_species_list:
-            subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+            # subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+            os.makedirs(date + SLASH + item)
         # now we've got all the folders for the viruses to go into
         for strain in strain2species_nostops.keys():
             # TODO: factor out this redundant loops and logic and data structures, however it *does* work
             species = '_'.join(strain2species_nostops[strain].split())
-            cmd = 'mv ' + strain + '/ ' + date + '/' + species
-            subprocess.call(cmd, shell=True)
+            # cmd = 'mv ' + strain + '/ ' + date + '/' + species
+            # subprocess.call(cmd, shell=True)
+            shutil.move(strain + SLASH, date + SLASH + species)
+
 
         # now we gotta extract the files and tbl2asn em'
         # This is absolutely disgusting code and I really really need to factor this out into it's own method
