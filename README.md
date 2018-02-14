@@ -1,9 +1,10 @@
-# ClinSeq
-Automatic Annotation and deposition of UW Virology clinical sequencing data
-This repository contains scripts for analysis of assembled fasta files of known human viruses. This program annotates these viruses and then packages them up for NCBI deposition. All you need to get going on this is a computer and some fasta files of human viruses. Feed this program the viruses and .sqn files that you can just email to NCBI will be generated!
-I can be contacted at uwvirongs@gmail.com for bug reports or feature requests - you can also make them here on github if you like.
+# ClinVirusSeq
+ClinVirusSeq is a ultra-lightweight script for quickly annotating and preparing sequences of well characterized human viruses for sending to NCBI Genbank. All you need to get started is a working installation of BioPython, some fasta files of human viruses and an NCBI generated author list.
 
-The only information you need to supply is a fasta with as many viruses as you'd like to annotate in it as well as an optional metadata sheet and a .sbt file for author lists in the .sqn and .gbf files that NCBI likes. 
+Currently tested and working on Windows 10 (although installing BioPython can be a bear), Ubuntu 10.4, and Mac OS X.
+
+Viruses that ClinVirusSeq has been tested with:
+Nipah, Sendai, Measles, Mumps, Parainfluenzas, Ebola, Rotavirus, Coronaviruses, West Nile Virus, HTLV, HIV, Influenza, Hepatitis, Norovirus, Enterovirus, JC, BK. 
 
 # Installation
 Installation differs greatly for Unix systems and for Windows
@@ -14,18 +15,21 @@ Installation differs greatly for Unix systems and for Windows
 
 Python - tested almost exclusively on 2.7.4 but there's nothing in here that shouldn't work on later versions.
 
-If you're running a lower version of python follow this guide to install pip (You may need administrator pillages)
+If you're running Python < 2.7.4 follow this guide to install pip (You may need administrator pillages)
 https://pip.pypa.io/en/stable/installing/ 
 
 Download the get-pip.py and run it from the command line by typing `pthon get-pip.py`
 
-Then open a command line and type
+If you're using Python >= 2.7.4 or you've sucseffully installed pip:
+Open a command line and type
 
 `pip install numpy`
 
 `pip install biopython`
 
-Then you'll need to install tbl2asn and put it on your path. (Another option is to download the appropriate version and simply unpack it directly into this repository once you've downloaded it. 
+Now download and unzip this repository to your computer (anywhere will work)
+
+Then you'll need to install tbl2asn and put it on your path. (Another option is to download tbl2asn and simply unpack it directly into the folder you've unpacked this repository into.) 
 tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 **Windows**
@@ -42,7 +46,7 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 4. Then download and unzip this repository to your computer (anywhere will do)
 
-5. Download tbl2asn for windows https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/  and unzip it, then copy and paste every single file in the tbl2asn folder (there should be like 7 .dlls and an .exe that is simply called tbl2asn 
+5. Download tbl2asn for windows https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/  and unzip it, then copy and paste every single file in the tbl2asn folder (there should be like 7 .dlls and an .exe that is simply called tbl2asn) into the folder that you just made in step 4. 
 
 **After the above has completed there's still a bit of setup that needs to be done.** 
 
@@ -52,12 +56,14 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 3. (Optional)
 You can generate a .csv file with most metadata that you wish to associate with your sequences. The file should have across the top Strain (the name of the fasta sequences that you'll import) followed by columns with NCBI approved metadata https://www.ncbi.nlm.nih.gov/Sequin/modifiers.html
+ 
+An important note is that the strain names in the metadata csv MUST match the sequence names in your fasta files. (i.e. the part after the >) 
 
-An example metadata file has been provided under the name example_metadata.csv 
+An example metadata file has been provided under the name example_metadata.csv - this metadata file will work with the example fasta file provided (example.fasta).
 
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads) you must fill out strain name, collection date and location or NCBI will not accept your submission, coverage is not necessary and if skipped during the automatic prompting will not create any issues 
 # Usage - ClinVirusSeq.py
-Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after > like >Strain_1 - this sequences name would be Strain_1) what you would like the strain of the virus (In your NCBI Genbank records) to be. 
+Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after > like >Strain_1 - this sequences name would be Strain_1) what you would like the strain of the virus (In your NCBI Genbank records) to be. (for example.fasta this name would be 'test')
 
 Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
@@ -69,7 +75,7 @@ The last argument is optional and if you don't provide a metadata location the p
 
 You can just put relative paths to your sbt and fasta file, I find it is easiest to store everything in the ClinvVirusSeq folder - that way you don't have to worry about typing paths. 
 
-I would also reccomend not putting whitespace or escape characters in your strain names.
+FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!
 
 The program will run for a bit and generate a folder for each sequence in your fasta file. The folder will be named the same as you named the strain in the fasta file. (so if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf .tbl and ect files that you need and love) 
 
