@@ -63,20 +63,20 @@ An example metadata file has been provided under the name example_metadata.csv -
 
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads) you must fill out strain name, collection date and location or NCBI will not accept your submission, coverage is not necessary and if skipped during the automatic prompting will not create any issues 
 # Usage - ClinVirusSeq.py
-General Usage
+**General Usage**
 
 `python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
 
-Example Usage (With metadata in the sheet)
+**Example Usage (With metadata in the sheet)**
 
 `python ClinVirusSeq.py example.fasta template.sbt -metadata_loc example_metadata.csv`
 
-Example Usage (No metadata sheet)
+**Example Usage (No metadata sheet)**
 
 `python ClinVirusSeq.py example.fasta template.sbt`
 
 
-Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (for example.fasta this name would be 'test') FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!
+Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (for example.fasta this name would be 'test') **FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!**
 
 Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
