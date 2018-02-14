@@ -63,27 +63,33 @@ An example metadata file has been provided under the name example_metadata.csv -
 
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads) you must fill out strain name, collection date and location or NCBI will not accept your submission, coverage is not necessary and if skipped during the automatic prompting will not create any issues 
 # Usage - ClinVirusSeq.py
-Create your fasta file with all of the sequences that you would like to annotate - you should make the names of the sequences (the things after > like >Strain_1 - this sequences name would be Strain_1) what you would like the strain of the virus (In your NCBI Genbank records) to be. (for example.fasta this name would be 'test')
+General Usage
+`python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
+Example Usage (With metadata in the sheet)
+`python ClinVirusSeq.py example.fasta template.sbt -metadata_loc example_metadata.csv`
+Example Usage (No metadata sheet)
+`python ClinVirusSeq.py example.fasta template.sbt`
+
+
+Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (for example.fasta this name would be 'test') FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!
 
 Then you would need to run the ClinVirusSeq.py script from the command line. i.e. cd to the directory that this is living it - if you cloned from github it'll be ClinVirusSeq/ 
 
 `python ClinVirusSeq.py -h` prints out a list of arguments and some help information
 
-Normal usage will be `python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
-
 The last argument is optional and if you don't provide a metadata location the program will prompt you for it.
 
 You can just put relative paths to your sbt and fasta file, I find it is easiest to store everything in the ClinvVirusSeq folder - that way you don't have to worry about typing paths. 
 
-FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!
+# Output
 
 The program will run for a bit and generate a folder for each sequence in your fasta file. The folder will be named the same as you named the strain in the fasta file. (so if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf .tbl and ect files that you need and love) 
 
-Inside each folder will be some files, the .sqn file is what you email to gb-sub@ncbi.nlm.nih.gov and then shortly after your sequences will be deposited on NCBI. 
-
-tbl2asn will also spit out some errors and warnings onto the command line which are obviously pretty helpful. 
+tbl2asn will also spit out some errors and warnings onto the command line.
 
 The program itself will also examine each sequence record for stop codons and notify you of which ones contain stops.
+
+Inside each folder will be some files, the .sqn file is what you email to gb-sub@ncbi.nlm.nih.gov and then shortly after your sequences will be deposited on NCBI. 
 
 # Implementation Details and Important Notes
 
