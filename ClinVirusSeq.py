@@ -13,6 +13,7 @@ from Bio.Blast import NCBIWWW
 import datetime
 import platform
 import shutil
+import sys
 from Bio import Entrez
 Entrez.email = 'uwvirongs@gmail.com'
 
@@ -604,24 +605,24 @@ if __name__ == '__main__':
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
                                            'viruses that you want to have annotated - they should be known viruses')
     #parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
-    parser.add_argument('sbt_file_loc', help='File path for the .sbt file that should contain author names mainly')
+    parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file (should have a .sbt extension')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
                                                         'produce the consolidated sequin files for submission')
-
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except:
+        parser.print_help()
+        sys.exit(0)
 
     fasta_loc = args.fasta_file
 
-
-
-    sbt_file_loc = args.sbt_file_loc
+    sbt_file_loc = args.author_template_file_loc
 
     virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
 
     strain2species = {}
     strain2stops = {}
-
 
     meta_list = []
     coverage_list = []
@@ -649,46 +650,46 @@ if __name__ == '__main__':
     # now we only consolidate the sequin files if the flag is passed, which will save time if I have to blast stuff
     # multiple times for troubleshooting
     # TODO: make this x-platform
-    if args.r:
-        strain2species_nostops = {}
-        for item in strain2species.keys():
-            if not strain2stops[item]:
-                strain2species_nostops[item] = strain2species[item]
-        # now we've got map of strain 'folder names' to virus names with no stops
-        virus_species_list = []
-        for item in strain2species_nostops.values():
-            if '_'.join(item.split()) not in virus_species_list:
-                virus_species_list.append('_'.join(item.split()))
-        # now we've got a list of all the viruses in our fasta file
-        now = datetime.datetime.now()
-        date = now.strftime("%Y_%m-%d")
-        # subprocess.call('mkdir -p ' + date, shell=True) Changed to os.
-        os.makedirs(date)
-        for item in virus_species_list:
-            # subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
-            os.makedirs(date + SLASH + item)
-        # now we've got all the folders for the viruses to go into
-        for strain in strain2species_nostops.keys():
-            # TODO: factor out this redundant loops and logic and data structures, however it *does* work
-            species = '_'.join(strain2species_nostops[strain].split())
-            # cmd = 'mv ' + strain + '/ ' + date + '/' + species
-            # subprocess.call(cmd, shell=True)
-            shutil.move(strain + SLASH, date + SLASH + species)
-
-
-        # now we gotta extract the files and tbl2asn em'
-        # This is absolutely disgusting code and I really really need to factor this out into it's own method
-        for item in virus_species_list:
-            subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl',
-                            shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa',
-                            shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep',
-                            shell=True)
-            subprocess.call('cat ' + date + '/' + item + '/*/*.cmt > ' + date + '/' + item + '/' + item + '.cmt',
-                            shell=True)
-            subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -Y ' + date + '/' + item +
-                            '.cmt -a s -V vb', shell=True)
+    # if args.r:
+    #     strain2species_nostops = {}
+    #     for item in strain2species.keys():
+    #         if not strain2stops[item]:
+    #             strain2species_nostops[item] = strain2species[item]
+    #     # now we've got map of strain 'folder names' to virus names with no stops
+    #     virus_species_list = []
+    #     for item in strain2species_nostops.values():
+    #         if '_'.join(item.split()) not in virus_species_list:
+    #             virus_species_list.append('_'.join(item.split()))
+    #     # now we've got a list of all the viruses in our fasta file
+    #     now = datetime.datetime.now()
+    #     date = now.strftime("%Y_%m-%d")
+    #     # subprocess.call('mkdir -p ' + date, shell=True) Changed to os.
+    #     os.makedirs(date)
+    #     for item in virus_species_list:
+    #         # subprocess.call('mkdir -p ' + date + '/' + item, shell=True)
+    #         os.makedirs(date + SLASH + item)
+    #     # now we've got all the folders for the viruses to go into
+    #     for strain in strain2species_nostops.keys():
+    #         # TODO: factor out this redundant loops and logic and data structures, however it *does* work
+    #         species = '_'.join(strain2species_nostops[strain].split())
+    #         # cmd = 'mv ' + strain + '/ ' + date + '/' + species
+    #         # subprocess.call(cmd, shell=True)
+    #         shutil.move(strain + SLASH, date + SLASH + species)
+    #
+    #
+    #     # now we gotta extract the files and tbl2asn em'
+    #     # This is absolutely disgusting code and I really really need to factor this out into it's own method
+    #     for item in virus_species_list:
+    #         subprocess.call('cat ' + date + '/' + item + '/*/*.tbl > ' + date + '/' + item + '/' + item + '.tbl',
+    #                         shell=True)
+    #         subprocess.call('cat ' + date + '/' + item + '/*/*.fsa > ' + date + '/' + item + '/' + item + '.fsa',
+    #                         shell=True)
+    #         subprocess.call('cat ' + date + '/' + item + '/*/*.pep > ' + date + '/' + item + '/' + item + '.pep',
+    #                         shell=True)
+    #         subprocess.call('cat ' + date + '/' + item + '/*/*.cmt > ' + date + '/' + item + '/' + item + '.cmt',
+    #                         shell=True)
+    #         subprocess.call('tbl2asn -p ' + date + '/' + item + ' -t ' + sbt_file_loc + ' -Y ' + date + '/' + item +
+    #                         '.cmt -a s -V vb', shell=True)
 
     print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
           ' seconds')
