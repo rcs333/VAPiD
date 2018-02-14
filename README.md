@@ -64,10 +64,15 @@ An example metadata file has been provided under the name example_metadata.csv -
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads) you must fill out strain name, collection date and location or NCBI will not accept your submission, coverage is not necessary and if skipped during the automatic prompting will not create any issues 
 # Usage - ClinVirusSeq.py
 General Usage
+
 `python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
+
 Example Usage (With metadata in the sheet)
+
 `python ClinVirusSeq.py example.fasta template.sbt -metadata_loc example_metadata.csv`
+
 Example Usage (No metadata sheet)
+
 `python ClinVirusSeq.py example.fasta template.sbt`
 
 
