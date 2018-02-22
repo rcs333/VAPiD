@@ -66,11 +66,11 @@ If you don't have very many sequences at a time or you include a fasta not in yo
 # Usage - ClinVirusSeq.py
 **General Usage**
 
-`python ClinVirusSeq.py fasta_file_path author_template_path -metadata_loc metadata_info_path`
+`python ClinVirusSeq.py fasta_file_path author_template_path --metadata_loc metadata_info_path`
 
 **Example Usage (With metadata in the sheet)**
 
-`python ClinVirusSeq.py example.fasta template.sbt -metadata_loc example_metadata.csv`
+`python ClinVirusSeq.py example.fasta template.sbt --metadata_loc example_metadata.csv`
 
 **Example Usage (No metadata sheet)**
 
