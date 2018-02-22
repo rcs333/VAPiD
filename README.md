@@ -77,7 +77,7 @@ If you don't have very many sequences at a time or you include a fasta not in yo
 `python ClinVirusSeq.py example.fasta template.sbt`
 
 
-Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACERS IN THEM!!**
+Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACTERS IN THEM!!**
 
 Then you would need to run the ClinVirusSeq.py script from the command line, i.e. cd to the directory that this is living in - if you cloned from github it'll be ClinVirusSeq/ 
 
