@@ -29,7 +29,7 @@ def read_fasta(fasta_file_loc):
     dna_string = ''
     for line in open(fasta_file_loc):
         if line[0] == '>':
-            strain_list.append(line[1:].strip())
+            strain_list.append(line[1:].split()[0])
             if dna_string != '':
                 genome_list.append(dna_string)
                 dna_string = ''
@@ -323,21 +323,18 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         else:
             start = int(location_info[0])
             end = int(location_info[1])
-            if end == len(genome):
-                if ((end - start) + 1 % 3) == 0 and genome[end - 3:end].upper() in 'TGA,TAA,TAG,UGA,UAA,UAG':
-                    flag = ''
-                else:
-                    flag = '>'
+            if end >= len(genome) and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                flag = '>'
 
             it_count = 0
-            while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
-                print('THIS HAPPENED!!!!!!!')
+            modifid_orf = False
+            while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3 and it_count <= 3:
+                print('Modifying ORF length for ' + str(product))
+                modifid_orf = True
                 end += 3
                 it_count += 1
-                if it_count > 3:
-                    end -= it_count * 3
-                    break
-
+            if modifid_orf and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                end -= it_count * 3
 
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             if int(start) < 1:

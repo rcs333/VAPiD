@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/example_metadata.csv" afterPath="$PROJECT_DIR$/example_metadata.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ClinVirusSeq.py" afterPath="$PROJECT_DIR$/ClinVirusSeq.py" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,30 +27,30 @@
       <file leaf-file-name="ClinVirusSeq.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="659" column="54" lean-forward="true" selection-start-line="659" selection-start-column="54" selection-end-line="659" selection-end-column="54" />
+            <state relative-caret-position="420">
+              <caret line="336" column="35" lean-forward="false" selection-start-line="336" selection-start-column="35" selection-end-line="336" selection-end-column="35" />
               <folding>
                 <element signature="e#309#326#0" expanded="true" />
-                <element signature="e#6853#6957#0" expanded="false" />
-                <element signature="e#7211#7437#0" expanded="false" />
-                <element signature="e#7437#7553#0" expanded="false" />
-                <element signature="e#7761#8110#0" expanded="false" />
-                <element signature="e#9121#9239#0" expanded="false" />
-                <element signature="e#9677#9789#0" expanded="false" />
-                <element signature="e#11165#11281#0" expanded="false" />
-                <element signature="e#11284#11404#0" expanded="false" />
-                <element signature="e#11479#11790#0" expanded="false" />
-                <element signature="e#11793#11913#0" expanded="false" />
-                <element signature="e#11979#12226#0" expanded="false" />
-                <element signature="e#12559#12887#0" expanded="false" />
-                <element signature="e#12890#12980#0" expanded="false" />
-                <element signature="e#15392#15504#0" expanded="false" />
-                <element signature="e#20245#20361#0" expanded="false" />
-                <element signature="e#20559#21476#0" expanded="false" />
-                <element signature="e#21476#21589#0" expanded="false" />
-                <element signature="e#24489#24598#0" expanded="false" />
-                <element signature="e#26546#26663#0" expanded="false" />
-                <element signature="e#26910#27189#0" expanded="false" />
+                <element signature="e#6856#6960#0" expanded="false" />
+                <element signature="e#7214#7440#0" expanded="false" />
+                <element signature="e#7440#7556#0" expanded="false" />
+                <element signature="e#7764#8113#0" expanded="false" />
+                <element signature="e#9124#9242#0" expanded="false" />
+                <element signature="e#9680#9792#0" expanded="false" />
+                <element signature="e#11168#11284#0" expanded="false" />
+                <element signature="e#11287#11407#0" expanded="false" />
+                <element signature="e#11482#11793#0" expanded="false" />
+                <element signature="e#11796#11916#0" expanded="false" />
+                <element signature="e#11982#12229#0" expanded="false" />
+                <element signature="e#12562#12890#0" expanded="false" />
+                <element signature="e#12893#12983#0" expanded="false" />
+                <element signature="e#15454#15566#0" expanded="false" />
+                <element signature="e#20307#20423#0" expanded="false" />
+                <element signature="e#20621#21538#0" expanded="false" />
+                <element signature="e#21538#21651#0" expanded="false" />
+                <element signature="e#24551#24660#0" expanded="false" />
+                <element signature="e#26608#26725#0" expanded="false" />
+                <element signature="e#26972#27251#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -70,8 +70,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="746">
-                <caret line="57" column="11" lean-forward="false" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+              <first_editor relative-caret-position="945">
+                <caret line="63" column="11" lean-forward="false" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -106,7 +106,6 @@
       <find>pol</find>
       <find>v protein</find>
       <find>V</find>
-      <find>V</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -123,14 +122,15 @@
         <option value="$PROJECT_DIR$/test.sh" />
         <option value="$PROJECT_DIR$/get_metadata.py" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
         <option value="$PROJECT_DIR$/example_metadata.csv" />
+        <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="2560" />
+    <option name="x" value="1342" />
+    <option name="y" value="41" />
+    <option name="width" value="1183" />
     <option name="height" value="1307" />
   </component>
   <component name="ProjectView">
@@ -149,7 +149,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -164,10 +163,122 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="SearchEverywhereHistoryKey" value="ebola&#9;null&#9;null" />
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/README.md</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunManager">
     <configuration default="true" type="ApexTest" factoryName="Apex Test">
@@ -322,6 +433,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="" />
@@ -435,7 +549,14 @@
       <option name="project" value="LOCAL" />
       <updated>1518572976328</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="test">
+      <created>1518573050750</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1518573050750</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -448,30 +569,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="2560" height="1307" extended-state="0" />
+    <frame x="1342" y="41" width="1183" height="1307" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1783601" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.08242188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -503,7 +624,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="42" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -511,443 +632,30 @@
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="66" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="66" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="0">
-            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/get_metadata.py" />
-    <entry file="file://$PROJECT_DIR$/UWVIROCLINSEQ.csv" />
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="746">
-            <caret line="57" column="11" lean-forward="false" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -959,33 +667,490 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="855">
+            <caret line="57" column="11" lean-forward="false" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="66" lean-forward="false" selection-start-line="0" selection-start-column="65" selection-end-line="0" selection-end-column="66" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="659" column="54" lean-forward="true" selection-start-line="659" selection-start-column="54" selection-end-line="659" selection-end-column="54" />
+          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
           <folding>
             <element signature="e#309#326#0" expanded="true" />
-            <element signature="e#6853#6957#0" expanded="false" />
-            <element signature="e#7211#7437#0" expanded="false" />
-            <element signature="e#7437#7553#0" expanded="false" />
-            <element signature="e#7761#8110#0" expanded="false" />
-            <element signature="e#9121#9239#0" expanded="false" />
-            <element signature="e#9677#9789#0" expanded="false" />
-            <element signature="e#11165#11281#0" expanded="false" />
-            <element signature="e#11284#11404#0" expanded="false" />
-            <element signature="e#11479#11790#0" expanded="false" />
-            <element signature="e#11793#11913#0" expanded="false" />
-            <element signature="e#11979#12226#0" expanded="false" />
-            <element signature="e#12559#12887#0" expanded="false" />
-            <element signature="e#12890#12980#0" expanded="false" />
-            <element signature="e#15392#15504#0" expanded="false" />
-            <element signature="e#20245#20361#0" expanded="false" />
-            <element signature="e#20559#21476#0" expanded="false" />
-            <element signature="e#21476#21589#0" expanded="false" />
-            <element signature="e#24489#24598#0" expanded="false" />
-            <element signature="e#26546#26663#0" expanded="false" />
-            <element signature="e#26910#27189#0" expanded="false" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="0">
+            <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.sh" />
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.sh" />
+    <entry file="file://$PROJECT_DIR$/get_metadata.py" />
+    <entry file="file://$PROJECT_DIR$/UWVIROCLINSEQ.csv" />
+    <entry file="file:///System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/Carbon/MacHelp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="22" column="0" lean-forward="false" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="336" column="35" lean-forward="false" selection-start-line="336" selection-start-column="35" selection-end-line="336" selection-end-column="35" />
+          <folding>
+            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#6856#6960#0" expanded="false" />
+            <element signature="e#7214#7440#0" expanded="false" />
+            <element signature="e#7440#7556#0" expanded="false" />
+            <element signature="e#7764#8113#0" expanded="false" />
+            <element signature="e#9124#9242#0" expanded="false" />
+            <element signature="e#9680#9792#0" expanded="false" />
+            <element signature="e#11168#11284#0" expanded="false" />
+            <element signature="e#11287#11407#0" expanded="false" />
+            <element signature="e#11482#11793#0" expanded="false" />
+            <element signature="e#11796#11916#0" expanded="false" />
+            <element signature="e#11982#12229#0" expanded="false" />
+            <element signature="e#12562#12890#0" expanded="false" />
+            <element signature="e#12893#12983#0" expanded="false" />
+            <element signature="e#15454#15566#0" expanded="false" />
+            <element signature="e#20307#20423#0" expanded="false" />
+            <element signature="e#20621#21538#0" expanded="false" />
+            <element signature="e#21538#21651#0" expanded="false" />
+            <element signature="e#24551#24660#0" expanded="false" />
+            <element signature="e#26608#26725#0" expanded="false" />
+            <element signature="e#26972#27251#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example_metadata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="945">
+            <caret line="63" column="11" lean-forward="false" selection-start-line="63" selection-start-column="11" selection-end-line="63" selection-end-column="11" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
