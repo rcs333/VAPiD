@@ -1,9 +1,9 @@
-# ClinVirusSeq
-ClinVirusSeq is a ultra-lightweight script for quickly annotating and preparing sequences of well characterized human viruses for sending to NCBI Genbank. All you need to get started is a working installation of BioPython, some fasta files of human viruses and an NCBI generated author list.
+# VAPiD
+VAPiD is a ultra-lightweight script for quickly annotating and preparing sequences of well characterized human viruses for sending to NCBI Genbank. All you need to get started is a working installation of BioPython, some fasta files of human viruses and an NCBI generated author list.
 
 Currently tested and working on Windows 10 (although installing BioPython can be a bear), Ubuntu 10.4, and Mac OS X.
 
-Viruses that ClinVirusSeq has been tested with:
+Viruses that VAPiD has been tested with:
 Nipah, Sendai, Measles, Mumps, Parainfluenzas, Ebola, Rotavirus, Coronaviruses, West Nile Virus, HTLV, HIV, Influenza, Hepatitis, Norovirus, Enterovirus, JC, BK. 
 
 # Installation
@@ -13,7 +13,7 @@ Installation differs greatly for Unix systems and for Windows
 
 1. Install all dependencies (Shoutout to the wonderful people who wrote these!)
 
-Python - tested almost exclusively on 2.7.4 but there's nothing in here that shouldn't work on later versions.
+Python - tested almost exclusively on 2.7.4 python 3 and above have syntax issues and actually break when you try to manually enter metadata.
 
 If you're running Python < 2.7.4 follow this guide to install pip (You may need administrator privileges.)
 https://pip.pypa.io/en/stable/installing/ 
@@ -63,25 +63,25 @@ An example metadata file has been provided under the name example_metadata.csv -
 
 If you don't have very many sequences at a time or you include a fasta not in your metadata sheet the program will automatically prompt you for strain name, collection date, country of collection and coverage (for ngs reads). You must fill out strain name, collection date and location or NCBI will not accept your submission. Coverage is not necessary and if skipped during the automatic prompting, will not create any issues.
 
-# Usage - ClinVirusSeq.py
+# Usage - vapid.py
 **General Usage**
 
-`python ClinVirusSeq.py fasta_file_path author_template_path --metadata_loc metadata_info_path`
+`python vapid.py fasta_file_path author_template_path --metadata_loc metadata_info_path`
 
 **Example Usage (With metadata in the sheet)**
 
-`python ClinVirusSeq.py example.fasta template.sbt --metadata_loc example_metadata.csv`
+`python vapid.py example.fasta template.sbt --metadata_loc example_metadata.csv`
 
 **Example Usage (No metadata sheet)**
 
-`python ClinVirusSeq.py example.fasta template.sbt`
+`python vapid.py example.fasta template.sbt`
 
 
 Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACTERS IN THEM!!**
 
-Then you would need to run the ClinVirusSeq.py script from the command line, i.e. cd to the directory that this is living in - if you cloned from github it'll be ClinVirusSeq/ 
+Then you would need to run the vapid.py script from the command line, i.e. cd to the directory that this is living in - if you cloned from github it'll be VAPiD/ 
 
-`python ClinVirusSeq.py -h` prints out a list of arguments and some help information
+`python vapid.py -h` prints out a list of arguments and some help information
 
 The last argument is optional and if you don't provide a metadata location the program will prompt you for it.
 
