@@ -77,6 +77,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     for line in open(strain + SLASH + strain + '.blastresults'):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+            name_of_virus = name_of_virus.strip('/')[0]
             ref_seq_gb = line.split()[0][1:]
 
             # last part of these two logic checks is so we avoid the misassembled/mutated viruses
