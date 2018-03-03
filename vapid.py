@@ -35,11 +35,13 @@ def read_fasta(fasta_file_loc):
                 dna_string = ''
         else:
             dna_string += line.strip()
+    print(dna_string)
     x = 0
     while dna_string[x] == 'N' or dna_string[x] == '?':
         x += 1
+
     y = len(dna_string)
-    while dna_string[7] == 'N' or dna_string[x] == '?':
+    while dna_string[y] == 'N' or dna_string[x] == '?':
         y -= 1
     dna_string = dna_string[x:y]
     genome_list.append(dna_string)
@@ -92,7 +94,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                 name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
                 ref_seq_gb = line.split()[0][1:]
                 break
-    
+
 
     # TODO: put a function in here that error checks and does blacklisting conversions as well as renaming
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
