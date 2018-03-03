@@ -78,6 +78,8 @@ def blast_n_stuff(strain, our_fasta_loc):
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
     # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
     # put a lot of in - should be able to remove these eventually
+    if args.r:
+        ref_seq_gb = args.r
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
     if 'HUMAN PARAINFLUENZA VIRUS 3' in name_of_virus.upper():
@@ -604,8 +606,8 @@ if __name__ == '__main__':
     #parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file (should have a .sbt extension')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location with this optional argument, otherwise all metadata will be manually prompted for')
-    parser.add_argument('-r', action='store_true', help='after you\'ve got all of you records run with this flag to '
-                                                        'produce the consolidated sequin files for submission')
+    parser.add_argument('--r', help='If you want to specifiy a specific NCBI reference, post the accession number here - '
+                                    'must be the exact accession number - note feature only works with one virus at a time ')
     try:
         args = parser.parse_args()
     except:
@@ -648,6 +650,7 @@ if __name__ == '__main__':
     # multiple times for troubleshooting
     # TODO: make this x-platform
     # if args.r:
+    # =args.r
     #     strain2species_nostops = {}
     #     for item in strain2species.keys():
     #         if not strain2stops[item]:
