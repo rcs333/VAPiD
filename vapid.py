@@ -35,6 +35,13 @@ def read_fasta(fasta_file_loc):
                 dna_string = ''
         else:
             dna_string += line.strip()
+    x = 0
+    while dna_string[x] == 'N' or dna_string[x] == '?':
+        x += 1
+    y = len(dna_string)
+    while dna_string[7] == 'N' or dna_string[x] == '?':
+        y -= 1
+    dna_string = dna_string[x:y]
     genome_list.append(dna_string)
     return strain_list, genome_list
 
@@ -59,22 +66,35 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # read through the top hits saved earlier and save the accession number of the best hit that's complete
     read_next = False
+    found = False
     for line in open(strain + SLASH + strain + '.blastresults'):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
             ref_seq_gb = line.split()[0][1:]
-            # last part of these two logic checks is so we avoid the misassembled/mutated chinese viruses
+
+            # last part of these two logic checks is so we avoid the misassembled/mutated viruses
             # This is going to get really out of hand if we have to keep blacklisting records
             if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
+                found = True
                 break
             else:
                 read_next = True
         elif read_next:
             if 'complete genome' in line or 'genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
+                found = True
                 break
             else:
                 read_next = False
-    # TODO: put a function in here that error checks and does blacklisting conversions as well as renaminings
+
+    if not found:
+        for line in open(strain + SLASH + strain + '.blastresults'):
+            if line[0] == '>':
+                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                ref_seq_gb = line.split()[0][1:]
+                break
+    
+
+    # TODO: put a function in here that error checks and does blacklisting conversions as well as renaming
     # This skips us the fact that silly genbank put a laboratory strain as the ref_seq and we get clinicals
     # Should become obsolete when we own the coronaviruses - also corrects for some missanotations that I accidentally
     # put a lot of in - should be able to remove these eventually
@@ -82,8 +102,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = args.r
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
-    if 'HUMAN PARAINFLUENZA VIRUS 3' in name_of_virus.upper():
-        ref_seq_gb = 'KY674977'
+    #if 'HUMAN PARAINFLUENZA VIRUS 3' in name_of_virus.upper():
+    #    ref_seq_gb = 'KY674977'
     if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
         ref_seq_gb = 'KY369864'
     if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
@@ -538,6 +558,7 @@ def write_fsa(strain, name_of_virus, virus_genome, col_date):
     fsa.write(virus_genome)
     fsa.write('\n')
     fsa.close()
+
 
 # TODO: document how to use this functinoality, provide a example document from which to fill shit out and also write up a tutorial for using the program and actually producing something of value
 def do_meta_data(strain, sheet_exists):
