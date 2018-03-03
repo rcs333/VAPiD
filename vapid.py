@@ -325,7 +325,7 @@ def write_cmt(sample_name, coverage):
 # this takes in all of our information and makes a feature table that actually should work
 # annotations for ribosomal slippage and RNA editing should be working now - as well as creation of a .pep file for rna
 # editing
-def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note):
+def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir):
 
     tbl = open(strain + SLASH + strain + '.tbl', 'w')
     tbl.write('>Feature ' + strain)
@@ -349,7 +349,8 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             tbl.write('\n' + start_1 + '\t' + end_1 + '\tCDS\n')
             tbl.write(start_2 + '\t' + end_2 + '\n')
             tbl.write('\t\t\tproduct\t' + product + '\n')
-            tbl.write('\t\t\texception\tRibosomal Slippage\n')
+            if 'HEPATITIS B' not in name_o_vir:
+                tbl.write('\t\t\texception\tRibosomal Slippage\n')
         else:
             start = int(location_info[0])
             end = int(location_info[1])
@@ -460,7 +461,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         print('putative end is ' + str(put_end))
         gene_loc_list[7][1] = put_start + put_end
 
-    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff)
+    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus)
     #     if SLASH == '/':
     #     subprocess.call('tbl2asn -p ' + strain + '/ -t ' + strain + '/' + sbt_loc.split('/')[-1] +
     #                    ' -Y ' + strain + '/assembly.cmt -V vb', shell=True)
