@@ -373,6 +373,9 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             if int(end) < 1:
                 end = len(genome)
                 flag = '>'
+            # NEW EXPERIMENtAL CODE!@!!!!!!
+            if int(end) < int(start):
+                flag = '>'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
         # TODO: examine the effects of this line is it necessary - is it deleting important info? I thnk it does nothing
