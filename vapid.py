@@ -31,19 +31,24 @@ def read_fasta(fasta_file_loc):
         if line[0] == '>':
             strain_list.append(line[1:].split()[0])
             if dna_string != '':
+
+                xip = 0
+                while dna_string[xip] == 'N' or dna_string[xip] == '?':
+                    xip += 1
+                    y = len(dna_string) - 1
+                while dna_string[y] == 'N' or dna_string[y] == '?':
+                    y -= 1
+                dna_string = dna_string[x:y]
+                
                 genome_list.append(dna_string)
                 dna_string = ''
         else:
             dna_string += line.strip()
-    print(dna_string)
-    x = 0
-    while dna_string[x] == 'N' or dna_string[x] == '?':
-        x += 1
 
-    y = len(dna_string) - 1
-    while dna_string[y] == 'N' or dna_string[y] == '?':
-        y -= 1
-    dna_string = dna_string[x:y]
+
+
+
+
     genome_list.append(dna_string)
     return strain_list, genome_list
 
