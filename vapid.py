@@ -628,12 +628,12 @@ if __name__ == '__main__':
 
     start_time = timeit.default_timer()
     SLASH = check_os()
-    parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of UW clinical virus sequences'
+    parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of virus sequences'
                                                  ' for submission, pulling virus name information from blast and '
                                                  'annotations are contained inside the .fasta file passed to the script'
                                                  ' originally')
-    parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete genomes for all the '
-                                           'viruses that you want to have annotated - they should be known viruses')
+    parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete or near complete genomes for all the '
+                                           'viruses that you want to have annotated')
     #parser.add_argument('metadata_info_sheet', help='The metadata sheet that contains whatever we have for the samples')
     parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file (should have a .sbt extension')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location with this optional argument, otherwise all metadata will be manually prompted for')
