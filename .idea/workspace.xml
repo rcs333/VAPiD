@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="375" column="43" lean-forward="false" selection-start-line="375" selection-start-column="43" selection-end-line="375" selection-end-column="43" />
+            <state relative-caret-position="420">
+              <caret line="372" column="53" lean-forward="true" selection-start-line="372" selection-start-column="53" selection-end-line="372" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -632,7 +632,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520116831280</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="test">
+      <created>1520117561768</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1520117561768</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -910,8 +917,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="375" column="43" lean-forward="false" selection-start-line="375" selection-start-column="43" selection-end-line="375" selection-end-column="43" />
+        <state relative-caret-position="420">
+          <caret line="372" column="53" lean-forward="true" selection-start-line="372" selection-start-column="53" selection-end-line="372" selection-end-column="53" />
           <folding />
         </state>
       </provider>
