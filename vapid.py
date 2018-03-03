@@ -87,7 +87,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             else:
                 read_next = True
         elif read_next:
-            if 'complete genome' in line or 'genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651':
+            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651': # or 'genome' in line# 
                 found = True
                 break
             else:

@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="42" column="46" lean-forward="true" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
+            <state relative-caret-position="615">
+              <caret line="89" column="121" lean-forward="false" selection-start-line="89" selection-start-column="121" selection-end-line="89" selection-end-column="121" />
               <folding />
             </state>
           </provider>
@@ -118,7 +118,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="483" />
+    <option name="x" value="432" />
     <option name="y" value="23" />
     <option name="width" value="1840" />
     <option name="height" value="1307" />
@@ -611,7 +611,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520115631981</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="test">
+      <created>1520115673379</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1520115673379</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -624,7 +631,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="483" y="23" width="1840" height="1307" extended-state="0" />
+    <frame x="432" y="23" width="1840" height="1307" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11467391" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -889,8 +896,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="42" column="46" lean-forward="true" selection-start-line="42" selection-start-column="46" selection-end-line="42" selection-end-column="46" />
+        <state relative-caret-position="615">
+          <caret line="89" column="121" lean-forward="false" selection-start-line="89" selection-start-column="121" selection-end-line="89" selection-end-column="121" />
           <folding />
         </state>
       </provider>
