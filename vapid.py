@@ -38,7 +38,7 @@ def read_fasta(fasta_file_loc):
                 y = len(dna_string) - 1
                 while dna_string[y] == 'N' or dna_string[y] == '?':
                     y -= 1
-                dna_string = dna_string[x:y]
+                dna_string = dna_string[xip:y]
 
                 genome_list.append(dna_string)
                 dna_string = ''
