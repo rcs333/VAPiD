@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="352" column="16" lean-forward="false" selection-start-line="352" selection-start-column="16" selection-end-line="352" selection-end-column="16" />
+            <state relative-caret-position="520">
+              <caret line="336" column="18" lean-forward="true" selection-start-line="336" selection-start-column="18" selection-end-line="336" selection-end-column="18" />
               <folding>
                 <element signature="e#309#326#0" expanded="true" />
               </folding>
@@ -96,6 +96,8 @@
       <find>pol</find>
       <find>v protein</find>
       <find>V</find>
+      <find>- 1</find>
+      <find>start</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -120,8 +122,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="26" />
-    <option name="y" value="72" />
+    <option name="x" value="1333" />
+    <option name="y" value="63" />
     <option name="width" value="1354" />
     <option name="height" value="1307" />
   </component>
@@ -662,7 +664,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520119640795</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="test">
+      <created>1520120995131</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1520120995131</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -675,7 +684,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="26" y="72" width="1354" height="1307" extended-state="0" />
+    <frame x="1333" y="63" width="1354" height="1307" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15583457" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -730,13 +739,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/vapid.py</url>
-          <line>351</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="45" />
     </breakpoint-manager>
     <watches-manager />
@@ -947,8 +949,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="352" column="16" lean-forward="false" selection-start-line="352" selection-start-column="16" selection-end-line="352" selection-end-column="16" />
+        <state relative-caret-position="520">
+          <caret line="336" column="18" lean-forward="true" selection-start-line="336" selection-start-column="18" selection-end-line="336" selection-end-column="18" />
           <folding>
             <element signature="e#309#326#0" expanded="true" />
           </folding>

@@ -331,6 +331,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
     tbl.write('>Feature ' + strain)
 
     for x in range(0, len(gene_product_list)):
+        print(gene_product_list[x] + ' ' + str(location_info[0]))
         flag = ''
         xtra = ''
         sflag = ''
