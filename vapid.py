@@ -35,8 +35,8 @@ def read_fasta(fasta_file_loc):
                 xip = 0
                 while dna_string[xip] == 'N' or dna_string[xip] == '?':
                     xip += 1
-                y = len(dna_string) - 1
-                while dna_string[y] == 'N' or dna_string[y] == '?':
+                y = len(dna_string)
+                while dna_string[y-1] == 'N' or dna_string[y-1] == '?':
                     y -= 1
                 dna_string = dna_string[xip:y]
 
