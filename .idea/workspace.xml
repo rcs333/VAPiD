@@ -37,10 +37,37 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+            <state relative-caret-position="1048">
+              <caret line="574" column="0" lean-forward="true" selection-start-line="574" selection-start-column="0" selection-end-line="574" selection-end-column="0" />
               <folding>
-                <element signature="e#309#326#0" expanded="true" />
+                <element signature="e#179#196#0" expanded="true" />
+                <element signature="e#470#582#0" expanded="false" />
+                <element signature="e#780#1502#0" expanded="false" />
+                <element signature="e#1505#1620#0" expanded="false" />
+                <element signature="e#1934#5683#0" expanded="false" />
+                <element signature="e#5686#5803#0" expanded="false" />
+                <element signature="e#6230#6691#0" expanded="false" />
+                <element signature="e#6694#6812#0" expanded="false" />
+                <element signature="e#6960#7247#0" expanded="false" />
+                <element signature="e#7250#7362#0" expanded="false" />
+                <element signature="e#7484#8608#0" expanded="false" />
+                <element signature="e#8737#8853#0" expanded="false" />
+                <element signature="e#8856#8957#0" expanded="false" />
+                <element signature="e#9186#9514#0" expanded="false" />
+                <element signature="e#9517#9607#0" expanded="false" />
+                <element signature="e#9844#12073#0" expanded="false" />
+                <element signature="e#12076#12188#0" expanded="false" />
+                <element signature="e#12330#15804#0" expanded="false" />
+                <element signature="e#15807#15923#0" expanded="false" />
+                <element signature="e#17097#17210#0" expanded="false" />
+                <element signature="e#17500#19937#0" expanded="false" />
+                <element signature="e#19940#20049#0" expanded="false" />
+                <element signature="e#20128#20402#0" expanded="false" />
+                <element signature="e#20508#21834#0" expanded="false" />
+                <element signature="e#21837#21954#0" expanded="false" />
+                <element signature="e#22585#22699#0" expanded="false" />
+                <marker date="1520561143000" expanded="false" signature="16115:17094" ph="..." />
+                <marker date="1520561143000" expanded="false" signature="22196:22480" ph="..." />
               </folding>
             </state>
           </provider>
@@ -91,13 +118,20 @@
       <find>subpr</find>
       <find>.sbt</find>
       <find>while</find>
-      <find>build_num_arrays</find>
       <find>print</find>
       <find>pol</find>
       <find>v protein</find>
       <find>V</find>
       <find>- 1</find>
       <find>start</find>
+      <find>pull_metadata</find>
+      <find>find_loc_in_our_seq_from_reference</find>
+      <find>build_num_arrays</find>
+      <find>adjust</find>
+      <find>pull_coverage</find>
+      <find>pull_col_date</find>
+      <find>name_o_vir</find>
+      <find>process_para</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,8 +156,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="116" />
-    <option name="y" value="91" />
+    <option name="x" value="171" />
+    <option name="y" value="42" />
     <option name="width" value="1354" />
     <option name="height" value="1307" />
   </component>
@@ -580,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520126399591</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="test">
+      <created>1520550337574</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1520550337574</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -593,7 +634,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="116" y="91" width="1354" height="1307" extended-state="0" />
+    <frame x="171" y="42" width="1354" height="1307" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15583457" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -648,7 +689,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="45" />
+      <option name="time" value="47" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -737,10 +778,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="38" column="62" lean-forward="false" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+        <state relative-caret-position="1048">
+          <caret line="574" column="0" lean-forward="true" selection-start-line="574" selection-start-column="0" selection-end-line="574" selection-end-column="0" />
           <folding>
-            <element signature="e#309#326#0" expanded="true" />
+            <element signature="e#179#196#0" expanded="true" />
+            <element signature="e#470#582#0" expanded="false" />
+            <element signature="e#780#1502#0" expanded="false" />
+            <element signature="e#1505#1620#0" expanded="false" />
+            <element signature="e#1934#5683#0" expanded="false" />
+            <element signature="e#5686#5803#0" expanded="false" />
+            <element signature="e#6230#6691#0" expanded="false" />
+            <element signature="e#6694#6812#0" expanded="false" />
+            <element signature="e#6960#7247#0" expanded="false" />
+            <element signature="e#7250#7362#0" expanded="false" />
+            <element signature="e#7484#8608#0" expanded="false" />
+            <element signature="e#8737#8853#0" expanded="false" />
+            <element signature="e#8856#8957#0" expanded="false" />
+            <element signature="e#9186#9514#0" expanded="false" />
+            <element signature="e#9517#9607#0" expanded="false" />
+            <element signature="e#9844#12073#0" expanded="false" />
+            <element signature="e#12076#12188#0" expanded="false" />
+            <element signature="e#12330#15804#0" expanded="false" />
+            <element signature="e#15807#15923#0" expanded="false" />
+            <element signature="e#17097#17210#0" expanded="false" />
+            <element signature="e#17500#19937#0" expanded="false" />
+            <element signature="e#19940#20049#0" expanded="false" />
+            <element signature="e#20128#20402#0" expanded="false" />
+            <element signature="e#20508#21834#0" expanded="false" />
+            <element signature="e#21837#21954#0" expanded="false" />
+            <element signature="e#22585#22699#0" expanded="false" />
+            <marker date="1520561143000" expanded="false" signature="16115:17094" ph="..." />
+            <marker date="1520561143000" expanded="false" signature="22196:22480" ph="..." />
           </folding>
         </state>
       </provider>
