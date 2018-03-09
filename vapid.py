@@ -532,7 +532,7 @@ if __name__ == '__main__':
                         ' (should have a .sbt extension')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location '
                         'with this optional argument, otherwise all metadata will be manually prompted for')
-    parser.add_argument('--r', help='If you want to specifiy a specific NCBI reference, post the accession number here '
+    parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
                         '- must be the exact accession number - note feature only works with one virus type '
                         'at a time ')
     try:
