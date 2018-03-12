@@ -454,7 +454,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
-def write_fsa(strain, name_of_virus, virus_genome):
+def write_fsa(strain, name_of_virus, virus_genome, metadata):
     fsa = open(strain + SLASH + strain + '.fsa', 'w')
     fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] '
               '[molecule=RNA]' + metadata + '\n')
