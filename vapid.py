@@ -60,10 +60,14 @@ def read_fasta(fasta_file_loc):
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, speeds up error checking for development
     if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
-        print('Searching online blast for an appropriate reference... beware! if you have been throttled this may take '
-              'some time but this will finish eventually')
+        print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
+              'throttling)')
+
         record = open(our_fasta_loc).read()
-        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35,
+        # severely modifying our test code
+        #result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35,
+        #                               format_type='Text')
+        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=0,
                                        format_type='Text')
         with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
             out_handle.write(result_handle.read())
@@ -504,7 +508,7 @@ def check_for_stops(sample_name):
         if '*' in line:
             stops += 1
     if stops > 0:
-        print('WARNING: ' + sample_name + ' contains ' + str(stops) + 'stop codon(s)!')
+        print('WARNING: ' + sample_name + ' contains ' + str(stops) + ' stop codon(s)!')
         return True
     else:
         return False
