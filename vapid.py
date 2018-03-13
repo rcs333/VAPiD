@@ -77,7 +77,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     for line in open(strain + SLASH + strain + '.blastresults'):
         if line[0] == '>':
             name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-            name_of_virus = name_of_virus.strip('/')[0]
+            name_of_virus = name_of_virus.split('/')[0]
             ref_seq_gb = line.split()[0][1:]
 
             # last part of these two logic checks is so we avoid the misassembled/mutated viruses
@@ -113,7 +113,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'L20587.1'
     if 'MEASLES' in name_of_virus.upper():
         ref_seq_gb = 'EU293548'
-
+    print(ref_seq_gb + ' was the selected reference')
+    print(name_of_virus + ' was the parsed name of the virus')
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
     h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
