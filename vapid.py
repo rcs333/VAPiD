@@ -202,10 +202,14 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
 
     # Adjust every locus so that we actually put in correct annotations
+    #more debugging code
+    print('Lets see what ADJUST() actually does ')
+    print(gene_loc_list)
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
-            gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array)
 
+            gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array)
+    print(gene_loc_list)
     return gene_loc_list, gene_product_list
 
 
@@ -308,7 +312,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
-    #debugging prints 
+    #debugging prints
     print(gene_loc_list)
     print(gene_product_list)
     write_cmt(strain, coverage)
