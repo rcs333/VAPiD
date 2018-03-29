@@ -169,7 +169,8 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array):
-
+    print(our_num_array)
+    print(ref_num_array)
     # Go through our number array and search for the number of interest
     for x in range(0, len(our_num_array)):
         if ref_num_array[x] == given_num:
