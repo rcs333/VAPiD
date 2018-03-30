@@ -48,7 +48,7 @@ def read_fasta(fasta_file_loc):
                 dna_string = ''
         else:
             dna_string += line.strip()
-    # new code, trying to fix certian erroneous alignments 
+    # new code, trying to fix certian erroneous alignments
     genome_list.append(dna_string.replace('U', 'T'))
     return strain_list, genome_list
 
@@ -107,8 +107,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = args.r
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
-    if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
-        ref_seq_gb = 'KY369864'
+    #if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
+    #    ref_seq_gb = 'KY369864'
     if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
         ref_seq_gb = 'L20587.1'
     if 'MEASLES' in name_of_virus.upper():
