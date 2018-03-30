@@ -107,6 +107,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = args.r
     if 'CORONAVIRUS 229E' in name_of_virus.upper():
         ref_seq_gb = 'KY369913.1'
+        # this code might need to be tweaked a bit, but for now it's working
     #if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
     #    ref_seq_gb = 'KY369864'
     if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
