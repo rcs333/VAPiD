@@ -134,6 +134,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
     seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
     alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq)
+    print(alignments)
     ref_seq = alignments[0][0]
     our_seq = alignments[0][1]
     return name_of_virus, our_seq, ref_seq
@@ -199,8 +200,8 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
                 px = 'phoshoprotein'
             gene_product_list.append(px)
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
-    print(our_seq_num_array)
-    print(ref_seq_num_array)
+    #print(our_seq_num_array)
+    #print(ref_seq_num_array)
     # Adjust every locus so that we actually put in correct annotations
     #more debugging code
     print('Lets see what ADJUST() actually does ')
