@@ -48,8 +48,8 @@ def read_fasta(fasta_file_loc):
                 dna_string = ''
         else:
             dna_string += line.strip()
-
-    genome_list.append(dna_string)
+    # new code, trying to fix certian erroneous alignments 
+    genome_list.append(dna_string.replace('U', 'T'))
     return strain_list, genome_list
 
 
