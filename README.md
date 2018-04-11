@@ -18,7 +18,7 @@ Python - tested almost exclusively on 2.7.4 python 3 and above have syntax issue
 If you're running Python < 2.7.4 follow this guide to install pip (You may need administrator privileges.)
 https://pip.pypa.io/en/stable/installing/ 
 
-Download the get-pip.py and run it from the command line by typing `pthon get-pip.py`
+Download the get-pip.py and run it from the command line by typing `python get-pip.py`
 
 If you're using Python >= 2.7.4 or you've successfully installed pip:
 Open a command line and type
@@ -34,19 +34,24 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 **Windows**
 
-1. Install Microsoft Visual C++ for Python 2.7 https://www.microsoft.com/en-us/download/details.aspx?id=44266
-2. Install Python 2.7.4 https://www.python.org/download/releases/2.7.4/ (Although 2.7.5 works as well)
+1. Install Python 2.7.14 https://www.python.org/downloads/
   Make sure that when this is installing on the third step 'Customize your python installation' the box that says put python on your path is checked. This makes installing and running this annotator much easier. 
+  If no such box exists, open a command prompt window and type:
 
-3. Install Numpy and Biopython - if python is installed correctly this can be done easily by opening a command prompt window and typing:
+`set PATH=%PATH%;C:\python27\`
 
-`pip install numpy`
+  or change C:\python27\ to wherever Python was downloaded.  
 
-`pip install biopython`
+2. Install Numpy and Biopython 
 
-4. Then download and unzip this repository to your computer (anywhere will do)
+`python -m pip install numpy`
 
-5. Download tbl2asn for windows https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/  and unzip it, then copy and paste every single file in the tbl2asn folder (there should be like 7 .dlls and an .exe that is simply called tbl2asn) into the folder that you just made in step 4. 
+`python -m pip install biopython`
+
+
+3. Then download and unzip this repository to your computer (anywhere will do)
+
+4. Download tbl2asn for windows https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/  and unzip it, then copy and paste every single file in the tbl2asn folder (there should be like 7 .dlls and an .exe that is simply called tbl2asn) into the folder that you just made in step 3.
 
 **After the above has completed there's still a bit of setup that needs to be done.** 
 
