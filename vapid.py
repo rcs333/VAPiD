@@ -138,6 +138,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     print(alignments)
     ref_seq = alignments[0][0]
     our_seq = alignments[0][1]
+    alignments = ''
     return name_of_virus, our_seq, ref_seq
 
 
