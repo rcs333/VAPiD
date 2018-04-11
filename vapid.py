@@ -134,7 +134,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     # the two sequences with default settings
     seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
     seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
-    alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq)
+    alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
     print(alignments)
     ref_seq = alignments[0][0]
     our_seq = alignments[0][1]
