@@ -138,7 +138,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         z.write(line)
     fe.close()
     g_list, g_g = read_fasta(strain + SLASH + strain + '_ref.fasta')
-    z.write('>ref')
+    z.write('\n>ref\n')
     z.write(g_g[0])
     z.close()
 
