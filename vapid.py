@@ -143,7 +143,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     z.close()
 
     # Windows
-    if SLASH == '/':
+    if SLASH == '\\':
         subprocess.call('win-mafft/mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
     else:

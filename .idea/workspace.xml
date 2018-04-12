@@ -2,111 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/awk.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/basename.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/bash.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/cat.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/chmod.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/comm.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/cp.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/cut.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/date.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/dirname.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/echo.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/env.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/expr.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/false.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/file.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/fold.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/grep.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/gzip.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/head.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/id.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/info.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/join.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/ln.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/ls.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/md5sum.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/mkdir.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/mktemp.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/more.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-2.0.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-gcc_s-seh-1.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-gmp-10.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-iconv-2.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-intl-8.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-magic-1.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-mpfr-4.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-ncursesw6.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-pcre-1.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-readline6.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/msys-z.dll" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/mv.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/od.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/paste.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/printf.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/ps.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/pwd.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/rm.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/rmdir.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/sed.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/sh.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/sleep.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/sort.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/split.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/stty.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/tail.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/tar.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/touch.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/tr.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/true.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/uname.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/uniq.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/wc.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/which.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/xargs.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/addsingle.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/contrafoldwrap.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/countlen.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/disttbfast.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndblast.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndfast7.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndpre.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dvtditr.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/f2cl.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/getlag.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/hex2maffttext.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-distance.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-profile.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/maffttext2hex.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/makedirectionlist.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mccaskillwrap.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/multi2hat3s.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/nodepair.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/pairash.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/pairlocalalign.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/regtable2seq.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/replaceu.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/restoreu.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/score.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/seq2regtable.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/setcore.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/setdirection.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/sextet5.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/splittbfast.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/tbfast.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/version.exe" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/share/misc/magic" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/mafft-signed.ps1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/mafft.bat" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/testdata.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/mafft" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/bin/mafft-homologs.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-homologs.1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft.1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafftash_premafft.pl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/seekquencer_premafft.pl" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vapid.py" afterPath="$PROJECT_DIR$/vapid.py" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -137,35 +34,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1053">
-              <caret line="146" column="35" lean-forward="false" selection-start-line="146" selection-start-column="35" selection-end-line="146" selection-end-column="35" />
+            <state relative-caret-position="573">
+              <caret line="132" column="98" lean-forward="false" selection-start-line="132" selection-start-column="98" selection-end-line="132" selection-end-column="98" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#470#582#0" expanded="false" />
                 <element signature="e#1581#1696#0" expanded="false" />
-                <element signature="e#6703#6820#0" expanded="false" />
-                <element signature="e#7711#7829#0" expanded="false" />
-                <element signature="e#8266#8378#0" expanded="false" />
-                <element signature="e#9938#10054#0" expanded="false" />
-                <element signature="e#10057#10158#0" expanded="false" />
-                <element signature="e#10387#10715#0" expanded="false" />
-                <element signature="e#10718#10808#0" expanded="false" />
-                <element signature="e#11045#13274#0" expanded="false" />
-                <element signature="e#13277#13389#0" expanded="false" />
-                <element signature="e#17083#17199#0" expanded="false" />
-                <element signature="e#18373#18486#0" expanded="false" />
-                <element signature="e#21216#21325#0" expanded="false" />
-                <element signature="e#21794#23120#0" expanded="false" />
-                <element signature="e#23123#23240#0" expanded="false" />
+                <element signature="e#6704#6821#0" expanded="false" />
+                <element signature="e#7712#7830#0" expanded="false" />
+                <element signature="e#8267#8379#0" expanded="false" />
+                <element signature="e#9939#10055#0" expanded="false" />
+                <element signature="e#10058#10159#0" expanded="false" />
+                <element signature="e#10388#10716#0" expanded="false" />
+                <element signature="e#10719#10809#0" expanded="false" />
+                <element signature="e#11046#13275#0" expanded="false" />
+                <element signature="e#13278#13390#0" expanded="false" />
+                <element signature="e#17084#17200#0" expanded="false" />
+                <element signature="e#18374#18487#0" expanded="false" />
+                <element signature="e#21217#21326#0" expanded="false" />
+                <element signature="e#21795#23121#0" expanded="false" />
+                <element signature="e#23124#23241#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mafft-signed.ps1" pinned="false" current-in-tab="true">
+      <file leaf-file-name="mafft-signed.ps1" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/win-mafft/mafft-signed.ps1">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
@@ -596,13 +493,6 @@
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
     </task>
-    <task id="LOCAL-00011" summary="test">
-      <created>1517364919029</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1517364919029</updated>
-    </task>
     <task id="LOCAL-00012" summary="test">
       <created>1518572752360</created>
       <option name="number" value="00012" />
@@ -939,7 +829,14 @@
       <option name="project" value="LOCAL" />
       <updated>1523497204360</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="test">
+      <created>1523497338915</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1523497338915</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1044,20 +941,20 @@
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
             <element signature="e#1581#1696#0" expanded="false" />
-            <element signature="e#6703#6820#0" expanded="false" />
-            <element signature="e#7711#7829#0" expanded="false" />
-            <element signature="e#8266#8378#0" expanded="false" />
-            <element signature="e#9938#10054#0" expanded="false" />
-            <element signature="e#10057#10158#0" expanded="false" />
-            <element signature="e#10387#10715#0" expanded="false" />
-            <element signature="e#10718#10808#0" expanded="false" />
-            <element signature="e#11045#13274#0" expanded="false" />
-            <element signature="e#13277#13389#0" expanded="false" />
-            <element signature="e#17083#17199#0" expanded="false" />
-            <element signature="e#18373#18486#0" expanded="false" />
-            <element signature="e#21216#21325#0" expanded="false" />
-            <element signature="e#21794#23120#0" expanded="false" />
-            <element signature="e#23123#23240#0" expanded="false" />
+            <element signature="e#6704#6821#0" expanded="false" />
+            <element signature="e#7712#7830#0" expanded="false" />
+            <element signature="e#8267#8379#0" expanded="false" />
+            <element signature="e#9939#10055#0" expanded="false" />
+            <element signature="e#10058#10159#0" expanded="false" />
+            <element signature="e#10388#10716#0" expanded="false" />
+            <element signature="e#10719#10809#0" expanded="false" />
+            <element signature="e#11046#13275#0" expanded="false" />
+            <element signature="e#13278#13390#0" expanded="false" />
+            <element signature="e#17084#17200#0" expanded="false" />
+            <element signature="e#18374#18487#0" expanded="false" />
+            <element signature="e#21217#21326#0" expanded="false" />
+            <element signature="e#21795#23121#0" expanded="false" />
+            <element signature="e#23124#23241#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1097,20 +994,20 @@
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
             <element signature="e#1581#1696#0" expanded="false" />
-            <element signature="e#6703#6820#0" expanded="false" />
-            <element signature="e#7711#7829#0" expanded="false" />
-            <element signature="e#8266#8378#0" expanded="false" />
-            <element signature="e#9938#10054#0" expanded="false" />
-            <element signature="e#10057#10158#0" expanded="false" />
-            <element signature="e#10387#10715#0" expanded="false" />
-            <element signature="e#10718#10808#0" expanded="false" />
-            <element signature="e#11045#13274#0" expanded="false" />
-            <element signature="e#13277#13389#0" expanded="false" />
-            <element signature="e#17083#17199#0" expanded="false" />
-            <element signature="e#18373#18486#0" expanded="false" />
-            <element signature="e#21216#21325#0" expanded="false" />
-            <element signature="e#21794#23120#0" expanded="false" />
-            <element signature="e#23123#23240#0" expanded="false" />
+            <element signature="e#6704#6821#0" expanded="false" />
+            <element signature="e#7712#7830#0" expanded="false" />
+            <element signature="e#8267#8379#0" expanded="false" />
+            <element signature="e#9939#10055#0" expanded="false" />
+            <element signature="e#10058#10159#0" expanded="false" />
+            <element signature="e#10388#10716#0" expanded="false" />
+            <element signature="e#10719#10809#0" expanded="false" />
+            <element signature="e#11046#13275#0" expanded="false" />
+            <element signature="e#13278#13390#0" expanded="false" />
+            <element signature="e#17084#17200#0" expanded="false" />
+            <element signature="e#18374#18487#0" expanded="false" />
+            <element signature="e#21217#21326#0" expanded="false" />
+            <element signature="e#21795#23121#0" expanded="false" />
+            <element signature="e#23124#23241#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1139,20 +1036,20 @@
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
             <element signature="e#1581#1696#0" expanded="false" />
-            <element signature="e#6703#6820#0" expanded="false" />
-            <element signature="e#7711#7829#0" expanded="false" />
-            <element signature="e#8266#8378#0" expanded="false" />
-            <element signature="e#9938#10054#0" expanded="false" />
-            <element signature="e#10057#10158#0" expanded="false" />
-            <element signature="e#10387#10715#0" expanded="false" />
-            <element signature="e#10718#10808#0" expanded="false" />
-            <element signature="e#11045#13274#0" expanded="false" />
-            <element signature="e#13277#13389#0" expanded="false" />
-            <element signature="e#17083#17199#0" expanded="false" />
-            <element signature="e#18373#18486#0" expanded="false" />
-            <element signature="e#21216#21325#0" expanded="false" />
-            <element signature="e#21794#23120#0" expanded="false" />
-            <element signature="e#23123#23240#0" expanded="false" />
+            <element signature="e#6704#6821#0" expanded="false" />
+            <element signature="e#7712#7830#0" expanded="false" />
+            <element signature="e#8267#8379#0" expanded="false" />
+            <element signature="e#9939#10055#0" expanded="false" />
+            <element signature="e#10058#10159#0" expanded="false" />
+            <element signature="e#10388#10716#0" expanded="false" />
+            <element signature="e#10719#10809#0" expanded="false" />
+            <element signature="e#11046#13275#0" expanded="false" />
+            <element signature="e#13278#13390#0" expanded="false" />
+            <element signature="e#17084#17200#0" expanded="false" />
+            <element signature="e#18374#18487#0" expanded="false" />
+            <element signature="e#21217#21326#0" expanded="false" />
+            <element signature="e#21795#23121#0" expanded="false" />
+            <element signature="e#23124#23241#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1192,20 +1089,20 @@
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
             <element signature="e#1581#1696#0" expanded="false" />
-            <element signature="e#6703#6820#0" expanded="false" />
-            <element signature="e#7711#7829#0" expanded="false" />
-            <element signature="e#8266#8378#0" expanded="false" />
-            <element signature="e#9938#10054#0" expanded="false" />
-            <element signature="e#10057#10158#0" expanded="false" />
-            <element signature="e#10387#10715#0" expanded="false" />
-            <element signature="e#10718#10808#0" expanded="false" />
-            <element signature="e#11045#13274#0" expanded="false" />
-            <element signature="e#13277#13389#0" expanded="false" />
-            <element signature="e#17083#17199#0" expanded="false" />
-            <element signature="e#18373#18486#0" expanded="false" />
-            <element signature="e#21216#21325#0" expanded="false" />
-            <element signature="e#21794#23120#0" expanded="false" />
-            <element signature="e#23123#23240#0" expanded="false" />
+            <element signature="e#6704#6821#0" expanded="false" />
+            <element signature="e#7712#7830#0" expanded="false" />
+            <element signature="e#8267#8379#0" expanded="false" />
+            <element signature="e#9939#10055#0" expanded="false" />
+            <element signature="e#10058#10159#0" expanded="false" />
+            <element signature="e#10388#10716#0" expanded="false" />
+            <element signature="e#10719#10809#0" expanded="false" />
+            <element signature="e#11046#13275#0" expanded="false" />
+            <element signature="e#13278#13390#0" expanded="false" />
+            <element signature="e#17084#17200#0" expanded="false" />
+            <element signature="e#18374#18487#0" expanded="false" />
+            <element signature="e#21217#21326#0" expanded="false" />
+            <element signature="e#21795#23121#0" expanded="false" />
+            <element signature="e#23124#23241#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1311,32 +1208,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vapid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1053">
-          <caret line="146" column="35" lean-forward="false" selection-start-line="146" selection-start-column="35" selection-end-line="146" selection-end-column="35" />
-          <folding>
-            <element signature="e#179#196#0" expanded="true" />
-            <element signature="e#470#582#0" expanded="false" />
-            <element signature="e#1581#1696#0" expanded="false" />
-            <element signature="e#6703#6820#0" expanded="false" />
-            <element signature="e#7711#7829#0" expanded="false" />
-            <element signature="e#8266#8378#0" expanded="false" />
-            <element signature="e#9938#10054#0" expanded="false" />
-            <element signature="e#10057#10158#0" expanded="false" />
-            <element signature="e#10387#10715#0" expanded="false" />
-            <element signature="e#10718#10808#0" expanded="false" />
-            <element signature="e#11045#13274#0" expanded="false" />
-            <element signature="e#13277#13389#0" expanded="false" />
-            <element signature="e#17083#17199#0" expanded="false" />
-            <element signature="e#18373#18486#0" expanded="false" />
-            <element signature="e#21216#21325#0" expanded="false" />
-            <element signature="e#21794#23120#0" expanded="false" />
-            <element signature="e#23123#23240#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/example.fasta">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3255">
@@ -1366,6 +1237,32 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vapid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="573">
+          <caret line="132" column="98" lean-forward="false" selection-start-line="132" selection-start-column="98" selection-end-line="132" selection-end-column="98" />
+          <folding>
+            <element signature="e#179#196#0" expanded="true" />
+            <element signature="e#470#582#0" expanded="false" />
+            <element signature="e#1581#1696#0" expanded="false" />
+            <element signature="e#6704#6821#0" expanded="false" />
+            <element signature="e#7712#7830#0" expanded="false" />
+            <element signature="e#8267#8379#0" expanded="false" />
+            <element signature="e#9939#10055#0" expanded="false" />
+            <element signature="e#10058#10159#0" expanded="false" />
+            <element signature="e#10388#10716#0" expanded="false" />
+            <element signature="e#10719#10809#0" expanded="false" />
+            <element signature="e#11046#13275#0" expanded="false" />
+            <element signature="e#13278#13390#0" expanded="false" />
+            <element signature="e#17084#17200#0" expanded="false" />
+            <element signature="e#18374#18487#0" expanded="false" />
+            <element signature="e#21217#21326#0" expanded="false" />
+            <element signature="e#21795#23121#0" expanded="false" />
+            <element signature="e#23124#23241#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
