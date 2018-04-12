@@ -132,6 +132,19 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # Create two biopython sequence objects from our saved files and then run the biopython pairwise2 algorithim on
     # the two sequences with default settings
+    z = open(strain + SLASH + strain + '_aligner.fasta', 'w')
+    fe = open(our_fasta_loc)
+    for line in fe:
+        z.write(line)
+    fe.close()
+    ge = open(strain + SLASH + strain + '_ref.fasta')
+    for line2 in ge:
+        z.write(line2)
+    ge.close()
+    z.close()
+    
+
+
     seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
     seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
     alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
