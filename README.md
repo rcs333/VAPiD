@@ -55,7 +55,7 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 **After the above has completed there's still a bit of setup that needs to be done.** 
 
-1. Download MAFFT https://mafft.cbrc.jp/alignment/software/ for your appropriate system. Make sure you select the all-in-one version. 
+1. Download MAFFT https://mafft.cbrc.jp/alignment/software/ for your appropriate system. (THIS IS ALREADY DONE FOR WINDOWS and is included under the GPL licence) Make sure you select the all-in-one version. 
 
 2. Unzip the folder and place all files in the folder where this repository is living.
 
