@@ -142,16 +142,17 @@ def blast_n_stuff(strain, our_fasta_loc):
         z.write(line2)
     ge.close()
     z.close()
-    
 
-
-    seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
-    seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
-    alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
-    print(alignments)
-    ref_seq = alignments[0][0]
-    our_seq = alignments[0][1]
-    alignments = ''
+    subprocess.call('./mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+                    shell=True)
+    ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
+    #seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
+    #seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
+    #alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
+    #print(alignments)
+    ref_seq = ali_genomes[0]
+    our_seq = ali_genomes[1]
+    #alignments = ''
     return name_of_virus, our_seq, ref_seq
 
 
