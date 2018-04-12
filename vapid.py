@@ -155,7 +155,9 @@ def blast_n_stuff(strain, our_fasta_loc):
     #alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
     #print(alignments)
     ref_seq = ali_genomes[0]
+    print(ref_seq)
     our_seq = ali_genomes[1]
+    print(our_seq)
     #alignments = ''
     return name_of_virus, our_seq, ref_seq
 
