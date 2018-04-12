@@ -137,10 +137,9 @@ def blast_n_stuff(strain, our_fasta_loc):
     for line in fe:
         z.write(line)
     fe.close()
-    ge = open(strain + SLASH + strain + '_ref.fasta')
-    for line2 in ge:
-        z.write(line2)
-    ge.close()
+    g_list, g_g = read_fasta(strain + SLASH + strain + '_ref.fasta')
+    z.write('>ref')
+    z.write(g_g)
     z.close()
 
     subprocess.call('./mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
