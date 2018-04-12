@@ -142,7 +142,12 @@ def blast_n_stuff(strain, our_fasta_loc):
     z.write(g_g[0])
     z.close()
 
-    subprocess.call('./mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+    # Windows
+    if SLASH == '/':
+        subprocess.call('win-mafft/mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+                    shell=True)
+    else:
+        subprocess.call('./mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
     ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
     #seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
