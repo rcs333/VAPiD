@@ -438,52 +438,54 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     print('Looks like this virus has RNA editing, fixing it now')
+    found_ = False
     for g in range(0, len(gene_product_list)):
         # flipping this covers whack spacing in protein products
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
+            found_ = True
             break
-
-    # add the correct number of Gs
-    if v == 'HP3':
-        start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
-        nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
-        nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
-        nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
+    if found_:
+        # add the correct number of Gs
+        if v == 'HP3':
+            start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
+            nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
 
     # despite viral zone saying SENDAI adds 1 G adding two removes stop codon's - remains tbd if variable
-    elif v == 'SENDAI':
-        start_of_poly_g = nts_of_gene.find('AAAAGGG')
-        nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
-        nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
-        nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
+        elif v == 'SENDAI':
+            start_of_poly_g = nts_of_gene.find('AAAAGGG')
+            nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
 
-    elif v == 'HP4-1':
-        start_of_poly_g = nts_of_gene.find('AAGAGG', 435, 460)
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'HP4-1':
+            start_of_poly_g = nts_of_gene.find('AAGAGG', 435, 460)
+            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
 
-    elif v == 'MUMP':
-        start_of_poly_g = nts_of_gene.find('AAGAGG', 445, 465)
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'MUMP':
+            start_of_poly_g = nts_of_gene.find('AAGAGG', 445, 465)
+            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
 
-    elif v == 'MEAS':
-        start_of_poly_g = nts_of_gene.find('AAAAAGG', 674, 695)
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'MEAS':
+            start_of_poly_g = nts_of_gene.find('AAAAAGG', 674, 695)
+            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
 
-    elif v == 'NIPAH':
-        start_of_poly_g = nts_of_gene.find('AAAAAAGG', 705, 725)
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'NIPAH':
+            start_of_poly_g = nts_of_gene.find('AAAAAAGG', 705, 725)
+            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
 
-    elif v == 'HPIV4a':
-        start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
-        nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'HPIV4a':
+            start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
+            nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
 
-    new_translation = str(Seq(nts_of_gene).translate())
+        new_translation = str(Seq(nts_of_gene).translate())
 
-    pep = open(strain + SLASH + strain + '.pep', 'w')
-    pep.write('>n_' + strain + '\n' + new_translation)
-    pep.write('\n')
-    pep.close()
+        pep = open(strain + SLASH + strain + '.pep', 'w')
+        pep.write('>n_' + strain + '\n' + new_translation)
+        pep.write('\n')
+        pep.close()
 
 
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
