@@ -376,6 +376,8 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'phosphoprotein'
+        if 'P' in gene_product_list:
+            gene_of_interest = 'P'
         process_para(strain, genome, gene_loc_list, gene_product_list, 'phoshoprotein', 'HPIV4a')
 
     if 'measles' in name_of_virus.lower():
