@@ -359,7 +359,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
             extra_stuff = 'WEGOTAPARA1'
             gene_of_interest ='C\' protein'
 
-    if 'parainfluenza virus 4a' in name_of_virus.lower():
+    if 'parainfluenza virus 4' in name_of_virus.lower():
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'phosphoprotein'
