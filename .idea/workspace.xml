@@ -1,112 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/LICENCE.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/mafft-signed.ps1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/mafft.bat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/testdata.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/awk.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/basename.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/bash.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/cat.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/chmod.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/comm.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/cp.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/cut.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/date.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/dirname.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/echo.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/env.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/expr.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/false.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/file.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/fold.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/grep.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/gzip.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/head.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/id.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/info.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/join.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/ln.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/ls.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/mafft" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/mafft-homologs.rb" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/md5sum.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/mkdir.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/mktemp.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/more.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-2.0.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-gcc_s-seh-1.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-gmp-10.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-iconv-2.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-intl-8.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-magic-1.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-mpfr-4.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-ncursesw6.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-pcre-1.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-readline6.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/msys-z.dll" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/mv.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/od.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/paste.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/printf.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/ps.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/pwd.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/rm.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/rmdir.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/sed.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/sh.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/sleep.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/sort.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/split.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/stty.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/tail.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/tar.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/touch.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/tr.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/true.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/uname.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/uniq.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/wc.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/which.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/bin/xargs.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/addsingle.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/contrafoldwrap.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/countlen.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/disttbfast.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndblast.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndfast7.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dndpre.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/dvtditr.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/f2cl.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/getlag.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/hex2maffttext.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-distance.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-homologs.1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft-profile.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafft.1" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mafftash_premafft.pl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/maffttext2hex.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/makedirectionlist.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/mccaskillwrap.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/multi2hat3s.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/nodepair.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/pairash.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/pairlocalalign.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/regtable2seq.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/replaceu.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/restoreu.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/score.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/seekquencer_premafft.pl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/seq2regtable.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/setcore.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/setdirection.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/sextet5.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/splittbfast.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/tbfast.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/lib/mafft/version.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/win-mafft/usr/share/misc/magic" afterPath="" />
+    <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="test">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/awk.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/basename.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/bash.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/cat.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/chmod.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/comm.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/cp.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/cut.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/date.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/dirname.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/echo.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/env.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/expr.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/false.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/file.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/fold.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/grep.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/gzip.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/head.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/id.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/info.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/join.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/ln.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/ls.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/md5sum.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/mkdir.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/mktemp.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/more.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-2.0.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-gcc_s-seh-1.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-gmp-10.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-iconv-2.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-intl-8.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-magic-1.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-mpfr-4.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-ncursesw6.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-pcre-1.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-readline6.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/msys-z.dll" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/mv.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/od.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/paste.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/printf.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/ps.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/pwd.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/rm.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/rmdir.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/sed.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/sh.exe" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/mafft-signed.ps1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/mafft.bat" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/testdata.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/mafft" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/mafft-win/usr/bin/mafft-homologs.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
@@ -142,7 +91,7 @@
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="465">
-              <caret line="141" column="21" lean-forward="true" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
+              <caret line="141" column="21" lean-forward="false" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#470#582#0" expanded="false" />
@@ -460,13 +409,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00024" summary="test">
-      <created>1520115579991</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1520115579991</updated>
     </task>
     <task id="LOCAL-00025" summary="test">
       <created>1520115631981</created>
@@ -804,7 +746,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524100283185</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="test">
+      <created>1524100306342</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1524100306342</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1227,7 +1176,7 @@
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="465">
-          <caret line="141" column="21" lean-forward="true" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
+          <caret line="141" column="21" lean-forward="false" selection-start-line="141" selection-start-column="21" selection-end-line="141" selection-end-column="21" />
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
