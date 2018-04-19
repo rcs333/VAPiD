@@ -145,7 +145,7 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # Windows
     if SLASH == '\\':
-        s = 'mafft-win\\maft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
+        s = 'mafft-win\\mafft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
         subprocess.call(s, shell=True)
     else:
         subprocess.call('./mafft.bat --quiet' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
