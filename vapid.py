@@ -130,22 +130,23 @@ def blast_n_stuff(strain, our_fasta_loc):
     e.close()
     time.sleep(2)
 
-    # Create two biopython sequence objects from our saved files and then run the biopython pairwise2 algorithim on
-    # the two sequences with default settings
+    # mafft rules and the developer of mafft is awesome
     z = open(strain + SLASH + strain + '_aligner.fasta', 'w')
     fe = open(our_fasta_loc)
     for line in fe:
         z.write(line)
     fe.close()
-    g_list, g_g = read_fasta(strain + SLASH + strain + '_ref.fasta')
-    z.write('\n>ref\n')
-    z.write(g_g[0])
+    ge = open(strain + SLASH + strain + '_ref.fasta')
+    z.write('\n')
+    for line in ge:
+        z.write(line)
+    ge.close()
     z.close()
 
     # Windows
     if SLASH == '\\':
-        subprocess.call('win-mafft/mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
-                    shell=True)
+        s = 'mafft-win\\maft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
+        subprocess.call(s, shell=True)
     else:
         subprocess.call('./mafft.bat ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
