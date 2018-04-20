@@ -196,11 +196,14 @@ def adjust(given_num, our_num_array, ref_num_array):
     print(given_num)
     #print(ref_num_array)
     # Go through our number array and search for the number of interest
+    found = False
     for x in range(0, len(our_num_array)):
         if ref_num_array[x] == given_num:
             index = x
+            found = True
             break
-
+    if not found:
+        index = our_num_array[-1]
     # now index is the absolute location of what we want
     return str(our_num_array[index])
 
