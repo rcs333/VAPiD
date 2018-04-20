@@ -379,6 +379,8 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         gene_of_interest = 'phosphoprotein'
         if 'P' in gene_product_list:
             gene_of_interest = 'P'
+        elif 'P protein' in gene_product_list:
+            gene_of_interest = 'P protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HPIV4a')
 
     if 'measles' in name_of_virus.lower():
