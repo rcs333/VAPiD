@@ -461,7 +461,9 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             found_ = True
             break
+
     if found_:
+        print('WE FOUND tHE GENE FO INterST')
         # add the correct number of Gs
         if v == 'HP3':
             start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
