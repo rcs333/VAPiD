@@ -191,7 +191,7 @@ def build_num_arrays(our_seq, ref_seq):
 
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
-def adjust(given_num, our_num_array, ref_num_array):
+def adjust(given_num, our_num_array, ref_num_array, genome):
     #print("HERES OUR GIVEN NUM THAT WE CANT FIND")
     print(given_num)
     #print(ref_num_array)
@@ -202,15 +202,16 @@ def adjust(given_num, our_num_array, ref_num_array):
             index = x
             found = True
             break
-    if not found:
-        index = our_num_array[-1]
     # now index is the absolute location of what we want
-    return str(our_num_array[index])
+    if found:
+        return str(our_num_array[index])
+    else:
+        return str(len(genome) - 1)
 
 
 # this opens up the reference .gbk file and pulls all of the annotations, it then adjusts the annotations to the
 # relative locations that they should appear on our sequence
-def pull_correct_annotations(strain, our_seq, ref_seq):
+def pull_correct_annotations(strain, our_seq, ref_seq, genome):
     # Read the reference gbk file and extract lists of all of the protein locations and annotations!
     gene_loc_list = []
     gene_product_list = []
@@ -237,7 +238,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq):
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
 
-            gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array)
+            gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
     print(gene_loc_list)
     return gene_loc_list, gene_product_list
 
@@ -353,7 +354,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
-    gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq)
+    gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
     #debugging prints
     print(gene_loc_list)
     print(gene_product_list)
