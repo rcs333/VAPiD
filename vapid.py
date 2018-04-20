@@ -206,7 +206,7 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
     if found:
         return str(our_num_array[index])
     else:
-        return str(len(genome) - 1)
+        return str(len(genome))
 
 
 # this opens up the reference .gbk file and pulls all of the annotations, it then adjusts the annotations to the
