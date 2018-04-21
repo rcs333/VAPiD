@@ -83,7 +83,7 @@ If you don't have very many sequences at a time or you include a fasta not in yo
 
 **Example Usage (No metadata sheet)**
 
-`python vapid.py example.fasta template.sbt`
+`python vapid.py example.fasta example.sbt`
 
 
 Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE WHITESPACE OR SPECIAL CHARACTERS IN THEM!!**
