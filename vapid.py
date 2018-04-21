@@ -34,6 +34,7 @@ def read_fasta(fasta_file_loc):
         if line[0] == '>':
             strain_list.append(line[1:].split()[0])
             if dna_string != '':
+                # test commenting out to see if we handle incomplete sequences better this way
                 #xip = 0
                 #while dna_string[xip] == 'N' or dna_string[xip] == '?':
                 #    xip += 1
