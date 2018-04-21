@@ -49,7 +49,7 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 `python -m pip install biopython`
 
 
-3. Then download and unzip this repository to your computer (anywhere will do)
+3. Then download and unzip this repository (which can be downloaded with the green link on the right to the top of the page) to your computer (anywhere will do)
 
 4. Download tbl2asn for windows https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/  and unzip it, then copy and paste every single file in the tbl2asn folder (there should be like 7 .dlls and an .exe that is simply called tbl2asn) into the folder that you just made in step 3.
 
