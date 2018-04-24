@@ -66,7 +66,7 @@ def blast_n_stuff(strain, our_fasta_loc):
 
         record = open(our_fasta_loc).read()
 
-        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35,
+        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, entrez_query = 'txid10239[ORGN]',
                                        format_type='Text')
         with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
             out_handle.write(result_handle.read())
