@@ -149,8 +149,11 @@ def blast_n_stuff(strain, our_fasta_loc):
         s = 'mafft-win\\mafft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
         subprocess.call(s, shell=True)
     else:
-        subprocess.call('./mafft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+        try:
+            subprocess.call('mafft --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
+        except:
+            print('Running on a non windows system, which means you need to install mafft and put it on the sys path yourself.\nI suggest using brew or apt')
     ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
     #seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
     #seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
