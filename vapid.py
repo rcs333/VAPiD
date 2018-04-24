@@ -35,15 +35,15 @@ def read_fasta(fasta_file_loc):
             strain_list.append(line[1:].split()[0])
             if dna_string != '':
                 # test commenting out to see if we handle incomplete sequences better this way
-                #xip = 0
-                #while dna_string[xip] == 'N' or dna_string[xip] == '?':
-                #    xip += 1
+                xip = 0
+                while dna_string[xip] == 'N' or dna_string[xip] == '?':
+                    xip += 1
 
-                #y = len(dna_string)
-                #while dna_string[y-1] == 'N' or dna_string[y-1] == '?':
-                #    y -= 1
+                y = len(dna_string)
+                while dna_string[y-1] == 'N' or dna_string[y-1] == '?':
+                    y -= 1
 
-                #dna_string = dna_string[xip:y]
+                dna_string = dna_string[xip:y]
 
                 genome_list.append(dna_string)
                 dna_string = ''
