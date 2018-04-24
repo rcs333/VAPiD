@@ -223,8 +223,13 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
     for line in open(strain + SLASH + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
-            gene_loc_list.append(re.findall(r'\d+', line))
+            # this line simply makes sure we read in reversed start-stops in the true reversed direction
+            if 'complement' in line:
+                gene_loc_list.append(re.findall(r'\d+', line).reverse())
+            else:
+                gene_loc_list.append(re.findall(r'\d+', line))
             allow_one = True
+
         if '/product="' in line and allow_one:
             allow_one = False
             # Inconsistent naming of protein products
@@ -293,16 +298,16 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         location_info = gene_locations[x]
         if len(location_info) == 4:
             # reversing complementary proteins for bk polyamovirus
-            if 'bk poly' in name_o_vir.lower():
-                start_1 = str(location_info[3])
-                end_1 = str(location_info[2])
-                start_2 = str(location_info[1])
-                end_2 = str(location_info[0])
-            else:
-                start_1 = str(location_info[0])
-                end_1 = str(location_info[1])
-                start_2 = str(location_info[2])
-                end_2 = str(location_info[3])
+            #if 'bk poly' in name_o_vir.lower():
+            #    start_1 = str(location_info[3])
+            #    end_1 = str(location_info[2])
+           #     start_2 = str(location_info[1])
+          #      end_2 = str(location_info[0])
+
+            start_1 = str(location_info[0])
+            end_1 = str(location_info[1])
+            start_2 = str(location_info[2])
+            end_2 = str(location_info[3])
             tbl.write('\n' + start_1 + '\t' + end_1 + '\tCDS\n')
             tbl.write(start_2 + '\t' + end_2 + '\n')
             tbl.write('\t\t\tproduct\t' + product + '\n')
@@ -313,10 +318,10 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             start = int(location_info[0])
             end = int(location_info[1])
             # swap the small t antigen here
-            if 'bk poly' in name_o_vir.lower() and 'small T' in product:
-                blurg = start
-                start = end
-                end = blurg
+           # if 'bk poly' in name_o_vir.lower() and 'small T' in product:
+           #     blurg = start
+           #     start = end
+           #     end = blurg
 
             if end >= len(genome) and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
                 flag = '>'
