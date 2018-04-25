@@ -203,7 +203,7 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
 
     # experiemental code for handling genes that end at the very end of the number array
     if given_num == len(genome):
-        given_num -= 1
+        return len(genome)
 
     if our_num_array[given_num] == '-1':
 
