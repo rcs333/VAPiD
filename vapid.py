@@ -239,7 +239,9 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             # this is now going to be a list of numbers, start-stop start-stop
             # this line simply makes sure we read in reversed start-stops in the true reversed direction
             if 'complement' in line:
-                gene_loc_list.append(re.findall(r'\d+', line).reverse())
+                whack = re.findall(r'\d+', line)
+                whack.reverse()
+                gene_loc_list.append(whack)
             else:
                 gene_loc_list.append(re.findall(r'\d+', line))
             allow_one = True
