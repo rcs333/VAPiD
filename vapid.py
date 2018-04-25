@@ -190,12 +190,7 @@ def build_num_arrays(our_seq, ref_seq):
             our_num_array.append(our_count)
         else:
             our_num_array.append(-1)
-    z = open('OUR_NUM_array.txt', 'w')
-    z.write(str(our_num_array))
-    z.close()
-    y = open('ref_num_array.txt', 'w')
-    y.write(str(ref_num_array))
-    y.close()
+
     return our_num_array, ref_num_array
 
 
