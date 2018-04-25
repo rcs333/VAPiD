@@ -83,13 +83,13 @@ def blast_n_stuff(strain, our_fasta_loc):
 
             # last part of these two logic checks is so we avoid the misassembled/mutated viruses
             # This is going to get really out of hand if we have to keep blacklisting records
-            if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816':
+            if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C':
                 found = True
                 break
             else:
                 read_next = True
         elif read_next:
-            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816':
+            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C':
                 found = True
                 break
             else:
