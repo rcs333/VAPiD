@@ -159,8 +159,9 @@ def blast_n_stuff(strain, our_fasta_loc):
     #seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
     #alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
     #print(alignments)
-    ref_seq = ali_genomes[0]
-    our_seq = ali_genomes[1]
+    # SWAPPED THESE DURING BULLSHIT DEBUGGING
+    ref_seq = ali_genomes[1]
+    our_seq = ali_genomes[0]
 
     #alignments = ''
     return name_of_virus, our_seq, ref_seq
@@ -189,7 +190,12 @@ def build_num_arrays(our_seq, ref_seq):
             our_num_array.append(our_count)
         else:
             our_num_array.append(-1)
-
+    z = open('OUR_NUM_array.txt', 'w')
+    z.write(str(our_num_array))
+    z.close()
+    y = open('ref_num_array.txt', 'w')
+    y.write(str(ref_num_array))
+    y.close()
     return our_num_array, ref_num_array
 
 
@@ -200,12 +206,23 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
     print(given_num)
     #print(ref_num_array)
     # Go through our number array and search for the number of interest
-    found = False
-    for x in range(0, len(our_num_array)):
-        if ref_num_array[x] == given_num:
-            index = x
-            found = True
+    print('OH SHIT')
+    print(our_num_array[given_num])
+    if our_num_array[given_num] == '-1':
+
+        in_dex = given_num
+        while our_num_array[in_dex != '-1']:
+            in_dex += 1
             break
+        return str(our_num_array[in_dex])
+
+    else:
+        found = False
+        for x in range(0, len(our_num_array)):
+            if ref_num_array[x] == given_num:
+                index = x
+                found = True
+                break
     # now index is the absolute location of what we want
     if found:
         return str(our_num_array[index])
