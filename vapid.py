@@ -200,6 +200,11 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
     #print("HERES OUR GIVEN NUM THAT WE CANT FIND")
     #print(ref_num_array)
     # Go through our number array and search for the number of interest
+
+    # experiemental code for handling genes that end at the very end of the number array
+    if given_num == len(genome):
+        given_num -= 1
+
     if our_num_array[given_num] == '-1':
 
         in_dex = given_num
