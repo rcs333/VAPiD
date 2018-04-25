@@ -354,6 +354,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             if int(start) < 1:
                 sflag = '<'
                 xtra = '\t\t\tcodon_start\t' + str((int(end) % 3) + 1)
+                start = '1'
 
             if int(end) < 1 or int(end) < int(start):
                 end = len(genome)
