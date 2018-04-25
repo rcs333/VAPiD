@@ -356,19 +356,25 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             pie = ''
+            die = ''
             if int(start) < 1:
                 sflag = '<'
                 pie = str((int(end) % 3) + 1)
                 start = '1'
-            # removing this check - not sure what it was originally protecting 
+            # removing this check - not sure what it was originally protecting
             if int(end) < 1:# or int(end) < int(start):
                 end = len(genome)
                 flag = '>'
 
+            if 'HPIV-1' in name_o_vir or 'human parainfluenza virus 1' in name_o_vir.lower():
+                if 'C\'' in product or 'Y2' in product:
+                    die = '\t\t\ttransl_except\t(pos:' + str(start) + '..' + str(int(start) + 2) + ',aa:Met)'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
             if pie != '':
                 tbl.write('\t\t\tcodon_start\t' + pie)
+            if die != '':
+                tbl.write(die)
         xtra = ''
     tbl.write('\n')
     tbl.close()
