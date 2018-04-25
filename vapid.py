@@ -346,6 +346,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 end -= it_count * 3
 
             # This should now correctly annotate assemblies that come in with the very edges chopped off
+            pie = ''
             if int(start) < 1:
                 sflag = '<'
                 pie = str((int(end) % 3) + 1)
