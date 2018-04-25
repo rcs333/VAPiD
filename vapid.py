@@ -203,11 +203,8 @@ def build_num_arrays(our_seq, ref_seq):
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array, genome):
     #print("HERES OUR GIVEN NUM THAT WE CANT FIND")
-    print(given_num)
     #print(ref_num_array)
     # Go through our number array and search for the number of interest
-    print('OH SHIT')
-    print(our_num_array[given_num])
     if our_num_array[given_num] == '-1':
 
         in_dex = given_num
