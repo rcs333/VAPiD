@@ -327,7 +327,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             tbl.write('\n' + start_1 + '\t' + end_1 + '\tCDS\n')
             tbl.write(start_2 + '\t' + end_2 + '\n')
             tbl.write('\t\t\tproduct\t' + product + '\n')
-            if 'HEPATITIS B' not in name_o_vir:
+            if 'HEPATITIS B' not in name_o_vir and 'BK polyamavirus' not in name_o_vir:
                 tbl.write('\t\t\texception\tRibosomal Slippage\n')
 
         else:
@@ -344,13 +344,15 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             it_count = 0
             modifid_orf = False
-            while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3 and it_count <= 3:
-                print('Modifying ORF length for ' + str(product))
-                modifid_orf = True
-                end += 3
-                it_count += 1
-            if modifid_orf and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
-                end -= it_count * 3
+            #won't execute this block of code for complemented genes...
+            if end > start:
+                while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3 and it_count <= 3:
+                    print('Modifying ORF length for ' + str(product))
+                    modifid_orf = True
+                    end += 3
+                    it_count += 1
+                if modifid_orf and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
+                    end -= it_count * 3
 
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             pie = ''
