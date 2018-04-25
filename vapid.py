@@ -348,7 +348,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             if int(start) < 1:
                 sflag = '<'
-                xtra = '\n\t\t\tcodon_start\t' + str((int(end) % 3) + 1)
+                pie = str((int(end) % 3) + 1)
                 start = '1'
 
             if int(end) < 1 or int(end) < int(start):
@@ -357,6 +357,8 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
+            if pie != '':
+                tbl.write('\t\t\tcodon_start\t' + pie)
         xtra = ''
     tbl.write('\n')
     tbl.close()
