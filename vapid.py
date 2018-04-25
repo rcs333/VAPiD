@@ -83,13 +83,13 @@ def blast_n_stuff(strain, our_fasta_loc):
 
             # last part of these two logic checks is so we avoid the misassembled/mutated viruses
             # This is going to get really out of hand if we have to keep blacklisting records
-            if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C':
+            if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
                 found = True
                 break
             else:
                 read_next = True
         elif read_next:
-            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C':
+            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
                 found = True
                 break
             else:
@@ -111,8 +111,8 @@ def blast_n_stuff(strain, our_fasta_loc):
         # this code might need to be tweaked a bit, but for now it's working
     #if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
     #    ref_seq_gb = 'KY369864'
-    if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
-        ref_seq_gb = 'L20587.1'
+    #if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
+    #    ref_seq_gb = 'L20587.1'
     if 'MEASLES' in name_of_virus.upper():
         ref_seq_gb = 'EU293548'
     print(ref_seq_gb + ' was the selected reference')
