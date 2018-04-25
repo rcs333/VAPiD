@@ -368,7 +368,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             if 'HPIV-1' in name_o_vir or 'human parainfluenza virus 1' in name_o_vir.lower():
                 if 'C\'' in product or 'Y2' in product:
-                    die = '\t\t\ttransl_except\t(pos:' + str(start) + '..' + str(int(start) + 2) + ',aa:Met)'
+                    die = '\n\t\t\ttransl_except\t(pos:' + str(start) + '..' + str(int(start) + 2) + ',aa:Met)'
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
             if pie != '':
