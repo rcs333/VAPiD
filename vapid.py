@@ -390,8 +390,8 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
     #debugging prints
-    print(gene_loc_list)
-    print(gene_product_list)
+    #print(gene_loc_list)
+    #print(gene_product_list)
     write_cmt(strain, coverage)
 
     write_fsa(strain, name_of_virus, genome, metadata)
