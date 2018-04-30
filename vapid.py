@@ -133,7 +133,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'EU293548'
     print(ref_seq_gb + ' was the selected reference')
     print(name_of_virus + ' was the parsed name of the virus')
-      
+
     h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
     d = open(strain + SLASH + strain + '_ref.fasta', 'w')
     d.write(h.read())
@@ -645,8 +645,6 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(0)
 
-    #dong = args.r
-    #print(dong)
     fasta_loc = args.fasta_file
 
     sbt_file_loc = args.author_template_file_loc
