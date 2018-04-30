@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="91" column="119" lean-forward="false" selection-start-line="91" selection-start-column="119" selection-end-line="91" selection-end-column="119" />
+            <state relative-caret-position="1090">
+              <caret line="673" column="83" lean-forward="false" selection-start-line="673" selection-start-column="83" selection-end-line="673" selection-end-column="83" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#470#582#0" expanded="false" />
@@ -77,8 +77,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="1080">
-                <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <first_editor relative-caret-position="1050">
+                <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -151,8 +151,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="217" />
-    <option name="y" value="53" />
+    <option name="x" value="1187" />
+    <option name="y" value="32" />
     <option name="width" value="1315" />
     <option name="height" value="1303" />
   </component>
@@ -171,8 +171,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -187,6 +185,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -365,13 +365,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00058" summary="test">
-      <created>1523497126529</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1523497126529</updated>
     </task>
     <task id="LOCAL-00059" summary="test">
       <created>1523497204360</created>
@@ -709,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1524696350908</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="test">
+      <created>1524697014253</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1524697014253</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -722,7 +722,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="217" y="53" width="1315" height="1303" extended-state="0" />
+    <frame x="1187" y="32" width="1315" height="1303" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1134,8 +1134,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="91" column="119" lean-forward="false" selection-start-line="91" selection-start-column="119" selection-end-line="91" selection-end-column="119" />
+        <state relative-caret-position="1090">
+          <caret line="673" column="83" lean-forward="false" selection-start-line="673" selection-start-column="83" selection-end-line="673" selection-end-column="83" />
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#470#582#0" expanded="false" />
@@ -1176,8 +1176,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1080">
-            <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <first_editor relative-caret-position="1050">
+            <caret line="70" column="0" lean-forward="false" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />

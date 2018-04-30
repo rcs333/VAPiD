@@ -626,7 +626,7 @@ if __name__ == '__main__':
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete or near complete '
                                            'genomes for all the viruses that you want to have annotated')
     parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file'
-                        ' (should have a .sbt extension')
+                        ' (should have a .sbt extension) https://submit.ncbi.nlm.nih.gov/genbank/template/submission/')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location '
                         'with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
@@ -669,6 +669,6 @@ if __name__ == '__main__':
     for name in virus_strain_list:
         # now we've got a map of [strain] -> boolean value if there are stops or not
         strain2stops[name] = check_for_stops(name)
-
-    print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + str(timeit.default_timer() - start_time) +
-          ' seconds')
+    time = str(timeit.default_timer() - start_time)
+    newtime = time.split('.')[0] + '.' + time.split('.')[1][0:1]
+    print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + newtime + ' seconds')
