@@ -644,6 +644,8 @@ if __name__ == '__main__':
         parser.print_help()
         sys.exit(0)
 
+    dong = args.r
+    print(dong)
     fasta_loc = args.fasta_file
 
     sbt_file_loc = args.author_template_file_loc
