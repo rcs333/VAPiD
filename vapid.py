@@ -108,6 +108,8 @@ def blast_n_stuff(strain, our_fasta_loc):
                     ref_seq_gb = line.split()[0][1:]
                     break
 
+    # Download the reference fasta file from Entrez
+    record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
     # Download .gbk from Entrez, we'll pull annoations from this file later
     h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
@@ -131,8 +133,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         ref_seq_gb = 'EU293548'
     print(ref_seq_gb + ' was the selected reference')
     print(name_of_virus + ' was the parsed name of the virus')
-    # Download the reference fasta file from Entrez
-    record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
+      
     h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
     d = open(strain + SLASH + strain + '_ref.fasta', 'w')
     d.write(h.read())
