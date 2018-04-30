@@ -77,8 +77,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="90">
-                <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <first_editor relative-caret-position="371">
+                <caret line="73" column="392" lean-forward="false" selection-start-line="73" selection-start-column="392" selection-end-line="73" selection-end-column="392" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -364,13 +364,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00063" summary="test">
-      <created>1523500625594</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1523500625594</updated>
     </task>
     <task id="LOCAL-00064" summary="test">
       <created>1523500718517</created>
@@ -708,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525126571248</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="test">
+      <created>1525126631522</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1525126631522</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1175,8 +1175,8 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="90">
-            <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <first_editor relative-caret-position="371">
+            <caret line="73" column="392" lean-forward="false" selection-start-line="73" selection-start-column="392" selection-end-line="73" selection-end-column="392" />
             <folding />
           </first_editor>
           <second_editor />

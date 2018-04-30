@@ -71,7 +71,7 @@ If you don't have very many sequences at a time or you include a fasta not in yo
 
 # Usage - vapid.py
 
-Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE SPECIAL CHARACTERS IN THEM!!**
+Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE SPECIAL CHARACTERS IN THEM!!** (Things like ' " ? - # * ect.)
 
 Then you would need to run the vapid.py script from the command line. First cd to the directory that VAPiD is living in - if you cloned from github it'll be ../VAPiD/ 
 
