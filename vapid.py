@@ -279,10 +279,10 @@ def write_fasta(strain, genome):
 def write_cmt(sample_name, coverage):
     cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
-    cmt.write('Assembly Method\tGeneious v. 9.1\n')
+    #cmt.write('Assembly Method\tGeneious v. 9.1\n')
     if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
-    cmt.write('Sequencing Technology\tIllumina\n')
+    #cmt.write('Sequencing Technology\tIllumina\n')
     cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 

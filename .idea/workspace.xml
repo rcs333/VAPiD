@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vapid.py" afterPath="$PROJECT_DIR$/vapid.py" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="393" column="5" lean-forward="false" selection-start-line="393" selection-start-column="5" selection-end-line="393" selection-end-column="5" />
+            <state relative-caret-position="389">
+              <caret line="285" column="4" lean-forward="false" selection-start-line="285" selection-start-column="4" selection-end-line="285" selection-end-column="4" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#470#582#0" expanded="false" />
@@ -49,15 +49,14 @@
                 <element signature="e#9173#9285#0" expanded="false" />
                 <element signature="e#11050#11166#0" expanded="false" />
                 <element signature="e#11169#11270#0" expanded="false" />
-                <element signature="e#11499#11827#0" expanded="false" />
-                <element signature="e#11830#11920#0" expanded="false" />
-                <element signature="e#15624#15736#0" expanded="false" />
-                <element signature="e#19602#19718#0" expanded="false" />
-                <element signature="e#20892#21005#0" expanded="false" />
-                <element signature="e#21295#23965#0" expanded="false" />
-                <element signature="e#23965#24074#0" expanded="false" />
-                <element signature="e#24543#25869#0" expanded="false" />
-                <element signature="e#25872#25989#0" expanded="false" />
+                <element signature="e#11832#11922#0" expanded="false" />
+                <element signature="e#15626#15738#0" expanded="false" />
+                <element signature="e#19604#19720#0" expanded="false" />
+                <element signature="e#20894#21007#0" expanded="false" />
+                <element signature="e#21297#23967#0" expanded="false" />
+                <element signature="e#23967#24076#0" expanded="false" />
+                <element signature="e#24545#25871#0" expanded="false" />
+                <element signature="e#25874#25991#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -73,7 +72,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -97,7 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>/</find>
       <find>mkdir</find>
       <find>cp</find>
       <find>mv</find>
@@ -126,6 +124,8 @@
       <find>comple</find>
       <find>pull_correct_annotations</find>
       <find>print</find>
+      <find>special</find>
+      <find>ASSE</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -144,13 +144,13 @@
         <option value="$PROJECT_DIR$/example_metadata.csv" />
         <option value="$PROJECT_DIR$/example.fasta" />
         <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
-        <option value="$PROJECT_DIR$/vapid.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/vapid.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1163" />
+    <option name="x" value="1166" />
     <option name="y" value="96" />
     <option name="width" value="1315" />
     <option name="height" value="1303" />
@@ -364,13 +364,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00064" summary="test">
-      <created>1523500718517</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1523500718517</updated>
     </task>
     <task id="LOCAL-00065" summary="test">
       <created>1524004895328</created>
@@ -708,7 +701,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525126631522</updated>
     </task>
-    <option name="localTasksCounter" value="113" />
+    <task id="LOCAL-00113" summary="test">
+      <created>1525126675228</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1525126675229</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -721,7 +721,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1163" y="96" width="1315" height="1303" extended-state="0" />
+    <frame x="1166" y="96" width="1315" height="1303" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -795,15 +795,14 @@
             <element signature="e#9173#9285#0" expanded="false" />
             <element signature="e#11050#11166#0" expanded="false" />
             <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -866,15 +865,14 @@
             <element signature="e#9173#9285#0" expanded="false" />
             <element signature="e#11050#11166#0" expanded="false" />
             <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -920,15 +918,14 @@
             <element signature="e#9173#9285#0" expanded="false" />
             <element signature="e#11050#11166#0" expanded="false" />
             <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -963,15 +960,14 @@
             <element signature="e#9173#9285#0" expanded="false" />
             <element signature="e#11050#11166#0" expanded="false" />
             <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1017,15 +1013,14 @@
             <element signature="e#9173#9285#0" expanded="false" />
             <element signature="e#11050#11166#0" expanded="false" />
             <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1123,41 +1118,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py" />
-    <entry file="file://$PROJECT_DIR$/example_metadata.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vapid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="393" column="5" lean-forward="false" selection-start-line="393" selection-start-column="5" selection-end-line="393" selection-end-column="5" />
-          <folding>
-            <element signature="e#179#196#0" expanded="true" />
-            <element signature="e#470#582#0" expanded="false" />
-            <element signature="e#780#1673#0" expanded="false" />
-            <element signature="e#1676#1791#0" expanded="false" />
-            <element signature="e#7038#7155#0" expanded="false" />
-            <element signature="e#8046#8164#0" expanded="false" />
-            <element signature="e#9173#9285#0" expanded="false" />
-            <element signature="e#11050#11166#0" expanded="false" />
-            <element signature="e#11169#11270#0" expanded="false" />
-            <element signature="e#11499#11827#0" expanded="false" />
-            <element signature="e#11830#11920#0" expanded="false" />
-            <element signature="e#15624#15736#0" expanded="false" />
-            <element signature="e#19602#19718#0" expanded="false" />
-            <element signature="e#20892#21005#0" expanded="false" />
-            <element signature="e#21295#23965#0" expanded="false" />
-            <element signature="e#23965#24074#0" expanded="false" />
-            <element signature="e#24543#25869#0" expanded="false" />
-            <element signature="e#25872#25989#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/win-mafft/mafft-signed.ps1" />
     <entry file="file://$PROJECT_DIR$/example.fasta">
       <provider selected="true" editor-type-id="text-editor">
@@ -1180,6 +1140,40 @@
             <folding />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example_metadata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vapid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="285" column="4" lean-forward="false" selection-start-line="285" selection-start-column="4" selection-end-line="285" selection-end-column="4" />
+          <folding>
+            <element signature="e#179#196#0" expanded="true" />
+            <element signature="e#470#582#0" expanded="false" />
+            <element signature="e#780#1673#0" expanded="false" />
+            <element signature="e#1676#1791#0" expanded="false" />
+            <element signature="e#7038#7155#0" expanded="false" />
+            <element signature="e#8046#8164#0" expanded="false" />
+            <element signature="e#9173#9285#0" expanded="false" />
+            <element signature="e#11050#11166#0" expanded="false" />
+            <element signature="e#11169#11270#0" expanded="false" />
+            <element signature="e#11832#11922#0" expanded="false" />
+            <element signature="e#15626#15738#0" expanded="false" />
+            <element signature="e#19604#19720#0" expanded="false" />
+            <element signature="e#20894#21007#0" expanded="false" />
+            <element signature="e#21297#23967#0" expanded="false" />
+            <element signature="e#23967#24076#0" expanded="false" />
+            <element signature="e#24545#25871#0" expanded="false" />
+            <element signature="e#25874#25991#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
