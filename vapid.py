@@ -379,7 +379,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             tbl.write('\n' + sflag + str(start) + '\t' + flag + str(end) + '\tCDS\n')
             tbl.write('\t\t\tproduct\t' + product + xtra)
             if pie != '':
-                tbl.write('\t\t\tcodon_start\t' + pie)
+                tbl.write('\n\t\t\tcodon_start\t' + pie)
             if die != '':
                 tbl.write(die)
         xtra = ''
