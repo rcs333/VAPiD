@@ -638,7 +638,7 @@ if __name__ == '__main__':
                         'with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
                         '- must be the exact accession number - note feature only works with one virus type '
-                        'at a time ')
+                        'at a time and you must put quotation marks around the accesion number')
     try:
         args = parser.parse_args()
     except:
