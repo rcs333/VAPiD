@@ -60,52 +60,66 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, speeds up error checking for development
-    if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
-        print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
-              'throttling)')
-
-        record = open(our_fasta_loc).read()
-
-        result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, entrez_query = 'txid10239[ORGN]',
-                                       format_type='Text')
-        with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
-            out_handle.write(result_handle.read())
-        result_handle.close()
-
-    # read through the top hits saved earlier and save the accession number of the best hit that's complete
-    read_next = False
-    found = False
-    for line in open(strain + SLASH + strain + '.blastresults'):
-        if line[0] == '>':
-            name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-            name_of_virus = name_of_virus.split('/')[0]
-            ref_seq_gb = line.split()[0][1:]
-
-            # last part of these two logic checks is so we avoid the misassembled/mutated viruses
-            # This is going to get really out of hand if we have to keep blacklisting records
-            if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
-                found = True
-                break
-            else:
-                read_next = True
-        elif read_next:
-            if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
-                found = True
-                break
-            else:
-                read_next = False
-
-    # if we don't find any complete genomes just pull the top hit from blast and go from there
-    if not found:
-        for line in open(strain + SLASH + strain + '.blastresults'):
-            if line[0] == '>':
-                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-                ref_seq_gb = line.split()[0][1:]
-                break
-
+    ref_seq_bg = ''
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
     if args.r:
         ref_seq_gb = args.r
+    else:
+        if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
+            print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
+                'throttling)')
+
+            record = open(our_fasta_loc).read()
+
+            result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, entrez_query = 'txid10239[ORGN]',
+                                       format_type='Text')
+            with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
+                out_handle.write(result_handle.read())
+            result_handle.close()
+
+        # read through the top hits saved earlier and save the accession number of the best hit that's complete
+        read_next = False
+        found = False
+        for line in open(strain + SLASH + strain + '.blastresults'):
+            if line[0] == '>':
+                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                name_of_virus = name_of_virus.split('/')[0]
+                ref_seq_gb = line.split()[0][1:]
+
+                # last part of these two logic checks is so we avoid the misassembled/mutated viruses
+                # This is going to get really out of hand if we have to keep blacklisting records
+                if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
+                    found = True
+                    break
+                else:
+                    read_next = True
+            elif read_next:
+                if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
+                    found = True
+                    break
+                else:
+                    read_next = False
+
+        # if we don't find any complete genomes just pull the top hit from blast and go from there
+        if not found:
+            for line in open(strain + SLASH + strain + '.blastresults'):
+                if line[0] == '>':
+                    name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                    ref_seq_gb = line.split()[0][1:]
+                    break
+
+    # Download .gbk from Entrez, we'll pull annoations from this file later
+    h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
+    e = open(strain + SLASH + strain + '_ref.gbk', 'w')
+    e.write(h2.read())
+    e.close()
+    time.sleep(1)
+
+    if args.r:
+        for line in open(strain + SLASH + strain + '_ref.gbk'):
+            if 'DEFINITION' in line:
+                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+
     #if 'CORONAVIRUS 229E' in name_of_virus.upper():
     #    ref_seq_gb = 'KY369913.1'
         # this code might need to be tweaked a bit, but for now it's working
@@ -124,12 +138,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     d.write(h.read())
     d.close()
 
-    # Download .gbk from Entrez, we'll pull annoations from this file later
-    h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
-    e = open(strain + SLASH + strain + '_ref.gbk', 'w')
-    e.write(h2.read())
-    e.close()
-    time.sleep(2)
+
 
     # mafft rules and the developer of mafft is awesome
     z = open(strain + SLASH + strain + '_aligner.fasta', 'w')

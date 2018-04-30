@@ -94,6 +94,9 @@ Just change the path here to whever you ended up unzipping the VAPiD folder on y
 
 `python vapid.py example.fasta example.sbt`
 
+**Example Usage (With metadata sheet AND specifying the reference)**
+
+`python vapid.py example.fasta example.sbt --metadata_loc example_metadata.csv --r KF530268.1`
 
 `python vapid.py -h` prints out a list of arguments and some help information
 
