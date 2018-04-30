@@ -626,7 +626,7 @@ if __name__ == '__main__':
     parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete or near complete '
                                            'genomes for all the viruses that you want to have annotated')
     parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file'
-                        ' (should have a .sbt extension) https://submit.ncbi.nlm.nih.gov/genbank/template/submission/')
+                        ' (should have a .sbt extension)\n https://submit.ncbi.nlm.nih.gov/genbank/template/submission/')
     parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location '
                         'with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
