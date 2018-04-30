@@ -258,13 +258,10 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
     #print(ref_seq_num_array)
     # Adjust every locus so that we actually put in correct annotations
     #more debugging code
-    print('Lets see what ADJUST() actually does ')
-    print(gene_loc_list)
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
 
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
-    print(gene_loc_list)
     return gene_loc_list, gene_product_list
 
 
