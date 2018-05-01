@@ -649,7 +649,7 @@ if __name__ == '__main__':
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
                         '- must be the exact accession number - note feature only works with one virus type '
                         'at a time and you must put quotation marks around the accesion number')
-    parser.add_argument('--d', help='specify the full path of a local blast database you MUST have blast+ with blastn'
+    parser.add_argument('--db', help='specify the full path of a local blast database you MUST have blast+ with blastn'
                                     'installed correctly on your system path for this to work right')
     try:
         args = parser.parse_args()

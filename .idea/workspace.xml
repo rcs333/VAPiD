@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="76" column="60" lean-forward="true" selection-start-line="76" selection-start-column="60" selection-end-line="76" selection-end-column="60" />
+            <state relative-caret-position="448">
+              <caret line="651" column="29" lean-forward="false" selection-start-line="651" selection-start-column="29" selection-end-line="651" selection-end-column="29" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#469#581#0" expanded="false" />
@@ -370,13 +370,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00041" summary="test">
-      <created>1520975455702</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1520975455702</updated>
     </task>
     <task id="LOCAL-00042" summary="test">
       <created>1520975584980</created>
@@ -714,7 +707,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525212800435</updated>
     </task>
-    <option name="localTasksCounter" value="90" />
+    <task id="LOCAL-00090" summary="test">
+      <created>1525213765316</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1525213765317</updated>
+    </task>
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1179,8 +1179,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="76" column="60" lean-forward="true" selection-start-line="76" selection-start-column="60" selection-end-line="76" selection-end-column="60" />
+        <state relative-caret-position="448">
+          <caret line="651" column="29" lean-forward="false" selection-start-line="651" selection-start-column="29" selection-end-line="651" selection-end-column="29" />
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
