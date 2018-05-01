@@ -4,7 +4,7 @@ VAPiD is a ultra-lightweight script for quickly annotating and preparing sequenc
 Currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 
 Viruses that VAPiD has been tested with:  
-RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Ebola, Rotavirus, West Nile Virus, HTLV, HIV, Norovirus, JC, BK virus.
+RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK virus.
 # Installation
 Installation differs greatly for Unix systems and for Windows
 
