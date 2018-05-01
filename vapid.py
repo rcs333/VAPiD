@@ -70,8 +70,10 @@ def blast_n_stuff(strain, our_fasta_loc):
             if args.db:
                 local_database_location = args.db
                 print('Searching local blast database at ' + local_database_location)
-                # may need to tweak the output method - need to test first 
-                local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + fasta_loc + ' -out ' + strain + SLASH + strain + '.blastresults'
+                # may need to tweak the output method - need to test first
+                local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + fasta_loc + \
+                                  ' -num_descriptions 0 -num_alignments 35 -word_size 28 > ' + strain + SLASH + strain \
+                                  + '.blastresults'
                 subprocess.call(local_blast_cmd, shell=True)
             else:
                 print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
