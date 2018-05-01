@@ -64,18 +64,25 @@ def blast_n_stuff(strain, our_fasta_loc):
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
     if args.r:
         ref_seq_gb = args.r
+
     else:
         if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
-            print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
-                'throttling)')
+            if args.db:
+                local_database_location = args.db
+                print('Searching local blast database at ' + local_database_location)
+                local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + fasta_loc + ' -out ' + strain + SLASH + strain + '.blastresults'
+                subprocess.call(local_blast_cmd, shell=True)
+            else:
+                print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
+                      'throttling)')
 
-            record = open(our_fasta_loc).read()
+                record = open(our_fasta_loc).read()
 
-            result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, entrez_query = 'txid10239[ORGN]',
-                                       format_type='Text')
-            with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
-                out_handle.write(result_handle.read())
-            result_handle.close()
+                result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=35, entrez_query = 'txid10239[ORGN]',
+                                                format_type='Text')
+                with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
+                    out_handle.write(result_handle.read())
+                result_handle.close()
 
         # read through the top hits saved earlier and save the accession number of the best hit that's complete
         read_next = False
@@ -639,6 +646,8 @@ if __name__ == '__main__':
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
                         '- must be the exact accession number - note feature only works with one virus type '
                         'at a time and you must put quotation marks around the accesion number')
+    parser.add_argument('--d', help='specify the full path of a local blast database you MUST have blast+ with blastn'
+                                    'installed correctly on your system path for this to work right')
     try:
         args = parser.parse_args()
     except:

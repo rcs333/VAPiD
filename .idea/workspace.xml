@@ -18,29 +18,6 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/README.md">
-                <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-                  <state split_layout="SPLIT">
-                    <first_editor relative-caret-position="707">
-                      <caret line="99" column="72" lean-forward="true" selection-start-line="99" selection-start-column="72" selection-end-line="99" selection-end-column="72" />
-                      <folding />
-                    </first_editor>
-                    <second_editor />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="ClinVirusSeq" />
@@ -50,8 +27,8 @@
       <file leaf-file-name="example_metadata.csv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example_metadata.csv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+            <state relative-caret-position="15">
+              <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -60,26 +37,35 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="525">
+              <caret line="74" column="17" lean-forward="true" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
                 <element signature="e#469#581#0" expanded="false" />
+                <element signature="e#779#1672#0" expanded="false" />
                 <element signature="e#1675#1790#0" expanded="false" />
-                <element signature="e#7435#7552#0" expanded="false" />
-                <element signature="e#8443#8561#0" expanded="false" />
-                <element signature="e#9570#9682#0" expanded="false" />
-                <element signature="e#11447#11563#0" expanded="false" />
-                <element signature="e#11566#11667#0" expanded="false" />
-                <element signature="e#11896#12226#0" expanded="false" />
-                <element signature="e#12229#12319#0" expanded="false" />
-                <element signature="e#16025#16137#0" expanded="false" />
-                <element signature="e#20003#20119#0" expanded="false" />
-                <element signature="e#21293#21406#0" expanded="false" />
-                <element signature="e#21696#24366#0" expanded="false" />
-                <element signature="e#24366#24475#0" expanded="false" />
-                <element signature="e#24944#26270#0" expanded="false" />
-                <element signature="e#26273#26390#0" expanded="false" />
+                <element signature="e#7868#7985#0" expanded="false" />
+                <element signature="e#8412#8873#0" expanded="false" />
+                <element signature="e#8876#8994#0" expanded="false" />
+                <element signature="e#9149#10003#0" expanded="false" />
+                <element signature="e#10003#10115#0" expanded="false" />
+                <element signature="e#10245#11751#0" expanded="false" />
+                <element signature="e#11999#12100#0" expanded="false" />
+                <element signature="e#12329#12659#0" expanded="false" />
+                <element signature="e#12662#12752#0" expanded="false" />
+                <element signature="e#12989#16455#0" expanded="false" />
+                <element signature="e#16458#16570#0" expanded="false" />
+                <element signature="e#16712#20433#0" expanded="false" />
+                <element signature="e#20436#20552#0" expanded="false" />
+                <element signature="e#20749#21726#0" expanded="false" />
+                <element signature="e#21726#21839#0" expanded="false" />
+                <element signature="e#22129#24799#0" expanded="false" />
+                <element signature="e#24799#24908#0" expanded="false" />
+                <element signature="e#24997#25271#0" expanded="false" />
+                <element signature="e#25377#26703#0" expanded="false" />
+                <element signature="e#26706#26823#0" expanded="false" />
+                <element signature="e#27070#27353#0" expanded="false" />
+                <element signature="e#27455#27569#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,6 +81,19 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="1080">
+                <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+                <folding />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -106,6 +105,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
+      <find>ct</find>
+      <find>.call</find>
+      <find>subprocess</find>
+      <find>-1</find>
+      <find>/</find>
+      <find>mkdir</find>
       <find>cp</find>
       <find>mv</find>
       <find>subpr</find>
@@ -126,16 +131,8 @@
       <find>write_fsa</find>
       <find>start</find>
       <find>read_fasta</find>
-      <find>RNA editing</find>
-      <find>blast_n_stuff</find>
-      <find>-1</find>
-      <find>write</find>
-      <find>comple</find>
-      <find>pull_correct_annotations</find>
       <find>print</find>
-      <find>special</find>
-      <find>ASSE</find>
-      <find>&lt;</find>
+      <find>RNA editing</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -151,17 +148,17 @@
       <list>
         <option value="$PROJECT_DIR$/test.sh" />
         <option value="$PROJECT_DIR$/get_metadata.py" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/example_metadata.csv" />
         <option value="$PROJECT_DIR$/example.fasta" />
         <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/vapid.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1155" />
-    <option name="y" value="26" />
+    <option name="x" value="1272" />
+    <option name="y" value="23" />
     <option name="width" value="1315" />
     <option name="height" value="1303" />
   </component>
@@ -180,6 +177,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,14 +193,11 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.general" />
     <property name="SearchEverywhereHistoryKey" value="ebola&#9;null&#9;null" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -375,6 +371,251 @@
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
     </task>
+    <task id="LOCAL-00039" summary="test">
+      <created>1520561319822</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1520561319822</updated>
+    </task>
+    <task id="LOCAL-00040" summary="test">
+      <created>1520896136573</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1520896136573</updated>
+    </task>
+    <task id="LOCAL-00041" summary="test">
+      <created>1520975455702</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1520975455702</updated>
+    </task>
+    <task id="LOCAL-00042" summary="test">
+      <created>1520975584980</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1520975584980</updated>
+    </task>
+    <task id="LOCAL-00043" summary="test">
+      <created>1520975818541</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1520975818541</updated>
+    </task>
+    <task id="LOCAL-00044" summary="test">
+      <created>1520976245690</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1520976245690</updated>
+    </task>
+    <task id="LOCAL-00045" summary="test">
+      <created>1522287652764</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1522287652764</updated>
+    </task>
+    <task id="LOCAL-00046" summary="test">
+      <created>1522288071155</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1522288071155</updated>
+    </task>
+    <task id="LOCAL-00047" summary="test">
+      <created>1522288333869</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1522288333869</updated>
+    </task>
+    <task id="LOCAL-00048" summary="test">
+      <created>1522288670207</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1522288670207</updated>
+    </task>
+    <task id="LOCAL-00049" summary="test">
+      <created>1522443685362</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1522443685362</updated>
+    </task>
+    <task id="LOCAL-00050" summary="test">
+      <created>1522443939726</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1522443939727</updated>
+    </task>
+    <task id="LOCAL-00051" summary="test">
+      <created>1522444518458</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1522444518458</updated>
+    </task>
+    <task id="LOCAL-00052" summary="test">
+      <created>1522445815587</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1522445815587</updated>
+    </task>
+    <task id="LOCAL-00053" summary="test">
+      <created>1523492965911</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1523492965911</updated>
+    </task>
+    <task id="LOCAL-00054" summary="test">
+      <created>1523493906204</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1523493906204</updated>
+    </task>
+    <task id="LOCAL-00055" summary="test">
+      <created>1523494127060</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1523494127060</updated>
+    </task>
+    <task id="LOCAL-00056" summary="test">
+      <created>1523494174091</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1523494174091</updated>
+    </task>
+    <task id="LOCAL-00057" summary="test">
+      <created>1523494359623</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1523494359623</updated>
+    </task>
+    <task id="LOCAL-00058" summary="test">
+      <created>1523497126529</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1523497126529</updated>
+    </task>
+    <task id="LOCAL-00059" summary="test">
+      <created>1523497204360</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1523497204360</updated>
+    </task>
+    <task id="LOCAL-00060" summary="test">
+      <created>1523497338915</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1523497338915</updated>
+    </task>
+    <task id="LOCAL-00061" summary="test">
+      <created>1523499149421</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1523499149421</updated>
+    </task>
+    <task id="LOCAL-00062" summary="test">
+      <created>1523500307460</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1523500307460</updated>
+    </task>
+    <task id="LOCAL-00063" summary="test">
+      <created>1523500625594</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1523500625594</updated>
+    </task>
+    <task id="LOCAL-00064" summary="test">
+      <created>1523500718517</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1523500718517</updated>
+    </task>
+    <task id="LOCAL-00065" summary="test">
+      <created>1524004895328</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1524004895333</updated>
+    </task>
+    <task id="LOCAL-00066" summary="test">
+      <created>1524092735219</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1524092735220</updated>
+    </task>
+    <task id="LOCAL-00067" summary="test">
+      <created>1524093778611</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1524093778611</updated>
+    </task>
+    <task id="LOCAL-00068" summary="test">
+      <created>1524095361332</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1524095361332</updated>
+    </task>
+    <task id="LOCAL-00069" summary="test">
+      <created>1524096453273</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1524096453273</updated>
+    </task>
+    <task id="LOCAL-00070" summary="test">
+      <created>1524099278482</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1524099278482</updated>
+    </task>
+    <task id="LOCAL-00071" summary="test">
+      <created>1524099998036</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1524099998036</updated>
+    </task>
+    <task id="LOCAL-00072" summary="test">
+      <created>1524100283185</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1524100283185</updated>
+    </task>
+    <task id="LOCAL-00073" summary="test">
+      <created>1524100306342</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1524100306342</updated>
+    </task>
     <task id="LOCAL-00074" summary="test">
       <created>1524100411734</created>
       <option name="number" value="00074" />
@@ -473,252 +714,7 @@
       <option name="project" value="LOCAL" />
       <updated>1524609177652</updated>
     </task>
-    <task id="LOCAL-00088" summary="test">
-      <created>1524617632178</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1524617632178</updated>
-    </task>
-    <task id="LOCAL-00089" summary="test">
-      <created>1524618819264</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1524618819264</updated>
-    </task>
-    <task id="LOCAL-00090" summary="test">
-      <created>1524618853385</created>
-      <option name="number" value="00090" />
-      <option name="presentableId" value="LOCAL-00090" />
-      <option name="project" value="LOCAL" />
-      <updated>1524618853385</updated>
-    </task>
-    <task id="LOCAL-00091" summary="test">
-      <created>1524619014875</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
-      <option name="project" value="LOCAL" />
-      <updated>1524619014875</updated>
-    </task>
-    <task id="LOCAL-00092" summary="test">
-      <created>1524619146030</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
-      <option name="project" value="LOCAL" />
-      <updated>1524619146030</updated>
-    </task>
-    <task id="LOCAL-00093" summary="test">
-      <created>1524619230920</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1524619230920</updated>
-    </task>
-    <task id="LOCAL-00094" summary="test">
-      <created>1524619372616</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1524619372616</updated>
-    </task>
-    <task id="LOCAL-00095" summary="test">
-      <created>1524619521110</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
-      <option name="project" value="LOCAL" />
-      <updated>1524619521110</updated>
-    </task>
-    <task id="LOCAL-00096" summary="test">
-      <created>1524691186317</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
-      <option name="project" value="LOCAL" />
-      <updated>1524691186317</updated>
-    </task>
-    <task id="LOCAL-00097" summary="test">
-      <created>1524691822590</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1524691822591</updated>
-    </task>
-    <task id="LOCAL-00098" summary="test">
-      <created>1524692063860</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1524692063861</updated>
-    </task>
-    <task id="LOCAL-00099" summary="test">
-      <created>1524692397171</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1524692397171</updated>
-    </task>
-    <task id="LOCAL-00100" summary="test">
-      <created>1524692808658</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1524692808658</updated>
-    </task>
-    <task id="LOCAL-00101" summary="test">
-      <created>1524693414109</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1524693414109</updated>
-    </task>
-    <task id="LOCAL-00102" summary="test">
-      <created>1524693801432</created>
-      <option name="number" value="00102" />
-      <option name="presentableId" value="LOCAL-00102" />
-      <option name="project" value="LOCAL" />
-      <updated>1524693801432</updated>
-    </task>
-    <task id="LOCAL-00103" summary="test">
-      <created>1524694368276</created>
-      <option name="number" value="00103" />
-      <option name="presentableId" value="LOCAL-00103" />
-      <option name="project" value="LOCAL" />
-      <updated>1524694368276</updated>
-    </task>
-    <task id="LOCAL-00104" summary="test">
-      <created>1524695540293</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1524695540293</updated>
-    </task>
-    <task id="LOCAL-00105" summary="test">
-      <created>1524695832580</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1524695832580</updated>
-    </task>
-    <task id="LOCAL-00106" summary="test">
-      <created>1524696350908</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1524696350908</updated>
-    </task>
-    <task id="LOCAL-00107" summary="test">
-      <created>1524697014253</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1524697014253</updated>
-    </task>
-    <task id="LOCAL-00108" summary="test">
-      <created>1525126259327</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126259328</updated>
-    </task>
-    <task id="LOCAL-00109" summary="test">
-      <created>1525126424664</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126424664</updated>
-    </task>
-    <task id="LOCAL-00110" summary="test">
-      <created>1525126502958</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126502958</updated>
-    </task>
-    <task id="LOCAL-00111" summary="test">
-      <created>1525126571248</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126571248</updated>
-    </task>
-    <task id="LOCAL-00112" summary="test">
-      <created>1525126631522</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126631522</updated>
-    </task>
-    <task id="LOCAL-00113" summary="test">
-      <created>1525126675228</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126675229</updated>
-    </task>
-    <task id="LOCAL-00114" summary="test">
-      <created>1525126721759</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1525126721760</updated>
-    </task>
-    <task id="LOCAL-00115" summary="test">
-      <created>1525127653154</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127653154</updated>
-    </task>
-    <task id="LOCAL-00116" summary="test">
-      <created>1525127742310</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127742310</updated>
-    </task>
-    <task id="LOCAL-00117" summary="test">
-      <created>1525127802058</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127802058</updated>
-    </task>
-    <task id="LOCAL-00118" summary="test">
-      <created>1525127868254</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127868254</updated>
-    </task>
-    <task id="LOCAL-00119" summary="test">
-      <created>1525127884999</created>
-      <option name="number" value="00119" />
-      <option name="presentableId" value="LOCAL-00119" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127884999</updated>
-    </task>
-    <task id="LOCAL-00120" summary="test">
-      <created>1525127960539</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1525127960539</updated>
-    </task>
-    <task id="LOCAL-00121" summary="test">
-      <created>1525128122714</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1525128122714</updated>
-    </task>
-    <task id="LOCAL-00122" summary="test">
-      <created>1525129273150</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1525129273150</updated>
-    </task>
-    <option name="localTasksCounter" value="123" />
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -731,30 +727,30 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1155" y="26" width="1315" height="1303" extended-state="0" />
+    <frame x="1272" y="23" width="1315" height="1303" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16045627" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32956383" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug Logs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.008914101" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Execute Anonymous" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16045627" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Salesforce" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -786,7 +782,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="62" />
+      <option name="time" value="57" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -798,21 +794,30 @@
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
             <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -868,21 +873,30 @@
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
             <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -921,21 +935,30 @@
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
             <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -963,21 +986,30 @@
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
             <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1016,21 +1048,30 @@
           <folding>
             <element signature="e#179#196#0" expanded="true" />
             <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
             <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1128,6 +1169,49 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py" />
+    <entry file="file://$PROJECT_DIR$/example_metadata.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="4" lean-forward="false" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vapid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="74" column="17" lean-forward="true" selection-start-line="74" selection-start-column="17" selection-end-line="74" selection-end-column="17" />
+          <folding>
+            <element signature="e#179#196#0" expanded="true" />
+            <element signature="e#469#581#0" expanded="false" />
+            <element signature="e#779#1672#0" expanded="false" />
+            <element signature="e#1675#1790#0" expanded="false" />
+            <element signature="e#7868#7985#0" expanded="false" />
+            <element signature="e#8412#8873#0" expanded="false" />
+            <element signature="e#8876#8994#0" expanded="false" />
+            <element signature="e#9149#10003#0" expanded="false" />
+            <element signature="e#10003#10115#0" expanded="false" />
+            <element signature="e#10245#11751#0" expanded="false" />
+            <element signature="e#11999#12100#0" expanded="false" />
+            <element signature="e#12329#12659#0" expanded="false" />
+            <element signature="e#12662#12752#0" expanded="false" />
+            <element signature="e#12989#16455#0" expanded="false" />
+            <element signature="e#16458#16570#0" expanded="false" />
+            <element signature="e#16712#20433#0" expanded="false" />
+            <element signature="e#20436#20552#0" expanded="false" />
+            <element signature="e#20749#21726#0" expanded="false" />
+            <element signature="e#21726#21839#0" expanded="false" />
+            <element signature="e#22129#24799#0" expanded="false" />
+            <element signature="e#24799#24908#0" expanded="false" />
+            <element signature="e#24997#25271#0" expanded="false" />
+            <element signature="e#25377#26703#0" expanded="false" />
+            <element signature="e#26706#26823#0" expanded="false" />
+            <element signature="e#27070#27353#0" expanded="false" />
+            <element signature="e#27455#27569#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/win-mafft/mafft-signed.ps1" />
     <entry file="file://$PROJECT_DIR$/example.fasta">
       <provider selected="true" editor-type-id="text-editor">
@@ -1137,53 +1221,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example_metadata.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="707">
-            <caret line="99" column="72" lean-forward="true" selection-start-line="99" selection-start-column="72" selection-end-line="99" selection-end-column="72" />
+          <first_editor relative-caret-position="1080">
+            <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
             <folding />
           </first_editor>
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vapid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding>
-            <element signature="e#179#196#0" expanded="true" />
-            <element signature="e#469#581#0" expanded="false" />
-            <element signature="e#1675#1790#0" expanded="false" />
-            <element signature="e#7435#7552#0" expanded="false" />
-            <element signature="e#8443#8561#0" expanded="false" />
-            <element signature="e#9570#9682#0" expanded="false" />
-            <element signature="e#11447#11563#0" expanded="false" />
-            <element signature="e#11566#11667#0" expanded="false" />
-            <element signature="e#11896#12226#0" expanded="false" />
-            <element signature="e#12229#12319#0" expanded="false" />
-            <element signature="e#16025#16137#0" expanded="false" />
-            <element signature="e#20003#20119#0" expanded="false" />
-            <element signature="e#21293#21406#0" expanded="false" />
-            <element signature="e#21696#24366#0" expanded="false" />
-            <element signature="e#24366#24475#0" expanded="false" />
-            <element signature="e#24944#26270#0" expanded="false" />
-            <element signature="e#26273#26390#0" expanded="false" />
-          </folding>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
