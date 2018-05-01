@@ -70,6 +70,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             if args.db:
                 local_database_location = args.db
                 print('Searching local blast database at ' + local_database_location)
+                # may need to tweak the output method - need to test first 
                 local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + fasta_loc + ' -out ' + strain + SLASH + strain + '.blastresults'
                 subprocess.call(local_blast_cmd, shell=True)
             else:
