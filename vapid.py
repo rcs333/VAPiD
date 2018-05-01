@@ -89,7 +89,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                 record = open(our_fasta_loc).read()
 
                 #test code - we know parsing works with 0 descriptions and 35 alignments
-                result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=35, alignments=0, entrez_query = 'txid10239[ORGN]',
+                result_handle = NCBIWWW.qblast('blastn', 'nt', record, word_size=28, descriptions=0, alignments=15, entrez_query = 'txid10239[ORGN]',
                                                 format_type='Text')
                 with open(strain + SLASH + strain + '.blastresults', 'w') as out_handle:
                     out_handle.write(result_handle.read())
