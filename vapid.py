@@ -187,7 +187,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     #seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
     #alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
     #print(alignments)
-    # SWAPPED THESE DURING BULLSHIT DEBUGGING
+    # SWAPPED THESE DURING DEBUGGING
     ref_seq = ali_genomes[1]
     our_seq = ali_genomes[0]
 
