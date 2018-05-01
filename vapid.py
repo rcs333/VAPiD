@@ -71,10 +71,17 @@ def blast_n_stuff(strain, our_fasta_loc):
                 local_database_location = args.db
                 print('Searching local blast database at ' + local_database_location)
                 # may need to tweak the output method - need to test first
-                local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + fasta_loc + \
-                                  ' -num_descriptions 0 -num_alignments 35 -word_size 28 > ' + strain + SLASH + strain \
+                local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
+                                  ' -num_alignments 1 -word_size 28 -outfmt \'6 sacc\' -out ' + strain + SLASH + strain \
                                   + '.blastresults'
                 subprocess.call(local_blast_cmd, shell=True)
+
+                # pull first accession number
+                for line in open(strain + SLASH + strain + '.blastresults'):
+                    ref_seq_gb = line.split('|')[3]
+                    break
+                # this is to prevent an issue with parsing collisions
+                subprocess.call('rm ' + strain + SLASH + strain + '.blastresults')
             else:
                 print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
                       'throttling)')
@@ -87,36 +94,36 @@ def blast_n_stuff(strain, our_fasta_loc):
                     out_handle.write(result_handle.read())
                 result_handle.close()
 
-        # read through the top hits saved earlier and save the accession number of the best hit that's complete
-        read_next = False
-        found = False
-        for line in open(strain + SLASH + strain + '.blastresults'):
-            if line[0] == '>':
-                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-                name_of_virus = name_of_virus.split('/')[0]
-                ref_seq_gb = line.split()[0][1:]
+                # read through the top hits saved earlier and save the accession number of the best hit that's complete
+                read_next = False
+                found = False
+                for line in open(strain + SLASH + strain + '.blastresults'):
+                    if line[0] == '>':
+                        name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                        name_of_virus = name_of_virus.split('/')[0]
+                        ref_seq_gb = line.split()[0][1:]
 
-                # last part of these two logic checks is so we avoid the misassembled/mutated viruses
-                # This is going to get really out of hand if we have to keep blacklisting records
-                if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
-                    found = True
-                    break
-                else:
-                    read_next = True
-            elif read_next:
-                if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
-                    found = True
-                    break
-                else:
-                    read_next = False
+                        # last part of these two logic checks is so we avoid the misassembled/mutated viruses
+                        # This is going to get really out of hand if we have to keep blacklisting records
+                        if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
+                            found = True
+                            break
+                        else:
+                            read_next = True
+                    elif read_next:
+                        if 'complete genome' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
+                            found = True
+                            break
+                        else:
+                            read_next = False
 
-        # if we don't find any complete genomes just pull the top hit from blast and go from there
-        if not found:
-            for line in open(strain + SLASH + strain + '.blastresults'):
-                if line[0] == '>':
-                    name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-                    ref_seq_gb = line.split()[0][1:]
-                    break
+                # if we don't find any complete genomes just pull the top hit from blast and go from there
+                if not found:
+                    for line in open(strain + SLASH + strain + '.blastresults'):
+                        if line[0] == '>':
+                            name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                            ref_seq_gb = line.split()[0][1:]
+                            break
 
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
@@ -127,7 +134,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     e.close()
     time.sleep(1)
 
-    if args.r:
+    if args.r or args.db:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
             if 'DEFINITION' in line:
                 name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
