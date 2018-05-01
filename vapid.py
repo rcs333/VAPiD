@@ -1,4 +1,4 @@
-# VAPiD v0.9
+# VAPiD v1.0
 
 # VAPiD is an extremely lightweight virus genome annotator that takes any number of viral genomes and annotates them
 # producing files suitable for NCBI submission
@@ -9,12 +9,10 @@ import argparse
 import timeit
 import os
 from Bio.Seq import Seq
-from Bio import SeqIO
 from Bio.Blast import NCBIWWW
 import platform
 import sys
 from Bio import Entrez
-from Bio import pairwise2
 import time
 Entrez.email = 'uwvirongs@gmail.com'
 
@@ -23,8 +21,8 @@ VERSION = 'v1.0'
 
 
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number of
-# sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Returns a list with the names of the
-# strains and the strings of the genomes
+# sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Returns two lists with the names of
+# the strains in the first one and the genomes as strings in the second list, also changes U's to T's
 def read_fasta(fasta_file_loc):
     strain_list = []
     genome_list = []
@@ -34,7 +32,7 @@ def read_fasta(fasta_file_loc):
         if line[0] == '>':
             strain_list.append(line[1:].split()[0])
             if dna_string != '':
-                # test commenting out to see if we handle incomplete sequences better this way
+                # strip leading and trailing Ns or ?s because there's no reason to submit them
                 xip = 0
                 while dna_string[xip] == 'N' or dna_string[xip] == '?':
                     xip += 1
@@ -49,7 +47,7 @@ def read_fasta(fasta_file_loc):
                 dna_string = ''
         else:
             dna_string += line.strip()
-    # new code, trying to fix certian erroneous alignments
+    # Just to make sure all our sequences are on the same page
     genome_list.append(dna_string.replace('U', 'T'))
     return strain_list, genome_list
 
@@ -225,14 +223,12 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array, genome):
-    #print("HERES OUR GIVEN NUM THAT WE CANT FIND")
-    #print(ref_num_array)
-    # Go through our number array and search for the number of interest
 
-    # experiemental code for handling genes that end at the very end of the number array
+    # Handles gene lengths that go off the end of the genome
     if given_num == len(genome):
         return len(genome)
 
+    # Go through our number array and search for the number of interest
     if our_num_array[given_num] == '-1':
 
         in_dex = given_num
@@ -248,6 +244,7 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
                 index = x
                 found = True
                 break
+
     # now index is the absolute location of what we want
     if found:
         return str(our_num_array[index])
@@ -258,10 +255,12 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
 # this opens up the reference .gbk file and pulls all of the annotations, it then adjusts the annotations to the
 # relative locations that they should appear on our sequence
 def pull_correct_annotations(strain, our_seq, ref_seq, genome):
+
     # Read the reference gbk file and extract lists of all of the protein locations and annotations!
     gene_loc_list = []
     gene_product_list = []
     allow_one = False
+
     for line in open(strain + SLASH + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
@@ -281,14 +280,13 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             if px == 'phospho protein':
                 px = 'phoshoprotein'
             gene_product_list.append(px)
+
     our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
-    #print(our_seq_num_array)
-    #print(ref_seq_num_array)
+
     # Adjust every locus so that we actually put in correct annotations
-    #more debugging code
+
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
-
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
     return gene_loc_list, gene_product_list
 
@@ -302,15 +300,12 @@ def write_fasta(strain, genome):
 
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
-# This is something that only we'll know for sure and don't want to reuire it, - so I'll keep it untill release
-# TODO: remove the assembly data and method and technology before release
+# NOTE: only writes coverage length - so now if we want to say our sequencing platform we have to edit this code
 def write_cmt(sample_name, coverage):
     cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
-    #cmt.write('Assembly Method\tGeneious v. 9.1\n')
     if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
-    #cmt.write('Sequencing Technology\tIllumina\n')
     cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 
@@ -338,12 +333,6 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
         location_info = gene_locations[x]
         if len(location_info) == 4:
-            # reversing complementary proteins for bk polyamovirus
-            #if 'bk poly' in name_o_vir.lower():
-            #    start_1 = str(location_info[3])
-            #    end_1 = str(location_info[2])
-           #     start_2 = str(location_info[1])
-          #      end_2 = str(location_info[0])
 
             start_1 = str(location_info[0])
             end_1 = str(location_info[1])
@@ -358,11 +347,6 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         else:
             start = int(location_info[0])
             end = int(location_info[1])
-            # swap the small t antigen here
-           # if 'bk poly' in name_o_vir.lower() and 'small T' in product:
-           #     blurg = start
-           #     start = end
-           #     end = blurg
 
             if end >= len(genome) and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
                 flag = '>'
