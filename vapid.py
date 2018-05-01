@@ -81,7 +81,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                     ref_seq_gb = line.split('|')[3]
                     break
                 # this is to prevent an issue with parsing collisions
-                subprocess.call('rm ' + strain + SLASH + strain + '.blastresults')
+                subprocess.call('rm ' + strain + SLASH + strain + '.blastresults', shell=True)
             else:
                 print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
                       'throttling)')
