@@ -61,7 +61,10 @@ def blast_n_stuff(strain, our_fasta_loc):
     ref_seq_bg = ''
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
     if args.r:
-        ref_seq_gb = args.r
+        ding = args.r
+        if SLASH == '/':
+            ding = '\'' + ding + '\''
+        ref_seq_gb = ding
 
     else:
         if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
@@ -640,7 +643,7 @@ if __name__ == '__main__':
                         'with this optional argument, otherwise all metadata will be manually prompted for')
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
                         '- must be the exact accession number - note feature only works with one virus type '
-                        'at a time and you must put quotation marks around the accesion number')
+                        'at a time')
     parser.add_argument('--db', help='specify the full path of a local blast database you MUST have blast+ with blastn'
                                     'installed correctly on your system path for this to work right')
     try:
