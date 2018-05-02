@@ -62,7 +62,6 @@ def blast_n_stuff(strain, our_fasta_loc):
     if args.r:
         ding = args.r
         ref_seq_gb = ding
-        print(ref_seq_gb)
 
     elif args.db:
         local_database_location = args.db
@@ -124,7 +123,6 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
-    print(record)
     # Download .gbk from Entrez, we'll pull annotations from this file later
     h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
