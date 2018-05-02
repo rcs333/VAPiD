@@ -11,13 +11,13 @@ VAPiD is currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 Viruses that VAPiD has been tested with:  
 RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK virus.
 
-#Quickstart Installation Guide
+# Quickstart Installation Guide
 
 1. Ensure you have mafft, numpy, biopython, and blast+ installed locally and on your path.
 2. Download and install VAPiD (below).
 3. Download VAPiD Viral Database (below).
 
-#Quickstart Run Guide
+# Quickstart Run Guide
 1. Put your viral genomes in a single fasta file, preferably with the strain name for each sequence as the sequence header.
 2. Make a author metadata submission template file for your submission at
 https://submit.ncbi.nlm.nih.gov/genbank/template/submission/
