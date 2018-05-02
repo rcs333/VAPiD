@@ -77,8 +77,6 @@ def blast_n_stuff(strain, our_fasta_loc):
         for line in open(strain + SLASH + strain + '.blastresults'):
             ref_seq_gb = line.split('|')[3]
             break
-        # this is to prevent an issue with parsing collisions
-        #os.remove(strain + SLASH + strain + '.blastresults')
 
     else:
         if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
@@ -127,7 +125,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
     print(record)
-    # Download .gbk from Entrez, we'll pull annoations from this file later
+    # Download .gbk from Entrez, we'll pull annotations from this file later
     h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
     e.write(h2.read())
@@ -146,8 +144,8 @@ def blast_n_stuff(strain, our_fasta_loc):
     #    ref_seq_gb = 'KY369864'
     #if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
     #    ref_seq_gb = 'L20587.1'
-    if 'MEASLES' in name_of_virus.upper():
-        ref_seq_gb = 'EU293548'
+    #if 'MEASLES' in name_of_virus.upper():
+    #    ref_seq_gb = 'EU293548'
     print(ref_seq_gb + ' was the selected reference')
     print(name_of_virus + ' was the parsed name of the virus')
 
@@ -182,15 +180,11 @@ def blast_n_stuff(strain, our_fasta_loc):
         except:
             print('Running on a non windows system, which means you need to install mafft and put it on the sys path yourself.\nI suggest using brew or apt')
     ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
-    #seq1 = SeqIO.read(strain + SLASH + strain + '_ref.fasta', 'fasta')
-    #seq2 = SeqIO.read(strain + SLASH + strain + '.fasta', 'fasta')
-    #alignments = pairwise2.align.globalxx(seq1.seq, seq2.seq, one_alignment_only=True)
-    #print(alignments)
+
     # SWAPPED THESE DURING DEBUGGING
     ref_seq = ali_genomes[1]
     our_seq = ali_genomes[0]
 
-    #alignments = ''
     return name_of_virus, our_seq, ref_seq
 
 
@@ -402,9 +396,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
     name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
-    #debugging prints
-    #print(gene_loc_list)
-    #print(gene_product_list)
+
     write_cmt(strain, coverage)
 
     write_fsa(strain, name_of_virus, genome, metadata)
@@ -468,8 +460,10 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     # This is the only code that requires something of the computing environment
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
-    subprocess.call(cmd, shell=True)
-
+    try:
+        subprocess.call(cmd, shell=True)
+    except:
+        print('tbl2asn not installed, go to https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/ and download the appropriate version')
     return name_of_virus
 
 
