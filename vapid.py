@@ -58,13 +58,11 @@ def read_fasta(fasta_file_loc):
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
     # If we've already done this one before skip the blasting step, speeds up error checking for development
-    ref_seq_bg = ''
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
     if args.r:
         ding = args.r
-        if SLASH == '/':
-            ding = '\'' + ding + '\''
         ref_seq_gb = ding
+        print(ref_seq_gb)
 
     elif args.db:
         local_database_location = args.db
@@ -80,7 +78,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             ref_seq_gb = line.split('|')[3]
             break
         # this is to prevent an issue with parsing collisions
-        os.remove(strain + SLASH + strain + '.blastresults')
+        #os.remove(strain + SLASH + strain + '.blastresults')
 
     else:
         if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
@@ -128,6 +126,7 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
+    print(record)
     # Download .gbk from Entrez, we'll pull annoations from this file later
     h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
