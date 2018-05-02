@@ -71,7 +71,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         print('Searching local blast database at ' + local_database_location)
         # may need to tweak the output method - need to test first
         local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
-                          ' -num_alignments 1 -word_size 28 -outfmt \'6 sacc\' -out ' + strain + SLASH + strain \
+                          ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
                           + '.blastresults'
         subprocess.call(local_blast_cmd, shell=True)
 
