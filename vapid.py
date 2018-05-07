@@ -154,15 +154,6 @@ def blast_n_stuff(strain, our_fasta_loc):
             if 'DEFINITION' in line:
                 name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
 
-    #if 'CORONAVIRUS 229E' in name_of_virus.upper():
-    #    ref_seq_gb = 'KY369913.1'
-        # this code might need to be tweaked a bit, but for now it's working
-    #if 'HUMAN RESPIROVIRUS 3' in name_of_virus.upper():
-    #    ref_seq_gb = 'KY369864'
-    #if 'HUMAN IMMUNODEFICIENCY VIRUS TYPE 1' in name_of_virus.upper():
-    #    ref_seq_gb = 'L20587.1'
-    #if 'MEASLES' in name_of_virus.upper():
-    #    ref_seq_gb = 'EU293548'
     print(ref_seq_gb + ' was the selected reference')
     print(name_of_virus + ' was the parsed name of the virus')
 
@@ -170,8 +161,6 @@ def blast_n_stuff(strain, our_fasta_loc):
     d = open(strain + SLASH + strain + '_ref.fasta', 'w')
     d.write(h.read())
     d.close()
-
-
 
     # mafft rules and the developer of mafft is awesome
     z = open(strain + SLASH + strain + '_aligner.fasta', 'w')
@@ -195,7 +184,8 @@ def blast_n_stuff(strain, our_fasta_loc):
             subprocess.call('mafft --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
         except:
-            print('Running on a non windows system, which means you need to install mafft and put it on the sys path yourself.\nI suggest using brew or apt')
+            print('Running on a non windows system, which means you need to install mafft and put it on the sys path '
+                  'yourself.\nI suggest using brew or apt')
     ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
 
     # SWAPPED THESE DURING DEBUGGING
@@ -382,8 +372,8 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 sflag = '<'
                 pie = str((int(end) % 3) + 1)
                 start = '1'
-            # removing this check - not sure what it was originally protecting
-            if int(end) < 1:# or int(end) < int(start):
+
+            if int(end) < 1:
                 end = len(genome)
                 flag = '>'
 
@@ -475,7 +465,6 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus)
 
-    # This is the only code that requires something of the computing environment
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
     try:
         subprocess.call(cmd, shell=True)
@@ -527,7 +516,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
             break
 
     if found_:
-        print('WE FOUND tHE GENE FO INterST')
+
         # add the correct number of Gs
         if v == 'HP3':
             start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
