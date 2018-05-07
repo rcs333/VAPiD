@@ -125,9 +125,14 @@ def blast_n_stuff(strain, our_fasta_loc):
         local_database_location = 'all_virus.fasta'
         print('Searching local blast database at ' + local_database_location)
         # may need to tweak the output method - need to test first
-        local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
+        try:
+            local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
                           ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
                           + '.blastresults'
+        except:
+            print('Either you do not have blastn installed or have not install the all_virus.fasta reference database '
+                  'which can be found under the release tab on github for VAPiD')
+            exit(0)
         subprocess.call(local_blast_cmd, shell=True)
 
         # pull first accession number
