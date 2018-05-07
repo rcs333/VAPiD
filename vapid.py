@@ -77,7 +77,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             ref_seq_gb = line.split('|')[3]
             break
 
-    else:
+    elif args.online:
         if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
             print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
                       'throttling)')
@@ -120,6 +120,20 @@ def blast_n_stuff(strain, our_fasta_loc):
                         name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
                         ref_seq_gb = line.split()[0][1:]
                         break
+    # default case -- use the provided reference database that we will include
+    else:
+        local_database_location = 'all_virus.fasta'
+        print('Searching local blast database at ' + local_database_location)
+        # may need to tweak the output method - need to test first
+        local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
+                          ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
+                          + '.blastresults'
+        subprocess.call(local_blast_cmd, shell=True)
+
+        # pull first accession number
+        for line in open(strain + SLASH + strain + '.blastresults'):
+            ref_seq_gb = line.split('|')[3]
+            break
 
     # Download the reference fasta file from Entrez
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
@@ -130,7 +144,7 @@ def blast_n_stuff(strain, our_fasta_loc):
     e.close()
     time.sleep(1)
 
-    if args.r or args.db:
+    if not args.online:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
             if 'DEFINITION' in line:
                 name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
@@ -636,6 +650,9 @@ if __name__ == '__main__':
                         'at a time')
     parser.add_argument('--db', help='specify the full path of a local blast database you MUST have blast+ with blastn'
                                     'installed correctly on your system path for this to work right')
+    parser.add_argument('--online', help='Force VAPiD to blast against online database, good for machines that don\'t '
+                                         'have blast+ installed or if the virus is really strange. Warning: this can be'
+                                         ' EXTREMELY slow ~10-25 minutes a virus')
     try:
         args = parser.parse_args()
     except:
