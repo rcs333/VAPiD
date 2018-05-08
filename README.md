@@ -75,7 +75,7 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 **After the above has completed there's still a bit of setup that needs to be done.** 
 
-1. Download the all_virus.fasta reference database over on the release tab, (https://github.com/rcs333/VAPiD/releases/edit/v1.0). Download the .nhr .nsq and .nin file and place them in the VAPiD folder
+1. Download the all_virus.fasta reference database over on the release tab, (https://github.com/rcs333/VAPiD/releases/). Download the .nhr .nsq and .nin file and place them in the VAPiD folder
 
 2. Install MAFFT using your favorite package manager ('brew install mafft' or 'sudo apt-get install mafft') or download and install from https://mafft.cbrc.jp/alignment/software/ for your appropriate system. (THIS IS ALREADY DONE FOR WINDOWS and is included under the GPL licence) Make sure you select the all-in-one version. (Mac and Linux) Unzip the folder and place all files in the folder where this repository is living.
 

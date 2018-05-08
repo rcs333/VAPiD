@@ -131,7 +131,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                           + '.blastresults'
         except:
             print('Either you do not have blastn installed or have not installed the all_virus.fasta reference database '
-                  'which can be found under the release tab on github for VAPiD https://github.com/rcs333/VAPiD/releases/edit/v1.1')
+                  'which can be found under the release tab on github for VAPiD https://github.com/rcs333/VAPiD/releases')
             exit(0)
         subprocess.call(local_blast_cmd, shell=True)
 
