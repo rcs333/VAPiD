@@ -13,9 +13,10 @@ RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, H
 
 # Quickstart Installation Guide
 
-1. Ensure you have mafft, numpy, biopython, and blast+ installed locally and on your path.
+1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
 2. Download and install VAPiD (below).
 3. Download VAPiD Viral Database (below).
+4. Download and install tbl2asn (below)
 
 # Quickstart Run Guide
 1. Put your viral genomes in a single fasta file, preferably with the strain name for each sequence as the sequence header.
@@ -103,11 +104,9 @@ Just change the path here to whever you ended up unzipping the VAPiD folder on y
 
 `cd C:\User\Downloads\VAPiD`
 
-
-
 **General Usage**
 
-`python vapid.py fasta_file_path author_template_path --metadata_loc metadata_info_path --db custom_database_location --online`
+`python vapid.py fasta_file_path author_template_path --metadata_loc metadata_info_path --db custom_database_location --online --r reference_accesion_num`
 
 **Example Usage (With metadata in the sheet)**
 
@@ -119,8 +118,7 @@ Just change the path here to whever you ended up unzipping the VAPiD folder on y
 
 **Example Usage (With metadata sheet AND specifying the reference)**
 
-`python vapid.py example.fasta example.sbt --metadata_loc example_metadata.csv --r 'KF530268.1'`
-The quotation marks around the reference accession number are *required*
+`python vapid.py example.fasta example.sbt --metadata_loc example_metadata.csv --r KF530268.1`
 
 **Example Usage (with a custom blast database)**
 
@@ -151,7 +149,7 @@ To submit your sequence to NCBI simply email the .sqn file to gb-sub@ncbi.nlm.ni
 
 # Implementation Details and Important Notes
 
-Right now we accomplish the annotation by searching blast for the best hit that is a complete genome and using a maaft alignment to generate annotations for the supplied sequence. We can handle some ribosomal slippage as well as RNA editing in all human viruses. - Following this note - a large problem is actually inconsistent spelling in genbank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
+A large problem is actually inconsistent spelling in genbank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
 
 
 # Future directions
