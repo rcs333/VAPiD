@@ -9,7 +9,7 @@ VAPiD can perform three different types of viral annotation:
 VAPiD is currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 
 Viruses that VAPiD has been tested with:  
-RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK virus.
+RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK, HPV.
 
 # Quickstart Installation Guide
 
@@ -151,8 +151,8 @@ To submit your sequence to NCBI simply email the .sqn file to gb-sub@ncbi.nlm.ni
 
 # Implementation Details and Important Notes
 
-A large problem is actually inconsistent spelling in genbank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
+A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
 
 
 # Future directions
-Paper to be released! 
+Paper to be released! And then hopefully linked here for implementation details and ect. 
