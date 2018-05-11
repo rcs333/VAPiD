@@ -14,9 +14,9 @@ RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, H
 # Quickstart Installation Guide
 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
-2. Download and install VAPiD (below).
+2. Download and install VAPiD.
 3. Download [VAPiD Viral Database](https://github.com/rcs333/VAPiD/releases/download/v1.2/all_virus.zip)
-4. Download and install tbl2asn (below)
+4. Download and install [tbl2asn](https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/)
 
 # Quickstart Run Guide
 1. Put your viral genomes in a single fasta file, preferably with the strain name for each sequence as the sequence header.
