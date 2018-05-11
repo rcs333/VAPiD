@@ -11,6 +11,7 @@ VAPiD is currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 Viruses that VAPiD has been tested with:  
 RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK, HPV.
 
+VAPiD currently does not support segmented viral genomes, although theoretically one could run individual segments one at a time. 
 # Quickstart Installation Guide
 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
