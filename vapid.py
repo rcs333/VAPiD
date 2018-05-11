@@ -1,4 +1,4 @@
-# VAPiD v1.0
+# VAPiD v1.2
 
 # VAPiD is an extremely lightweight virus genome annotator that takes any number of viral genomes and annotates them
 # producing files suitable for NCBI submission
@@ -120,7 +120,7 @@ def blast_n_stuff(strain, our_fasta_loc):
                         name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
                         ref_seq_gb = line.split()[0][1:]
                         break
-    # default case -- use the provided reference database that we will include
+    # default case -- use either of the provided reference databases that we will include
     else:
         if os.path.isfile('all_virus.fasta'):
             local_database_location = 'all_virus.fasta'
@@ -137,9 +137,6 @@ def blast_n_stuff(strain, our_fasta_loc):
                           + '.blastresults'
 
         subprocess.call(local_blast_cmd, shell=True)
-
-        print('Either you do not have blastn installed or have not installed the all_virus.fasta reference database '
-               'which can be found under the release tab on github for VAPiD https://github.com/rcs333/VAPiD/releases')
 
         # pull first accession number
         for line in open(strain + SLASH + strain + '.blastresults'):
@@ -392,7 +389,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 tbl.write('\n\t\t\tcodon_start\t' + pie)
             if die != '':
                 tbl.write(die)
-        xtra = ''
+    
     tbl.write('\n')
     tbl.close()
 
@@ -578,7 +575,6 @@ def write_fsa(strain, name_of_virus, virus_genome, metadata):
 
 # Build the metadata for every virus that's been submitted
 def do_meta_data(strain, sheet_exists):
-    meta_data = ''
     first = True
     s = ''
     coverage = ''
@@ -601,11 +597,10 @@ def do_meta_data(strain, sheet_exists):
         con = ' [country=' + raw_input('Enter country sample was collected in (example - USA): ').strip() + ']'
         st = ' [strain=' + raw_input('Enter strain name - if unknown just put ' + strain + ': ').strip() + ']'
         cov = raw_input('Enter coverage as a number example 42.3, if unknown just leave this blank and hit enter: ')
-        coverage = cov
         meta_data = col + con + st
     else:
         meta_data = s
-    return meta_data, coverage
+    return meta_data, cov
 
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
