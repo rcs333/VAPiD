@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vapid.py" afterPath="$PROJECT_DIR$/vapid.py" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="344" column="41" lean-forward="true" selection-start-line="344" selection-start-column="41" selection-end-line="344" selection-end-column="41" />
+            <state relative-caret-position="914">
+              <caret line="600" column="22" lean-forward="true" selection-start-line="600" selection-start-column="22" selection-end-line="600" selection-end-column="22" />
               <folding>
                 <element signature="e#421#533#0" expanded="false" />
                 <element signature="e#791#1688#0" expanded="false" />
@@ -61,11 +61,10 @@
                 <element signature="e#21493#21606#0" expanded="false" />
                 <element signature="e#21896#24521#0" expanded="false" />
                 <element signature="e#24521#24630#0" expanded="false" />
-                <element signature="e#25099#26378#0" expanded="false" />
-                <element signature="e#26381#26498#0" expanded="false" />
-                <element signature="e#26745#27028#0" expanded="false" />
-                <element signature="e#27130#27244#0" expanded="false" />
-                <element signature="e#27279#30847#0" expanded="false" />
+                <element signature="e#26409#26526#0" expanded="false" />
+                <element signature="e#26773#27056#0" expanded="false" />
+                <element signature="e#27158#27272#0" expanded="false" />
+                <element signature="e#27307#30875#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -81,7 +80,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -105,7 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>subprocess</find>
       <find>-1</find>
       <find>/</find>
       <find>mkdir</find>
@@ -135,6 +133,7 @@
       <find>bio</find>
       <find>Seq</find>
       <find>orf length</find>
+      <find>cov</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -153,8 +152,8 @@
         <option value="$PROJECT_DIR$/example_metadata.csv" />
         <option value="$PROJECT_DIR$/example.fasta" />
         <option value="$PROJECT_DIR$/ClinVirusSeq.py" />
-        <option value="$PROJECT_DIR$/vapid.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/vapid.py" />
       </list>
     </option>
   </component>
@@ -373,13 +372,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00070" summary="test">
-      <created>1524099278482</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1524099278482</updated>
     </task>
     <task id="LOCAL-00071" summary="test">
       <created>1524099998036</created>
@@ -717,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526079871843</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="readme updates">
+      <created>1526080670406</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1526080670406</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -822,11 +821,10 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -901,11 +899,10 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -963,11 +960,10 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1014,11 +1010,10 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1076,11 +1071,10 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1195,10 +1189,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1185">
+            <caret line="79" column="44" lean-forward="false" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
+            <folding />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="344" column="41" lean-forward="true" selection-start-line="344" selection-start-column="41" selection-end-line="344" selection-end-column="41" />
+        <state relative-caret-position="914">
+          <caret line="600" column="22" lean-forward="true" selection-start-line="600" selection-start-column="22" selection-end-line="600" selection-end-column="22" />
           <folding>
             <element signature="e#421#533#0" expanded="false" />
             <element signature="e#791#1688#0" expanded="false" />
@@ -1221,28 +1231,11 @@
             <element signature="e#21493#21606#0" expanded="false" />
             <element signature="e#21896#24521#0" expanded="false" />
             <element signature="e#24521#24630#0" expanded="false" />
-            <element signature="e#25099#26378#0" expanded="false" />
-            <element signature="e#26381#26498#0" expanded="false" />
-            <element signature="e#26745#27028#0" expanded="false" />
-            <element signature="e#27130#27244#0" expanded="false" />
-            <element signature="e#27279#30847#0" expanded="false" />
+            <element signature="e#26409#26526#0" expanded="false" />
+            <element signature="e#26773#27056#0" expanded="false" />
+            <element signature="e#27158#27272#0" expanded="false" />
+            <element signature="e#27307#30875#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="1185">
-            <caret line="79" column="44" lean-forward="false" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
-            <folding />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>

@@ -598,9 +598,10 @@ def do_meta_data(strain, sheet_exists):
         st = ' [strain=' + raw_input('Enter strain name - if unknown just put ' + strain + ': ').strip() + ']'
         cov = raw_input('Enter coverage as a number example 42.3, if unknown just leave this blank and hit enter: ')
         meta_data = col + con + st
+        coverage = cov
     else:
         meta_data = s
-    return meta_data, cov
+    return meta_data, coverage
 
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
