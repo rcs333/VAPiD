@@ -14,7 +14,7 @@ RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, H
 # Quickstart Installation Guide
 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
-2. Download and install VAPiD.
+2. Download and install [VAPiD](https://github.com/rcs333/VAPiD/archive/master.zip).
 3. Download [VAPiD Viral Database](https://github.com/rcs333/VAPiD/releases/download/v1.2/all_virus.zip)
 4. Download and install [tbl2asn](https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/)
 
