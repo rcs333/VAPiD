@@ -122,18 +122,24 @@ def blast_n_stuff(strain, our_fasta_loc):
                         break
     # default case -- use the provided reference database that we will include
     else:
-        local_database_location = 'all_virus.fasta'
+        if os.path.isfile('all_virus.fasta'):
+            local_database_location = 'all_virus.fasta'
+        elif os.path.isfile('virus_compressed.fasta'):
+            local_database_location = 'virus_compressed.fasta'
+        else:
+            print('No local blast database found! Please install from the github releases page! Or use vapid with --online')
+            print('Exiting...')
+            exit(0)
         print('Searching local blast database at ' + local_database_location)
-        # may need to tweak the output method - need to test first
-        try:
-            local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
+
+        local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
                           ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
                           + '.blastresults'
-        except:
-            print('Either you do not have blastn installed or have not installed the all_virus.fasta reference database '
-                  'which can be found under the release tab on github for VAPiD https://github.com/rcs333/VAPiD/releases')
-            exit(0)
+
         subprocess.call(local_blast_cmd, shell=True)
+
+        print('Either you do not have blastn installed or have not installed the all_virus.fasta reference database '
+               'which can be found under the release tab on github for VAPiD https://github.com/rcs333/VAPiD/releases')
 
         # pull first accession number
         for line in open(strain + SLASH + strain + '.blastresults'):
@@ -644,7 +650,7 @@ if __name__ == '__main__':
                         'at a time')
     parser.add_argument('--db', help='specify the full path of a local blast database you MUST have blast+ with blastn'
                                     'installed correctly on your system path for this to work right')
-    parser.add_argument('--online', help='Force VAPiD to blast against online database, good for machines that don\'t '
+    parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database, good for machines that don\'t '
                                          'have blast+ installed or if the virus is really strange. Warning: this can be'
                                          ' EXTREMELY slow ~10-25 minutes a virus')
     try:
