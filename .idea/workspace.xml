@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="339" column="35" lean-forward="false" selection-start-line="339" selection-start-column="35" selection-end-line="339" selection-end-column="35" />
+            <state relative-caret-position="465">
+              <caret line="344" column="41" lean-forward="true" selection-start-line="344" selection-start-column="41" selection-end-line="344" selection-end-column="41" />
               <folding>
                 <element signature="e#421#533#0" expanded="false" />
                 <element signature="e#791#1688#0" expanded="false" />
@@ -85,8 +85,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="165">
-                <caret line="11" column="192" lean-forward="false" selection-start-line="11" selection-start-column="192" selection-end-line="11" selection-end-column="192" />
+              <first_editor relative-caret-position="1185">
+                <caret line="79" column="44" lean-forward="false" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
                 <folding />
               </first_editor>
               <second_editor />
@@ -373,13 +373,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
-    </task>
-    <task id="LOCAL-00069" summary="test">
-      <created>1524096453273</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1524096453273</updated>
     </task>
     <task id="LOCAL-00070" summary="test">
       <created>1524099278482</created>
@@ -717,7 +710,14 @@
       <option name="project" value="LOCAL" />
       <updated>1526079670404</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="readme updates">
+      <created>1526079871843</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1526079871843</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1179,6 +1179,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ClinVirusSeq.py" />
     <entry file="file://$PROJECT_DIR$/win-mafft/mafft-signed.ps1" />
+    <entry file="file://$PROJECT_DIR$/example.fasta">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3255">
+          <caret line="217" column="8" lean-forward="false" selection-start-line="217" selection-start-column="8" selection-end-line="217" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/example_metadata.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -1189,8 +1197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="339" column="35" lean-forward="false" selection-start-line="339" selection-start-column="35" selection-end-line="339" selection-end-column="35" />
+        <state relative-caret-position="465">
+          <caret line="344" column="41" lean-forward="true" selection-start-line="344" selection-start-column="41" selection-end-line="344" selection-end-column="41" />
           <folding>
             <element signature="e#421#533#0" expanded="false" />
             <element signature="e#791#1688#0" expanded="false" />
@@ -1222,19 +1230,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example.fasta">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3255">
-          <caret line="217" column="8" lean-forward="false" selection-start-line="217" selection-start-column="8" selection-end-line="217" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="165">
-            <caret line="11" column="192" lean-forward="false" selection-start-line="11" selection-start-column="192" selection-end-line="11" selection-end-column="192" />
+          <first_editor relative-caret-position="1185">
+            <caret line="79" column="44" lean-forward="false" selection-start-line="79" selection-start-column="44" selection-end-line="79" selection-end-column="44" />
             <folding />
           </first_editor>
           <second_editor />
