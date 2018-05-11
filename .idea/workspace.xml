@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="78f26c85-5dce-4eb3-9c62-ab6c839eb105" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vapid.py" afterPath="$PROJECT_DIR$/vapid.py" />
     </list>
     <ignored path="ClinVirusSeq.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -368,13 +367,6 @@
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
     </task>
-    <task id="LOCAL-00065" summary="test">
-      <created>1524004895328</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1524004895333</updated>
-    </task>
     <task id="LOCAL-00066" summary="test">
       <created>1524092735219</created>
       <option name="number" value="00066" />
@@ -711,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1525911076108</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="updated release location">
+      <created>1526075505237</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1526075505237</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
