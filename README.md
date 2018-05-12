@@ -15,8 +15,8 @@ VAPiD currently does not support segmented viral genomes, although theoretically
 # Quickstart Installation Guide
 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
-2. Download and install [VAPiD](https://github.com/rcs333/VAPiD/archive/master.zip).
-3. Download [VAPiD Viral Database](https://github.com/rcs333/VAPiD/releases/download/v1.2/all_virus.zip)
+2. Download and install [VAPiD](https://github.com/rcs333/VAPiD/archive/master.zip)
+3. Download [VAPiD Viral Database](https://github.com/rcs333/VAPiD/releases/download/v1.2/all_virus.zip) and put it in the VAPiD folder
 4. Download and install [tbl2asn](https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/)
 
 # Quickstart Run Guide
@@ -78,7 +78,7 @@ tbl2asn can be found at https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/
 
 **After the above has completed there's still a bit of setup that needs to be done.** 
 
-1. Download the all_virus.fasta (recommended) or compressed reference database over on the release tab, (https://github.com/rcs333/VAPiD/releases/). Download the .nhr .nsq and .nin file and place them in the VAPiD folder
+1. Download the all_virus.fasta (recommended) or compressed reference database over on the release tab, (https://github.com/rcs333/VAPiD/releases/). Download the .nhr .nsq and .nin file and place them in the VAPiD folder 
 
 2. (Mac and Linux only )Install MAFFT using your favorite package manager ('brew install mafft' or 'sudo apt-get install mafft') or download and install from https://mafft.cbrc.jp/alignment/software/ for your appropriate system. (THIS IS ALREADY DONE FOR WINDOWS and is included under the GPL licence)
 
@@ -108,7 +108,11 @@ Just change the path here to wherever you ended up unzipping the VAPiD folder on
 
 **General Usage**
 
-`python vapid.py fasta_file_path author_template_path --metadata_loc metadata_info_path --db custom_database_location --online --r reference_accesion_num`
+`python vapid.py fasta_file_path author_template_path --metadata_loc metadata_info_path`
+
+Optional arguments - choose one of these
+
+`--db custom_database_location --online --r reference_accesion_num`
 
 **Example Usage (With metadata in the sheet)**
 

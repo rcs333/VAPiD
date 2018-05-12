@@ -127,7 +127,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         elif os.path.isfile('virus_compressed.fasta'):
             local_database_location = 'virus_compressed.fasta'
         else:
-            print('No local blast database found! Please install from the github releases page! Or use vapid with --online')
+            print('No local blast database found in this folder! Please install from the github releases page! Or use vapid with --online')
             print('Exiting...')
             exit(0)
         print('Searching local blast database at ' + local_database_location)
@@ -592,11 +592,11 @@ def do_meta_data(strain, sheet_exists):
                 break
 
     if s == '':
-        print('metadata not found in provided .csv or .csv not created -  time for manual entry for sequence - ' + strain)
+        print('metadata not found in provided .csv or .csv not created -  time for minimal manual entry for sequence - ' + strain)
         col = ' [collection-date=' + raw_input('Enter collection date in the format (23-Mar-2005, Mar-2005, or 2005): ').strip() + ']'
         con = ' [country=' + raw_input('Enter country sample was collected in (example - USA): ').strip() + ']'
         st = ' [strain=' + raw_input('Enter strain name - if unknown just put ' + strain + ': ').strip() + ']'
-        cov = raw_input('Enter coverage as a number example 42.3, if unknown just leave this blank and hit enter: ')
+        cov = raw_input('Enter coverage as a number (example 42.3), if unknown just leave this blank and hit enter: ')
         meta_data = col + con + st
         coverage = cov
     else:
@@ -631,24 +631,22 @@ if __name__ == '__main__':
 
     start_time = timeit.default_timer()
     SLASH = check_os()
-    parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPackage a set of virus sequences'
-                                                 ' for submission, pulling virus name information from blast and '
-                                                 'annotations are contained inside the .fasta file passed to the script'
-                                                 ' originally')
-    parser.add_argument('fasta_file', help='Input file in .fasta format, should contain complete or near complete '
+    parser = argparse.ArgumentParser(description='Version ' + VERSION + '\nPrepares FASTA file for NCBI Genbank submission '
+                                                 'through local or online blastn-based annotation of viral sequences. '
+                                                 'In default mode, VAPiD searches this folder for our viral databases.')
+    parser.add_argument('fasta_file', help='Input file in .fasta format containing complete or near complete '
                                            'genomes for all the viruses that you want to have annotated')
-    parser.add_argument('author_template_file_loc', help='File path for the NCBI provided sequence author template file'
+    parser.add_argument('author_template_file_loc', help='File path for the NCBI-provided sequence author template file'
                         ' (should have a .sbt extension)\n https://submit.ncbi.nlm.nih.gov/genbank/template/submission/')
-    parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv specify the location '
-                        'with this optional argument, otherwise all metadata will be manually prompted for')
-    parser.add_argument('--r', help='If you want to specify a specific NCBI reference, post the accession number here '
-                        '- must be the exact accession number - note feature only works with one virus type '
-                        'at a time')
-    parser.add_argument('--db', help='specify the full path of a local blast database you MUST have blast+ with blastn'
-                                    'installed correctly on your system path for this to work right')
-    parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database, good for machines that don\'t '
-                                         'have blast+ installed or if the virus is really strange. Warning: this can be'
-                                         ' EXTREMELY slow ~10-25 minutes a virus')
+    parser.add_argument('--metadata_loc', help='If you\'ve input the metadata in the provided csv, specify the location '
+                        'with this optional argument. Otherwise all metadata will be manually prompted for.')
+    parser.add_argument('--r', help='If you want to specify a specific NCBI reference, put the accession number here '
+                        '- must be the exact accession number - note: feature forces all sequences in FASTA to be this viral species.')
+    parser.add_argument('--db', help='specify the local blast database name.  You MUST have blast+ with blastn'
+                                    'installed correctly on your system path for this to work.')
+    parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database.  This is good for machines that don\'t '
+                                         'have blast+ installed or if the virus is really strange.'
+                                         'Warning: this can be EXTREMELY slow, up to ~5-25 minutes a virus')
     try:
         args = parser.parse_args()
     except:
