@@ -17,7 +17,7 @@ import time
 Entrez.email = 'uwvirongs@gmail.com'
 
 
-VERSION = 'v1.0'
+VERSION = 'v1.2'
 
 
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number of
