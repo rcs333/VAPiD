@@ -15,6 +15,7 @@ import sys
 from Bio import Entrez
 import time
 import datetime
+import shutil
 Entrez.email = 'uwvirongs@gmail.com'
 
 
@@ -152,6 +153,11 @@ def blast_n_stuff(strain, our_fasta_loc):
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
     e.write(h2.read())
     e.close()
+    if args.f:
+        os.remove(strain + SLASH + strain + '_ref.gbk')
+        shutil.copyfile(args.f, strain + SLASH + strain + '_ref.gbk')
+
+
     time.sleep(1)
 
     if not args.online:
@@ -644,6 +650,7 @@ if __name__ == '__main__':
                         'with this optional argument. Otherwise all metadata will be manually prompted for.')
     parser.add_argument('--r', help='If you want to specify a specific NCBI reference, put the accession number here '
                         '- must be the exact accession number - note: feature forces all sequences in FASTA to be this viral species.')
+    parser.add_argument('--f', help='specify a custom gbf file that you would like to annotate off of')
     parser.add_argument('--db', help='specify the local blast database name.  You MUST have blast+ with blastn'
                                     'installed correctly on your system path for this to work.')
     parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database.  This is good for machines that don\'t '
