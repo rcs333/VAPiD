@@ -54,6 +54,22 @@ def read_fasta(fasta_file_loc):
     return strain_list, genome_list
 
 
+# Spell checking functionality provided by Entrez
+def spell_check(query_string):
+	handle = Entrez.espell(term=query_string)
+	record = Entrez.read(handle)
+	corrected_query = record["CorrectedQuery"]	
+	# Entrez returns blank strings for numerals or things that are spelled correctly 
+	# Since this is based on NCBI's spell checking protein names are included and correct
+	# However this won't correct SUPER messed up words or made up words 
+	if corrected_query != '':
+		print('Checking spelling on ' + string)
+		print(string + ' was corrected to: ' + corrected_query)
+		return corrected_query
+	else:
+		return query_string
+
+	
 # This function takes the strain name and a location of the individual fasta file we saved earlier and runs a blast
 # Search saving the top 35 hits - then the top hit is found that is a complete genome and the fasta and .gbk of that
 # are saved - then we run alignment on the two and return two strings one of them our sequence with '-' and the
@@ -290,6 +306,13 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             allow_one = False
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
+            if not args.no_spell_check:
+                px_word_list = px.split()
+                for word in px_word_list:
+                    if '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' or '0' not in word: 
+                        word = spell_check(word)
+
+                px = ' '.join(px_word_list)
             if px == 'phospho protein':
                 px = 'phoshoprotein'
             gene_product_list.append(px)
@@ -656,6 +679,7 @@ if __name__ == '__main__':
     parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database.  This is good for machines that don\'t '
                                          'have blast+ installed or if the virus is really strange.'
                                          'Warning: this can be EXTREMELY slow, up to ~5-25 minutes a virus')
+    parser.add_argument('--no_spell_check', action='store_false', help='Turn off the automatic spellchecking for protein annoations ')
     try:
         args = parser.parse_args()
     except:
