@@ -126,6 +126,10 @@ Optional arguments - choose one of these
 
 `python vapid.py example.fasta example.sbt --metadata_loc example_metadata.csv --r KF530268.1`
 
+**Example Usage (No metadata sheet, specifying the reference, and no spellchecking)**
+
+`python vapid.py example.fasta example.sbt --r KY45632.1 --no_spell_check`
+
 **Example Usage (with a custom blast database)**
 
 `python vapid.py example.fasta example.sbt --metadata_loc example_metadata.csv --db /User/my/path/to/a/working/blastdb/`
