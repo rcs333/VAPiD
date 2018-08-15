@@ -307,7 +307,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             allow_one = False
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
-            if not args.no_spell_check:
+            if args.no_spell_check:
                 px_word_list = px.split()
                 for word in px_word_list:
                     if '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' or '0' not in word: 
