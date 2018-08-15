@@ -63,8 +63,8 @@ def spell_check(query_string):
 	# Since this is based on NCBI's spell checking protein names are included and correct
 	# However this won't correct SUPER messed up words or made up words 
 	if corrected_query != '':
-		print('Checking spelling on ' + string)
-		print(string + ' was corrected to: ' + corrected_query)
+		print('Checking spelling on ' + query_string)
+		print(query_string + ' was corrected to: ' + corrected_query)
 		return corrected_query
 	else:
 		return query_string
