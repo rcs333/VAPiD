@@ -37,8 +37,8 @@
       <file leaf-file-name="vapid.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/vapid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="990">
-              <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+            <state relative-caret-position="448">
+              <caret line="312" column="7" lean-forward="false" selection-start-line="312" selection-start-column="7" selection-end-line="312" selection-end-column="12" />
               <folding>
                 <element signature="e#179#196#0" expanded="true" />
               </folding>
@@ -80,7 +80,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mkdir</find>
       <find>cp</find>
       <find>mv</find>
       <find>subpr</find>
@@ -110,6 +109,7 @@
       <find>blast_n_stuff</find>
       <find>pull_correct_annotations</find>
       <find>adjust</find>
+      <find>\t</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -460,13 +460,6 @@
       <option name="presentableId" value="Default" />
       <updated>1495746763140</updated>
     </task>
-    <task id="LOCAL-00083" summary="test">
-      <created>1524264961122</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1524264961122</updated>
-    </task>
     <task id="LOCAL-00084" summary="test">
       <created>1524265082136</created>
       <option name="number" value="00084" />
@@ -803,7 +796,14 @@
       <option name="project" value="LOCAL" />
       <updated>1532730069728</updated>
     </task>
-    <option name="localTasksCounter" value="132" />
+    <task id="LOCAL-00132" summary="small tweak">
+      <created>1534296323238</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1534296323239</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -874,7 +874,8 @@
     <MESSAGE value="minor tweaks" />
     <MESSAGE value="readme updates" />
     <MESSAGE value="fixed meta_data_sheet" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed meta_data_sheet" />
+    <MESSAGE value="small tweak" />
+    <option name="LAST_COMMIT_MESSAGE" value="small tweak" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1151,8 +1152,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vapid.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="990">
-          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+        <state relative-caret-position="448">
+          <caret line="312" column="7" lean-forward="false" selection-start-line="312" selection-start-column="7" selection-end-line="312" selection-end-column="12" />
           <folding>
             <element signature="e#179#196#0" expanded="true" />
           </folding>

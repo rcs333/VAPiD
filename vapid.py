@@ -56,20 +56,21 @@ def read_fasta(fasta_file_loc):
 
 # Spell checking functionality provided by Entrez
 def spell_check(query_string):
-	handle = Entrez.espell(term=query_string)
-	record = Entrez.read(handle)
-	corrected_query = record["CorrectedQuery"]	
-	# Entrez returns blank strings for numerals or things that are spelled correctly 
-	# Since this is based on NCBI's spell checking protein names are included and correct
-	# However this won't correct SUPER messed up words or made up words 
-	if corrected_query != '':
-		print('Checking spelling on ' + query_string)
-		print(query_string + ' was corrected to: ' + corrected_query)
-		return corrected_query
-	else:
-		return query_string
+    print('in spellcheck')
+    handle = Entrez.espell(term=query_string)
+    record = Entrez.read(handle)
+    corrected_query = record["CorrectedQuery"]
+    # Entrez returns blank strings for numerals or things that are spelled correctly
+    # Since this is based on NCBI's spell checking protein names are included and correct
+    # However this won't correct SUPER messed up words or made up words
+    if corrected_query != '':
+        print('Checking spelling on ' + query_string)
+        print(query_string + ' was corrected to: ' + corrected_query)
+        return corrected_query
+    else:
+        return query_string
 
-	
+
 # This function takes the strain name and a location of the individual fasta file we saved earlier and runs a blast
 # Search saving the top 35 hits - then the top hit is found that is a complete genome and the fasta and .gbk of that
 # are saved - then we run alignment on the two and return two strings one of them our sequence with '-' and the
