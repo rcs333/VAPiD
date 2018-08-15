@@ -160,7 +160,7 @@ To submit your sequence to NCBI simply email the .sqn file to gb-sub@ncbi.nlm.ni
 
 # Implementation Details and Important Notes
 
-A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. I continually try to update this program to deal with problems that come up, but this is a major source of error right now.
+A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. 
 
 
 # Future directions
