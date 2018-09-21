@@ -285,12 +285,36 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
 # this opens up the reference .gbk file and pulls all of the annotations, it then adjusts the annotations to the
 # relative locations that they should appear on our sequence
 def pull_correct_annotations(strain, our_seq, ref_seq, genome):
-
     # Read the reference gbk file and extract lists of all of the protein locations and annotations!
+
+    # now we're doing this at the top because we'recalling this earlier
+    our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
+
     gene_loc_list = []
     gene_product_list = []
     allow_one = False
 
+    all_loc_list = []
+    all_product_list = []
+
+    # Experimental code for transferring 'gene' annotations from NCBI reference sequence
+    if args.all:
+        for line in open(strain + SLASH + strain + '_ref.gbk'):
+            if 'gene' in line and '..' in line:
+                # technically this should be gene list, but I already named the CDS stuff as if it were genes so we're just gonna roll with it
+                all_loc_list.append(re.findall(r'\d+', line))
+                # this lets us just read the next line because gene name will always be after nucleotide position
+                allow_one = True
+            if '/gene' in line and allow_one:
+                allow_one = False
+                px_all = line.split('=')[1][1:-2]
+                all_product_list.append(px_all)
+        # adjust gene list
+        for entry in range(0, len(all_loc_list)):
+            for y in range(0, len(all_loc_list[entry])):
+                all_loc_list[entry][y] = adjust(int(all_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
+
+    allow_one = False
     for line in open(strain + SLASH + strain + '_ref.gbk'):
         if ' CDS ' in line:
             # this is now going to be a list of numbers, start-stop start-stop
@@ -318,14 +342,13 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
                 px = 'phoshoprotein'
             gene_product_list.append(px)
 
-    our_seq_num_array, ref_seq_num_array = build_num_arrays(our_seq, ref_seq)
 
     # Adjust every locus so that we actually put in correct annotations
 
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
-    return gene_loc_list, gene_product_list
+    return gene_loc_list, gene_product_list, all_loc_list, all_product_list
 
 
 # takes a strain name and a genome and writes and saves a fasta to the correct directory
@@ -349,11 +372,34 @@ def write_cmt(sample_name, coverage):
 
 # this takes in all of our information and makes a feature table that actually should work
 # annotations for ribosomal slippage and RNA editing should be working now - as well as creation of a .pep file for rna
-# editing
-def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir):
+# editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
+def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list ):
 
     tbl = open(strain + SLASH + strain + '.tbl', 'w')
     tbl.write('>Feature ' + strain)
+
+    # This block should write all gene annotations to tbl file as long as we got passed genes, and the only way that will ever happen is if the
+    # User put the -all flag
+    if len(all_product_list) > 0:
+        for x in range(0, len(all_product_list)):
+            e_flag = ''
+            s_flag = ''
+            s_all = all_loc_list[x][0]
+            e_all = all_loc_list[x][1]
+            p_all = all_product_list[x]
+            if int(e_all) >= len(genome):
+                e_flag = '>'
+            if int(s_all) < 1:
+                s_flag = '<'
+                s_all = '1'
+
+            if int(e_all) < 1:
+                e_all = len(genome)
+                e_flag = '>'
+
+            tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\tgene\n')
+            tbl.write('\t\t\tgene\t' + p_all)
+
 
     for x in range(0, len(gene_product_list)):
         print(gene_product_list[x] + ' ' + str(gene_locations[x]))
@@ -391,7 +437,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             it_count = 0
             modifid_orf = False
             #won't execute this block of code for complemented genes...
-            if end > start:
+            if end > start and 'IIIA' not in product.upper():
                 while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3 and it_count <= 3:
                     print('Modifying ORF length for ' + str(product))
                     modifid_orf = True
@@ -437,7 +483,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
-    gene_loc_list, gene_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
+    gene_loc_list, gene_product_list, all_loc_list, all_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
 
     write_cmt(strain, coverage)
 
@@ -498,7 +544,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         print('putative end is ' + str(put_end))
         gene_loc_list[7][1] = put_start + put_end
 
-    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus)
+    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list )
 
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
     try:
@@ -681,6 +727,8 @@ if __name__ == '__main__':
                                          'have blast+ installed or if the virus is really strange.'
                                          'Warning: this can be EXTREMELY slow, up to ~5-25 minutes a virus')
     parser.add_argument('--no_spell_check', action='store_false', help='Turn off the automatic spellchecking for protein annoations ')
+    parser.add_argument('--all', action='store_true', help='Use this flag to transfer ALL annotations from reference, this is largely untested')
+
     try:
         args = parser.parse_args()
     except:
