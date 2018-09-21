@@ -142,6 +142,10 @@ You need to have BLAST+ available on the system path and the specified directory
 
 `python vapid.py example.fasta example.sbt --online`
 
+**Example Usage (default reference database, no spellchecking and transfering 'gene' annotations as well as 'CDS' annotations**
+
+`python vapid.py example.fasta example.sbt --no_spell_check --all`
+
 `python vapid.py -h` prints out a list of arguments and some help information
 
 The metadata_loc argument is optional and if you don't provide a metadata location or if your sheet does not contain metadata for some sequences the program will prompt you for it.
