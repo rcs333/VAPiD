@@ -114,7 +114,11 @@ Just change the path here to wherever you ended up unzipping the VAPiD folder on
 
 Optional arguments - choose one of these
 
-`--db custom_database_location --online --r reference_accesion_num`
+`--db custom_database_location --online --r reference_accesion_num --f`
+
+Secondary optional argument - pick any you want
+
+`--no_spell_check --all`
 
 **Example Usage (With metadata in the sheet)**
 
@@ -166,9 +170,9 @@ To submit your sequence to NCBI simply email the .sqn file to gb-sub@ncbi.nlm.ni
 
 # Implementation Details and Important Notes
 
-A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. 
+A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. However this can result in certain protein names losing capitilization (i.e. IIIa3 will get changed to iiia3). 
 
 
 # Future directions
-Preprint is avalible at (https://www.biorxiv.org/content/early/2018/09/18/420463)
-We may add an option to transfer ALL annotations, not just CDS. 
+Preprint is avalible at (https://www.biorxiv.org/content/early/2018/09/18/420463) and paper is currently under review.
+Email uwvirongs@gmail.com for requests or bug reports.  
