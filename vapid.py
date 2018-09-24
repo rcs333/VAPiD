@@ -56,7 +56,6 @@ def read_fasta(fasta_file_loc):
 
 # Spell checking functionality provided by Entrez
 def spell_check(query_string):
-    print('in spellcheck')
     handle = Entrez.espell(term=query_string)
     record = Entrez.read(handle)
     corrected_query = record["CorrectedQuery"]
@@ -110,7 +109,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             out_handle.write(result_handle.read())
         result_handle.close()
 
-            # read through the top hits saved earlier and save the accession number of the best hit that's complete
+        # read through the top hits saved earlier and save the accession number of the best hit that's complete
         read_next = False
         found = False
         for line in open(strain + SLASH + strain + '.blastresults'):
@@ -220,7 +219,8 @@ def blast_n_stuff(strain, our_fasta_loc):
     ref_seq = ali_genomes[1]
     our_seq = ali_genomes[0]
 
-    return name_of_virus, our_seq, ref_seq
+    # now also returning the accession of the reference for use in the .cmt file
+    return name_of_virus, our_seq, ref_seq, ref_seq_gb
 
 
 # Takes in two sequences with gaps inserted inside of them and returns arrays that have a -1 in the gap locations and
@@ -361,11 +361,14 @@ def write_fasta(strain, genome):
 
 # Take the name of a virus sample, and write the .cmt file for it using supplied coverage information
 # NOTE: only writes coverage length - so now if we want to say our sequencing platform we have to edit this code
-def write_cmt(sample_name, coverage):
-    cmt = open(sample_name + SLASH +'assembly.cmt', 'w')
+# Now also writes in the comment the reference that this subission was annotated off - this should provide some more
+# accountability
+def write_cmt(sample_name, coverage, ref_gb):
+    cmt = open(sample_name + SLASH + 'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
     if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
+    cmt.write('Reference annotations were pulled from ' + ref_gb + '\n')
     cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 
@@ -399,7 +402,6 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\tgene\n')
             tbl.write('\t\t\tgene\t' + p_all)
-
 
     for x in range(0, len(gene_product_list)):
         print(gene_product_list[x] + ' ' + str(gene_locations[x]))
@@ -436,16 +438,12 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
             it_count = 0
             modifid_orf = False
-            #won't execute this block of code for complemented genes...
+            # won't execute this block of code for complemented genes...
+            print(genome[end - 3:end].upper())
             if end > start and 'IIIA' not in product.upper():
-                while genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3 and it_count <= 3:
+                if genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3:
                     print('Modifying ORF length for ' + str(product))
-                    modifid_orf = True
-                    end += 3
-                    it_count += 1
-                if modifid_orf and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
-                    end -= it_count * 3
-
+                    end = find_end_stop(genome, start, end)
             # This should now correctly annotate assemblies that come in with the very edges chopped off
             pie = ''
             die = ''
@@ -472,6 +470,20 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
     tbl.close()
 
 
+def find_end_stop(genome, start, end):
+    print('BLAT')
+    old_end = end
+    end = start + 3
+
+    while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 9):
+        end += 3
+    if end == old_end + 9:
+        print('WARNING no stop codon found, examine reference and original sequence')
+        return old_end
+    else:
+        return end
+
+
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
 def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
@@ -481,11 +493,11 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     write_fasta(strain, genome)
 
-    name_of_virus, our_seq, ref_seq = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
+    name_of_virus, our_seq, ref_seq, ref_accession = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list, all_loc_list, all_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
 
-    write_cmt(strain, coverage)
+    write_cmt(strain, coverage,ref_accession)
 
     write_fsa(strain, name_of_virus, genome, metadata)
 
