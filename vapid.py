@@ -14,7 +14,6 @@ import platform
 import sys
 from Bio import Entrez
 import time
-import datetime
 import shutil
 Entrez.email = 'uwvirongs@gmail.com'
 
@@ -75,30 +74,31 @@ def spell_check(query_string):
 # are saved - then we run alignment on the two and return two strings one of them our sequence with '-' and the
 # other of our new reference sequence
 def blast_n_stuff(strain, our_fasta_loc):
-    # If we've already done this one before skip the blasting step, speeds up error checking for development
+
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
     if args.r:
         ding = args.r
         ref_seq_gb = ding
 
+    # if the user provided a database to use print location and use database
     elif args.db:
         local_database_location = args.db
         print('Searching local blast database at ' + local_database_location)
-        # may need to tweak the output method - need to test first
+        # blastn with word size of 28 because we're searching off a provided reference we're just going to pull the top
         local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
                           ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
                           + '.blastresults'
         subprocess.call(local_blast_cmd, shell=True)
 
-        # pull first accession number
+        # pull first accession number from our reference database
         for line in open(strain + SLASH + strain + '.blastresults'):
             ref_seq_gb = line.split('|')[3]
             break
 
+    # online search
     elif args.online:
-        #if not os.path.isfile(strain + SLASH + strain + '.blastresults'):
         print('Searching NCBI for the best reference sequence (may take longer for multiple requests due to NCBI '
-                      'throttling)')
+              'throttling)')
 
         record = open(our_fasta_loc).read()
 
@@ -141,16 +141,22 @@ def blast_n_stuff(strain, our_fasta_loc):
                     break
     # default case -- use either of the provided reference databases that we will include
     else:
+        # all virus is the preferred database but we'll switch to compressed if that's what the user downloaded
+        # this list IS ordered by how much I recommend using these databases
         if os.path.isfile('all_virus.fasta'):
             local_database_location = 'all_virus.fasta'
         elif os.path.isfile('virus_compressed.fasta'):
             local_database_location = 'virus_compressed.fasta'
+        elif os.path.isfile('ref_seq_vir'):
+            local_database_location = 'ref_seq_vir'
+        # print a helpful error message and exit
         else:
-            print('No local blast database found in this folder! Please install from the github releases page! Or use vapid with --online')
+            print('No local blast database found in this folder! Please install from the github releases page! (https://github.com/rcs333/VAPiD/releases) Or use vapid with --online')
             print('Exiting...')
             exit(0)
         print('Searching local blast database at ' + local_database_location)
 
+        # we're only going to save one because these our pretty decent reference databases
         local_blast_cmd = 'blastn -db ' + local_database_location + ' -query ' + our_fasta_loc + \
                           ' -num_alignments 1 -word_size 28 -outfmt 6 -out ' + strain + SLASH + strain \
                           + '.blastresults'
@@ -173,9 +179,10 @@ def blast_n_stuff(strain, our_fasta_loc):
         os.remove(strain + SLASH + strain + '_ref.gbk')
         shutil.copyfile(args.f, strain + SLASH + strain + '_ref.gbk')
 
-
+    # NCBI online tools don't want more than like 1 request every .2 seconds or something so we just sleep for a second here
     time.sleep(1)
 
+    # because the difference in how this stuff gets saved we have to pull online differently
     if not args.online:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
             if 'DEFINITION' in line:
@@ -204,15 +211,18 @@ def blast_n_stuff(strain, our_fasta_loc):
 
     # Windows
     if SLASH == '\\':
+        # since we include the windows installation of maaft with vapid we can hard code the path
         s = 'mafft-win\\mafft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
         subprocess.call(s, shell=True)
     else:
         try:
             subprocess.call('mafft --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
+        # print a helpful error message and exit
         except:
             print('Running on a non windows system, which means you need to install mafft and put it on the sys path '
                   'yourself.\nI suggest using brew or apt')
+            exit(0)
     ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
 
     # SWAPPED THESE DURING DEBUGGING
@@ -331,17 +341,18 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             allow_one = False
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
+            # for some weird reason - this is the way we only go in when the flag is passed 
             if args.no_spell_check:
+                new_list = []
                 px_word_list = px.split()
                 for word in px_word_list:
                     if '1' or '2' or '3' or '4' or '5' or '6' or '7' or '8' or '9' or '0' not in word: 
-                        word = spell_check(word)
+                        new_list.append(spell_check(word))
 
-                px = ' '.join(px_word_list)
+                px = ' '.join(new_list)
             if px == 'phospho protein':
                 px = 'phoshoprotein'
             gene_product_list.append(px)
-
 
     # Adjust every locus so that we actually put in correct annotations
 
@@ -470,11 +481,14 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
     tbl.close()
 
 
+# Takes a nucleotide sequence and a start and end position [1 indexed] and search for a stop codon from the start
+# to the end + 9 so every codon in the provided gene and then 3 after it. Return the first stop codon found or if no
+# stop codon is found return the original end value and print a warning
 def find_end_stop(genome, start, end):
-    print('BLAT')
+    # save the provided end
     old_end = end
     end = start + 3
-
+    # Search for stop codons in DNA and RNA space until 3 codons after the provided end.
     while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 9):
         end += 3
     if end == old_end + 9:
