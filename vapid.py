@@ -486,12 +486,16 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 # stop codon is found return the original end value and print a warning
 def find_end_stop(genome, start, end):
     # save the provided end
+    # SUPER CRAZY CODE EDIt BECAUST THIS IS FAILING LIKE ALL ThE TIME RIGHT NOW
+    #TODO: CHECK THAT THIS ISN"T STUPID 
+    start -= 1 
     old_end = end
     end = start + 3
     # Search for stop codons in DNA and RNA space until 3 codons after the provided end.
-    while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 9):
+    # Turns out 3 codons isn't enough 
+    while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 30):
         end += 3
-    if end == old_end + 9:
+    if end == old_end + 30:
         print('WARNING no stop codon found, examine reference and original sequence')
         return old_end
     else:
