@@ -447,9 +447,18 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             if end >= len(genome) and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
                 flag = '>'
 
+
             it_count = 0
             modifid_orf = False
             # won't execute this block of code for complemented genes...
+            print(genome[end - 3:end].upper())
+            # this makes sure that our end is in frame, and will adjust hopefully this doesn't break everything 
+            # added a check to only do this in the absence of RNA editing or ribosomal sliippage 
+            if xtra == '':
+                if ((end - start) + 1) % 3 != 0:
+                    end +=1
+                if ((end - start) + 1) % 3 != 0:
+                    end +=1
             print(genome[end - 3:end].upper())
             if end > start and 'IIIA' not in product.upper():
                 if genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3:
@@ -493,9 +502,9 @@ def find_end_stop(genome, start, end):
     end = start + 3
     # Search for stop codons in DNA and RNA space until 3 codons after the provided end.
     # Turns out 3 codons isn't enough 
-    while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 30):
+    while genome[end -3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end <= (old_end + 60):
         end += 3
-    if end == old_end + 30:
+    if end == old_end + 60:
         print('WARNING no stop codon found, examine reference and original sequence')
         return old_end
     else:
@@ -574,6 +583,13 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         print('putative end is ' + str(put_end))
         gene_loc_list[7][1] = put_start + put_end
 
+    if 'parainfluenza virus 2' in name_of_virus.lower() or 'rubulavirus 2' in name_of_virus.lower():
+        print('WE have a para2!!!')
+        extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
+                      'G\n\t\t\tprotein_id\tn_' + strain
+        gene_of_interest = 'P protein'
+        process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HPIV2')
+
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list )
 
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
@@ -618,9 +634,13 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     print('Looks like this virus has RNA editing, fixing it now')
+    print(v)
+
     found_ = False
+    print('gene of interest = '+ gene_of_interest)
     for g in range(0, len(gene_product_list)):
         # flipping this covers whack spacing in protein products
+        print('product = '+ gene_product_list[g])
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             found_ = True
@@ -661,6 +681,12 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
         elif v == 'HPIV4a':
             start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
             nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+        elif v == 'HPIV2':
+            print('HPIV2 is getting here correctly')
+            start_of_poly_g = nts_of_gene.find('AAGAGG', 450, 490)
+            nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+            nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
 
         new_translation = str(Seq(nts_of_gene).translate())
 
