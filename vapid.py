@@ -1,4 +1,4 @@
-# VAPiD v1.2
+# VAPiD v1.3
 
 # VAPiD is an extremely lightweight virus genome annotator that takes any number of viral genomes and annotates them
 # producing files suitable for NCBI submission
@@ -18,19 +18,25 @@ import shutil
 Entrez.email = 'uwvirongs@gmail.com'
 
 
-VERSION = 'v1.2'
+VERSION = 'v1.3'
 
 
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number of
 # sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Returns two lists with the names of
 # the strains in the first one and the genomes as strings in the second list, also changes U's to T's
-def read_fasta(fasta_file_loc):
+def read_fasta(fasta_file_loc, slashes=False):
     strain_list = []
     genome_list = []
+    full_name_list = []
     dna_string = ''
 
     for line in open(fasta_file_loc):
         if line[0] == '>':
+            if slashes:
+                full_name_list.append(line[1:])
+            else:
+                full_name_list.append('')
+
             strain_list.append(line[1:].split()[0])
             if dna_string != '':
                 # strip leading and trailing Ns or ?s because there's no reason to submit them
@@ -50,7 +56,7 @@ def read_fasta(fasta_file_loc):
             dna_string += line.strip()
     # Just to make sure all our sequences are on the same page
     genome_list.append(dna_string.replace('U', 'T'))
-    return strain_list, genome_list
+    return strain_list, genome_list, full_name_list
 
 
 # Spell checking functionality provided by Entrez
@@ -223,7 +229,7 @@ def blast_n_stuff(strain, our_fasta_loc):
             print('Running on a non windows system, which means you need to install mafft and put it on the sys path '
                   'yourself.\nI suggest using brew or apt')
             exit(0)
-    ali_list, ali_genomes = read_fasta(strain + SLASH + strain + '.ali')
+    ali_list, ali_genomes, dumy_var_never_used = read_fasta(strain + SLASH + strain + '.ali')
 
     # SWAPPED THESE DURING DEBUGGING
     ref_seq = ali_genomes[1]
@@ -387,10 +393,10 @@ def write_cmt(sample_name, coverage, ref_gb):
 # this takes in all of our information and makes a feature table that actually should work
 # annotations for ribosomal slippage and RNA editing should be working now - as well as creation of a .pep file for rna
 # editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
-def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list ):
+def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list, full_name ):
 
     tbl = open(strain + SLASH + strain + '.tbl', 'w')
-    tbl.write('>Feature ' + strain)
+    tbl.write('>Feature ' + full_name)
 
     # This block should write all gene annotations to tbl file as long as we got passed genes, and the only way that will ever happen is if the
     # User put the -all flag
@@ -513,7 +519,7 @@ def find_end_stop(genome, start, end):
 
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
-def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
+def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
 
     if not os.path.exists(strain):
         os.makedirs(strain)
@@ -526,7 +532,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
 
     write_cmt(strain, coverage,ref_accession)
 
-    write_fsa(strain, name_of_virus, genome, metadata)
+    write_fsa(strain, name_of_virus, genome, metadata, full_name)
 
     extra_stuff = ''
 
@@ -584,13 +590,13 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc):
         gene_loc_list[7][1] = put_start + put_end
 
     if 'parainfluenza virus 2' in name_of_virus.lower() or 'rubulavirus 2' in name_of_virus.lower():
-        print('WE have a para2!!!')
+        print('Custom code for HPIV2 runnning')
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'P protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HPIV2')
 
-    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list )
+    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name)
 
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
     try:
@@ -698,9 +704,9 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
-def write_fsa(strain, name_of_virus, virus_genome, metadata):
+def write_fsa(strain, name_of_virus, virus_genome, metadata, full_name):
     fsa = open(strain + SLASH + strain + '.fsa', 'w')
-    fsa.write('>' + strain + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] '
+    fsa.write('>' + full_name.strip() + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] '
               '[molecule=RNA]' + metadata + '\n')
     fsa.write(virus_genome)
     fsa.write('\n')
@@ -708,10 +714,11 @@ def write_fsa(strain, name_of_virus, virus_genome, metadata):
 
 
 # Build the metadata for every virus that's been submitted
-def do_meta_data(strain, sheet_exists):
+def do_meta_data(strain, sheet_exists, full_name):
     first = True
     s = ''
     coverage = ''
+    
     if sheet_exists:
         for line in open(metadata_sheet_location):
             if first:
@@ -721,6 +728,10 @@ def do_meta_data(strain, sheet_exists):
                 for dex in range(0, len(names)):
                     if names[dex].strip() == 'coverage':
                         coverage = line.split(',')[dex].strip()
+                    elif names[dex].strip() == 'full_name':
+                        if line.split(',')[dex].strip() != '':
+                            full_name = line.split(',')[dex].strip()
+
                     else:
                         s = s + ' [' + names[dex].strip() + '=' + line.split(',')[dex].strip() + ']'
                 break
@@ -733,9 +744,16 @@ def do_meta_data(strain, sheet_exists):
         cov = raw_input('Enter coverage as a number (example 42.3), if unknown just leave this blank and hit enter: ')
         meta_data = col + con + st
         coverage = cov
+        # Here's one line of code to unilaterally standardize defualt naming scheme
+        if full_name == '':
+            full_name = strain + ' (' + con.split('=')[1][:-1] + '/' + col.split('=')[1][:-1] + ')'
+
     else:
         meta_data = s
-    return meta_data, coverage
+        if full_name == '':
+            full_name = strain
+            print('Automatic strain naming failed but submission will proceed without metadata appended to the fasta header.')
+    return meta_data, coverage, full_name
 
 
 # Takes the name of a recently created .gbf file and checks it for stop codons (which usually indicate something went
@@ -784,6 +802,9 @@ if __name__ == '__main__':
                                          'Warning: this can be EXTREMELY slow, up to ~5-25 minutes a virus')
     parser.add_argument('--no_spell_check', action='store_false', help='Turn off the automatic spellchecking for protein annoations ')
     parser.add_argument('--all', action='store_true', help='Use this flag to transfer ALL annotations from reference, this is largely untested')
+    parser.add_argument('--slashes', action='store_true', help='Use this flag to allow any characters in the name of your virus - This allows you to submit with a fasta file formated like >Sample1 (Human/USA/2016/A) Complete CDS'
+                        ' make sure that your metadata file only contains the first part of your name \'Sample1\' in the example above. You can also submit names with slashes by specifying in the metadata sheet under the header full_name, if you do that you do not need to use this flag')
+
 
     try:
         args = parser.parse_args()
@@ -795,7 +816,7 @@ if __name__ == '__main__':
 
     sbt_file_loc = args.author_template_file_loc
 
-    virus_strain_list, virus_genome_list = read_fasta(fasta_loc)
+    virus_strain_list, virus_genome_list, full_name_list = read_fasta(fasta_loc, args.slashes)
 
     strain2species = {}
     strain2stops = {}
@@ -805,18 +826,18 @@ if __name__ == '__main__':
     if args.metadata_loc:
         metadata_sheet_location = args.metadata_loc
         for x in range(0, len(virus_strain_list)):
-            metadata, coverage = do_meta_data(virus_strain_list[x], True)
+            metadata, coverage, full_name_list[x] = do_meta_data(virus_strain_list[x], True, full_name_list[x])
             meta_list.append(metadata)
             coverage_list.append(coverage)
     else:
         for x in range(0, len(virus_strain_list)):
-            metadata, coverage = do_meta_data(virus_strain_list[x], False)
+            metadata, coverage, full_name_list[x] = do_meta_data(virus_strain_list[x], False, full_name_list[x])
             meta_list.append(metadata)
             coverage_list.append(coverage)
 
     for x in range(0, len(virus_strain_list)):
         strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x],
-                                                                meta_list[x], coverage_list[x], sbt_file_loc)
+                                                                meta_list[x], coverage_list[x], sbt_file_loc, full_name_list[x])
         # now we've got a map of [strain] -> name of virus (with whitespace)
 
     for name in virus_strain_list:
