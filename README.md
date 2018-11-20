@@ -179,9 +179,9 @@ There are two different ways to submit with free form full names.
 
 **Add a full_name column to your metadata.csv file** 
 
-`strain,collection-date,country,coverage,full_name\n`
+metadata.csv line 1: `strain,collection-date,country,coverage,full_name`
 
-`test,2017,USA,42.5,test (USA/2016/A)`
+metadata.csv line 2: `test,2017,USA,42.5,test (USA/2016/A)`
 
 Simply add a column that is named EXACTLY 'full_name' and put the full name into the metadata.csv file. If you are using this option you still need to have your fasta headers match. So for the example above your fasta file would still need to start with just >test. This is so that I can find the record corresponding to 'test' in the metadata file. In this case you do not need to put a space in the full_name. i.e. test-usa/2016/a would work using this method. 
 
