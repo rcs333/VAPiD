@@ -14,6 +14,9 @@ Viruses that VAPiD has been tested with:
 RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK, HPV. However, any non segmented virus that has been previously deposited on genbank or for which you posses a .gbf file ~should~ work. If you would like to use VAPiD for a virus not listed just go ahead and try running it - if you get bad annoations or errors then send an email to uwvirongs@gmail.com and I'll add support for your favorite virus. 
 
 VAPiD currently does not support segmented viral genomes, although theoretically one could run individual segments one at a time. 
+
+As of VAPiD v1.3 support for custom virus names has been added and restrictions on slashes have been removed. For more information see the section below titled "Custom Names".
+
 # Quickstart Installation Guide
 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
@@ -99,7 +102,7 @@ If you don't have very many sequences at a time or you include a fasta not in yo
 
 # Usage - vapid.py
 
-Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE SPECIAL CHARACTERS IN THEM!!** (Things like ' " ? - # * ect.)
+Create your fasta file with all of the sequences that you would like to annotate. You can have as many sequences as you want. And you should name the sequences in your fasta file what you would like the strain name to be. (For the provided fasta file, example.fasta, this name would be 'test'). **FASTA STRAIN NAMES SHOULD NOT HAVE SPECIAL CHARACTERS IN THEM!!** (Things like ' " ? - # * ect.) This is still true for the base name as of v1.3. See the custom names section below for more information on this. 
 
 Then you would need to run the vapid.py script from the command line. First cd to the directory that VAPiD is living in - if you cloned from GitHub it'll be ../VAPiD/ 
 
@@ -168,10 +171,34 @@ The program itself will also examine each sequence record for stop codons and no
 Inside each folder will be some files, you can examine .gbf files either in a text editor or in something like Geneious.
 To submit your sequence to NCBI simply email the .sqn file to gb-sub@ncbi.nlm.nih.gov and then shortly after your sequences will be deposited on NCBI. 
 
+# Custom Names
+
+I have added support to submit viruses with free form full names. For example >Sample 3 (USA/Human/2016). Also if you are using the manual metadata input feature where it prompts you for the minimum required metadata VAPiD automatically appends (country/col_year) to your name. This is in an attempt to improve the quality of sequence being sent to NCBI so they like us more. 
+
+There are two different ways to submit with free form full names.
+
+**Add a full_name column to your metadata.csv file** 
+
+`strain,collection-date,country,coverage,full_name\n`
+
+`test,2017,USA,42.5,test (USA/2016/A)`
+
+Simply add a column that is named EXACTLY 'full_name' and put the full name into the metadata.csv file. If you are using this option you still need to have your fasta headers match. So for the example above your fasta file would still need to start with just >test. This is so that I can find the record corresponding to 'test' in the metadata file. In this case you do not need to put a space in the full_name. i.e. test-usa/2016/a would work using this method. 
+
+OR
+
+**Have your FASTA header be anything you want and use --slashes at runtime**
+
+In this option you would have your fasta header be >test (USA/Human/2016). And you would add `--slashes` to your python command running vapid.py. When using this option, internally your samples are still represented by test, right now it is required that there be a space between >test and anything with backslashes in it. So when using this option your metadata.csv file would still have just test and you could associate collection year or any other metadata with this sample. 
+
+In either of these methods your results will be placed into a folder that is named test. VAPiD will break if you don't have a space between your fasta header and anything with backslashes. 
+
+I do NOT reccomend batching submissions that mix these options. Also, if my solution to this problem has introduced any new problems or simply isn't appropriate for your case please let me know and I can add support for your specific case. 
+
+
 # Implementation Details and Important Notes
 
 A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. However this can result in certain protein names losing capitilization (i.e. IIIa3 will get changed to iiia3). 
-
 
 # Future directions
 Preprint is avalible at (https://www.biorxiv.org/content/early/2018/09/18/420463) and paper is currently under review.
