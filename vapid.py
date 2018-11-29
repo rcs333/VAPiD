@@ -1,7 +1,9 @@
-# VAPiD v1.3
-
 # VAPiD is an extremely lightweight virus genome annotator that takes any number of viral genomes and annotates them
 # producing files suitable for NCBI submission
+
+# Vapid Version
+VERSION = 'v1.3.1'
+
 
 import subprocess
 import re
@@ -16,10 +18,6 @@ from Bio import Entrez
 import time
 import shutil
 Entrez.email = 'uwvirongs@gmail.com'
-
-
-VERSION = 'v1.3'
-
 
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number of
 # sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Returns two lists with the names of
@@ -385,7 +383,7 @@ def write_cmt(sample_name, coverage, ref_gb):
     cmt.write('##Assembly-Data-START##\n')
     if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
-    cmt.write('Reference annotations were pulled from ' + ref_gb + '\n')
+    cmt.write('Created with VAPiD' + VERSION + ' Reference annotations were pulled from ' + ref_gb + '\n')
     cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 
