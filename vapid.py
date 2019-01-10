@@ -598,7 +598,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name)
 
-    cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
+    cmd = './tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
     try:
         subprocess.call(cmd, shell=True)
     except:
