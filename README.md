@@ -1,4 +1,9 @@
 # VAPiD: Viral Annotation Pipeline and iDentification
+
+# IMPORTANT, I'm doing some remote work right now so the main github repository is in an extreme development phase. 
+# IF you land on this page while this message is here PLEASE clone this url: https://github.com/rcs333/VAPiD/tree/fabb1cf2b1b888310e82b3393032660c607cb630
+
+
 VAPiD is a ultra-lightweight script for quickly annotating and preparing sequences of human viruses for sending to NCBI Genbank.  VAPiD takes a fasta file of human viruses, an NCBI-generated author list, and sample metadata and exports Sequin files that are ready to submit to NCBI.
 
 Pre-Print can be found at (https://www.biorxiv.org/content/early/2018/09/18/420463)!
