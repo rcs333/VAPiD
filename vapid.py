@@ -220,7 +220,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         subprocess.call(s, shell=True)
     else:
         try:
-            subprocess.call('mafft --adjustdirectionaccurately --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+            subprocess.call('mafft --adjustdirectionaccurately --thread 160 --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
         # print a helpful error message and exit
         except:
@@ -267,9 +267,6 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array, genome):
-    print('given num:' + str(given_num))
-    print('our_num_array:' + str(our_num_array))
-    print('ref_num_array:' + str(ref_num_array))
     # Handles gene lengths that go off the end of the genome
     if given_num == len(genome):
         return len(genome)
