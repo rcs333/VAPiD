@@ -267,9 +267,9 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array, genome):
-    print('given num:' + given_num)
-    print('our_num_array:' + our_num_array)
-    print('ref_num_array:' + ref_num_array)
+    print('given num:' + str(given_num))
+    print('our_num_array:' + str(our_num_array))
+    print('ref_num_array:' + str(ref_num_array))
     # Handles gene lengths that go off the end of the genome
     if given_num == len(genome):
         return len(genome)
