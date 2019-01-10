@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.3.1'
+VERSION = 'v1.3.2'
 
 
 import subprocess
@@ -220,7 +220,7 @@ def blast_n_stuff(strain, our_fasta_loc):
         subprocess.call(s, shell=True)
     else:
         try:
-            subprocess.call('mafft --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+            subprocess.call('mafft --adjustdirectionaccurately --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
                     shell=True)
         # print a helpful error message and exit
         except:
