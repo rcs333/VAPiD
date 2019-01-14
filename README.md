@@ -12,7 +12,7 @@ VAPiD can perform three different types of viral annotation:
 VAPiD is currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 
 Viruses that VAPiD has been tested with:  
-RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV, Norovirus, JC, BK, HPV. However, any non segmented virus that has been previously deposited on genbank or for which you posses a .gbf file ~should~ work. If you would like to use VAPiD for a virus not listed just go ahead and try running it - if you get bad annoations or errors then send an email to uwvirongs@gmail.com and I'll add support for your favorite virus. 
+RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV (The references for HIV can be a little variable), Norovirus, JC, BK, HPV. However, any non segmented virus that has been previously deposited on genbank or for which you posses a .gbf file ~should~ work. If you would like to use VAPiD for a virus not listed just go ahead and try running it - if you get bad annoations or errors then send an email to uwvirongs@gmail.com and I'll add support for your favorite virus. 
 
 VAPiD currently does not support segmented viral genomes, although theoretically one could run individual segments one at a time. 
 
