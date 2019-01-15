@@ -150,9 +150,9 @@ You need to have BLAST+ available on the system path and the specified directory
 
 `python vapid.py example.fasta example.sbt --online`
 
-**Example Usage (default reference database, no spellchecking and transfering 'gene' annotations as well as 'CDS' annotations**
+**Example Usage (default reference database, spellchecking and transfering 'gene' annotations as well as 'CDS' annotations**
 
-`python vapid.py example.fasta example.sbt --no_spell_check --all`
+`python vapid.py example.fasta example.sbt --spell_check --all`
 
 `python vapid.py -h` prints out a list of arguments and some help information
 
@@ -199,7 +199,7 @@ I do NOT reccomend batching submissions that mix these options. Also, if my solu
 
 # Implementation Details and Important Notes
 
-A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. However this can result in certain protein names losing capitilization (i.e. IIIa3 will get changed to iiia3). 
+A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. However this can result in certain protein names losing capitilization (i.e. IIIa3 will get changed to iiia3). Also novel sequences with muations directly in the stop codon alignment with the reference can cause a few extra stop codons to get added. First verify that your sequence is correct and if it is please email me or open an issue on the GitHub. 
 
 # Future directions
 Preprint is avalible at (https://www.biorxiv.org/content/early/2018/09/18/420463) and paper is currently under review.
