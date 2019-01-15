@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.4'
+VERSION = 'v1.4.1'
 
 import subprocess
 import re
@@ -415,6 +415,10 @@ def write_cmt(sample_name, coverage, ref_gb, did_we_rc):
 # this takes in all of our information and makes a feature table that contains correct annotations for for ribosomal slippage and RNA editing
 # - as well as creation of a .pep file for rna editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
 def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list, full_name ):
+    # covers the nipah situation where there's RNA editing on more than 1 protein - if this happens for more viruses I'll need to code a more
+    # robust sollution, but for now this works 
+    if 'nipah' in name_o_vir.lower():
+        pep = open(strain + SLASH + strain + '.pep', 'w')
 
     tbl = open(strain + SLASH + strain + '.tbl', 'w')
     tbl.write('>Feature ' + full_name)
@@ -451,6 +455,26 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
         if gene_of_intrest in product:
             xtra = note
 
+        if 'nipah' in name_o_vir.lower():
+            nts_of_gene = genome[int(gene_locations[x][0]) - 1:int(gene_locations[x][1]) - 1]
+            
+            if product.lower() == 'v protein':
+                xtra = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
+                      'G\n\t\t\tprotein_id\tn_1' + strain
+                start_of_poly_g = nts_of_gene.find('AAAAAGG')
+                nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
+                new_translation = str(Seq(nts_of_gene).translate())
+                pep.write('>n_1' + strain + '\n' + new_translation)
+                pep.write('\n')
+            elif product.lower() == 'w protein':
+                xtra = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds non templated ' \
+                      'G\n\t\t\tprotein_id\tn_2' + strain
+                start_of_poly_g = nts_of_gene.find('AAAAAGG')
+                nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+                new_translation = str(Seq(nts_of_gene).translate())
+                pep.write('>n_2' + strain + '\n' + new_translation)
+                pep.write('\n')
+
         if 'HIV' in name_o_vir and ('Pol polyprotein' == product or 'Pol' == product):
             sflag = '<'
 
@@ -485,14 +509,15 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 if ((end - start) + 1) % 3 != 0:
                     end +=1
 
-            #print(genome[end - 3:end].upper())
+            
             if end > start and 'IIIA' not in product.upper():
-                if (genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG') and (end < len(genome) - 3):
-                    if re.search('^AUCTG',genome[end - 3:end].upper()):
+                if (genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG') and (end < len(genome) - 3) and not re.search('[MRWSYKVHDBN]',genome[end - 3:end].upper()):
+                    if re.search('[MRWSYKVHDBN]',genome[end - 3:end].upper()):
                         print('Ambiguous base detected in a putative stop codon, this can cause problems with VAPiD annotations')
                     print('Modifying ORF length for ' + str(product))
                     end = find_end_stop(genome, start, end)
             # This should now correctly annotate assemblies that come in with the very edges chopped off
+            #print(genome[end - 3:end].upper())
             pie = ''
             die = ''
             if int(start) < 1:
@@ -516,6 +541,9 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
     tbl.write('\n')
     tbl.close()
+    if 'nipah' in name_o_vir.lower():
+        pep.close()
+
 
 
 # Takes a nucleotide sequence and a start and end position [1 indexed] and search for a stop codon from the start
@@ -612,22 +640,26 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
 
     if 'metapneumovirus' in name_of_virus.lower():
         put_start = int(gene_loc_list[7][0])
-        print('start of gene is ' + str(put_start))
+        #print('start of gene is ' + str(put_start))
         orf = genome[put_start - 1:put_start + 4000]
-        print('orf length is ' + str(len(orf)))
-        print('genome length is ' + str(len(genome)))
+        #print('orf length is ' + str(len(orf)))
+        #print('genome length is ' + str(len(genome)))
         orf_trans = str(Seq(orf).translate())
-        print('orf translation is ' + orf_trans)
-        put_end = (orf_trans.find('*') * 3)
-        print('putative end is ' + str(put_end))
-        gene_loc_list[7][1] = put_start + put_end
+        #print('orf translation is ' + orf_trans)
+        if orf_trans.find('*') != -1:
+            put_end = (orf_trans.find('*') * 3)
+            print('putative end is ' + str(put_end))
+            gene_loc_list[7][1] = put_start + put_end
 
     if 'parainfluenza virus 2' in name_of_virus.lower() or 'rubulavirus 2' in name_of_virus.lower():
-        print('Custom code for HPIV2 runnning')
+        #print('Custom code for HPIV2 runnning')
         extra_stuff = '\n\t\t\texception\tRNA Editing\n\t\t\tnote\tRNA Polymerase adds 2 non templated ' \
                       'G\n\t\t\tprotein_id\tn_' + strain
         gene_of_interest = 'P protein'
         process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, 'HPIV2')
+
+    
+
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name)
 
@@ -658,15 +690,15 @@ def pick_correct_frame(one, two):
     one_count = one_trans.count('*')
     two_count = two_trans.count('*')
     # Troubleshooting code that I'm keeping in for when we add more viruses that have non templated G's
-    print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
-    print(two_trans)
-    print('adding one G gives ' + str(one_count) + ' stop codon(s)')
-    print(one_trans)
+    #print('adding two Gs gives ' + str(two_count) + ' stop codon(s)')
+    #print(two_trans)
+    #print('adding one G gives ' + str(one_count) + ' stop codon(s)')
+    #print(one_trans)
     if one_count < two_count:
-        print('chose one')
+        #print('chose one')
         return one
     else:
-        print('chose two')
+        #print('chose two')
         return two
 
 
@@ -679,7 +711,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
     #print(v)
 
     found_ = False
-    print('gene of interest = '+ gene_of_interest)
+    #print('gene of interest = '+ gene_of_interest)
     for g in range(0, len(gene_product_list)):
         # flipping this covers whack spacing in protein products
         #print('product = '+ gene_product_list[g])
@@ -724,7 +756,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
             nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
 
         elif v == 'HPIV2':
-            print('HPIV2 is getting here correctly')
+            #print('HPIV2 is getting here correctly')
             start_of_poly_g = nts_of_gene.find('AAGAGG', 450, 490)
             nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
             nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
