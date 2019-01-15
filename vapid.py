@@ -2,8 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.3.2'
-
+VERSION = 'v1.4'
 
 import subprocess
 import re
@@ -17,11 +16,15 @@ import sys
 from Bio import Entrez
 import time
 import shutil
+import re
 Entrez.email = 'uwvirongs@gmail.com'
 
+
 # Reads in a fasta file that should have strain names for the names of the sequences -  can handle any number of
-# sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Returns two lists with the names of
-# the strains in the first one and the genomes as strings in the second list, also changes U's to T's
+# sequences. Also strips leading and trailing Ns or ?s from the provided sequence. Also takes an optional boolean 
+# value to determine if names should be allowed to have system protected characters like / in them. Returns three lists with the names of
+# the strains in the first one and the genomes as strings in the second list, the third list is only used when the slashes argument is true
+# also changes U's to T's
 def read_fasta(fasta_file_loc, slashes=False):
     strain_list = []
     genome_list = []
@@ -58,7 +61,10 @@ def read_fasta(fasta_file_loc, slashes=False):
 
 
 # Spell checking functionality provided by Entrez
+# takes an input string and returns the Entrez corrected string as long as it exists
 def spell_check(query_string):
+    # new entrez rules limit requests to no more than 3 a second, this will ensure we don't send more than two
+    time.sleep(0.5)
     handle = Entrez.espell(term=query_string)
     record = Entrez.read(handle)
     corrected_query = record["CorrectedQuery"]
@@ -74,9 +80,10 @@ def spell_check(query_string):
 
 
 # This function takes the strain name and a location of the individual fasta file we saved earlier and runs a blast
-# Search saving the top 35 hits - then the top hit is found that is a complete genome and the fasta and .gbk of that
+# Search saving the top 15 hits - then the top hit is found that is a complete genome and the fasta and .gbk of that
 # are saved - then we run alignment on the two and return two strings one of them our sequence with '-' and the
-# other of our new reference sequence
+# other of our new reference sequence. If a sequence is submitted that needs to be reverse complemented to align
+# to a reference the sequence will stay this way 
 def blast_n_stuff(strain, our_fasta_loc):
 
     # if user provided own reference use that one - also use our specifically chosen reference for some viruses
@@ -118,12 +125,13 @@ def blast_n_stuff(strain, our_fasta_loc):
         found = False
         for line in open(strain + SLASH + strain + '.blastresults'):
             if line[0] == '>':
-                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].split('complete')[0].split('partial')[0].split('genomic')[0].split('from')[0].strip()
                 name_of_virus = name_of_virus.split('/')[0]
                 ref_seq_gb = line.split()[0][1:]
 
                 # last part of these two logic checks is so we avoid the misassembled/mutated viruses
                 # This is going to get really out of hand if we have to keep blacklisting records
+                # TODO: pull these out of the database, regenerate and reupload 
                 if 'complete' in line and ref_seq_gb.split('.')[0] not in 'KM551753 GQ153651 L08816 HIVANT70C L20587':
                     found = True
                     break
@@ -140,22 +148,23 @@ def blast_n_stuff(strain, our_fasta_loc):
         if not found:
             for line in open(strain + SLASH + strain + '.blastresults'):
                 if line[0] == '>':
-                    name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
+                    name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].split('complete')[0].split('partial')[0].split('genomic')[0].split('from')[0].strip()
                     ref_seq_gb = line.split()[0][1:]
                     break
     # default case -- use either of the provided reference databases that we will include
     else:
         # all virus is the preferred database but we'll switch to compressed if that's what the user downloaded
         # this list IS ordered by how much I recommend using these databases
-        if os.path.isfile('all_virus.fasta'):
+        if os.path.isfile('all_virus.fasta.nin'):
             local_database_location = 'all_virus.fasta'
-        elif os.path.isfile('virus_compressed.fasta'):
+        elif os.path.isfile('virus_compressed.fasta.nin'):
             local_database_location = 'virus_compressed.fasta'
-        elif os.path.isfile('ref_seq_vir'):
+        elif os.path.isfile('ref_seq_vir.nin'):
             local_database_location = 'ref_seq_vir'
         # print a helpful error message and exit
         else:
-            print('No local blast database found in this folder! Please install from the github releases page! (https://github.com/rcs333/VAPiD/releases) Or use vapid with --online')
+            print('No local blast database found in this folder! Please install from the github releases page! '
+                '(https://github.com/rcs333/VAPiD/releases) Or use vapid with --online (not reccomended)')
             print('Exiting...')
             exit(0)
         print('Searching local blast database at ' + local_database_location)
@@ -172,13 +181,15 @@ def blast_n_stuff(strain, our_fasta_loc):
             ref_seq_gb = line.split('|')[3]
             break
 
-    # Download the reference fasta file from Entrez
+    # Download the reference fasta file from 
     record = Entrez.read(Entrez.esearch(db='nucleotide', term=ref_seq_gb))
     # Download .gbk from Entrez, we'll pull annotations from this file later
     h2 = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='gb', retmode='text')
     e = open(strain + SLASH + strain + '_ref.gbk', 'w')
     e.write(h2.read())
     e.close()
+
+    # if we've specified our own file remove the one we just found and delete it 
     if args.f:
         os.remove(strain + SLASH + strain + '_ref.gbk')
         shutil.copyfile(args.f, strain + SLASH + strain + '_ref.gbk')
@@ -190,10 +201,13 @@ def blast_n_stuff(strain, our_fasta_loc):
     if not args.online:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
             if 'DEFINITION' in line:
-                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].strip()
-
+                # this forces removal of 'complete/partial annotations because those get added by genbank and there is no reason to include them'
+                # we also want to strip off specific strain and isolate names in order to tend towards being more general 
+                name_of_virus = ' '.join(line.split()[1:]).split('strain')[0].split('isolate')[0].split('complete')[0].split('partial')[0].split('genomic')[0].split('from')[0].strip()
+    # let the user know 
     print(ref_seq_gb + ' was the selected reference')
     print(name_of_virus + ' was the parsed name of the virus')
+
 
     h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
     d = open(strain + SLASH + strain + '_ref.fasta', 'w')
@@ -212,29 +226,37 @@ def blast_n_stuff(strain, our_fasta_loc):
         z.write(line)
     ge.close()
     z.close()
-
+    print('Aligning reference and query...')
     # Windows
     if SLASH == '\\':
         # since we include the windows installation of maaft with vapid we can hard code the path
-        s = 'mafft-win\\mafft.bat --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
+        s = 'mafft-win\\mafft.bat --adjustdirection --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali'
         subprocess.call(s, shell=True)
     else:
         try:
-            subprocess.call('mafft --adjustdirectionaccurately --thread 160 --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali',
+            subprocess.call('mafft --adjustdirection --quiet ' + strain + SLASH + strain + '_aligner.fasta > ' + strain + SLASH + strain + '.ali 2>/dev/null',
                     shell=True)
         # print a helpful error message and exit
         except:
             print('Running on a non windows system, which means you need to install mafft and put it on the sys path '
                   'yourself.\nI suggest using brew or apt')
             exit(0)
+    
     ali_list, ali_genomes, dumy_var_never_used = read_fasta(strain + SLASH + strain + '.ali')
 
-    # SWAPPED THESE DURING DEBUGGING
+    need_to_rc = False 
+    # this will create a weird 
+    if '_R_' in ali_list[1]:
+        if ali_list[1][0:3] == '_R_':
+            # we need to RC input query and redo 
+            need_to_rc = True
+    print('Done alignment')
+    # this is the reverse of what I expect but it works
     ref_seq = ali_genomes[1]
     our_seq = ali_genomes[0]
 
-    # now also returning the accession of the reference for use in the .cmt file
-    return name_of_virus, our_seq, ref_seq, ref_seq_gb
+    # now also returning the accession of the reference for use in the .cmt file as well as a bool for if we need to rerun this block 
+    return name_of_virus, our_seq, ref_seq, ref_seq_gb, need_to_rc
 
 
 # Takes in two sequences with gaps inserted inside of them and returns arrays that have a -1 in the gap locations and
@@ -267,8 +289,9 @@ def build_num_arrays(our_seq, ref_seq):
 # Takes a gene start index relative to an unaligned reference sequence and then returns the location of the same start
 # area on the unaligned sequence that we're annotating using the number arrays to finish
 def adjust(given_num, our_num_array, ref_num_array, genome):
+    found = False
     # Handles gene lengths that go off the end of the genome
-    if given_num == len(genome):
+    if given_num >= len(genome):
         return len(genome)
 
     # Go through our number array and search for the number of interest
@@ -345,7 +368,8 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             # Inconsistent naming of protein products
             px = line.split('=')[1][1:-2]
             # for some weird reason - this is the way we only go in when the flag is passed 
-            if args.no_spell_check:
+            # TODO: need to make sure that this is activating properly 
+            if args.spell_check:
                 new_list = []
                 px_word_list = px.split()
                 for word in px_word_list:
@@ -358,7 +382,6 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
             gene_product_list.append(px)
 
     # Adjust every locus so that we actually put in correct annotations
-
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
@@ -377,19 +400,20 @@ def write_fasta(strain, genome):
 # NOTE: only writes coverage length - so now if we want to say our sequencing platform we have to edit this code
 # Now also writes in the comment the reference that this subission was annotated off - this should provide some more
 # accountability
-def write_cmt(sample_name, coverage, ref_gb):
+def write_cmt(sample_name, coverage, ref_gb, did_we_rc):
     cmt = open(sample_name + SLASH + 'assembly.cmt', 'w')
     cmt.write('##Assembly-Data-START##\n')
     if coverage != '':
         cmt.write('Coverage\t' + coverage + '\n')
+    if did_we_rc:
+        cmt.write('Original input sequence was reverse complemented by MAFFT during the alignment phase')
     cmt.write('Created with VAPiD' + VERSION + ' Reference annotations were pulled from ' + ref_gb + '\n')
     cmt.write('##Assembly-Data-END##\n')
     cmt.close()
 
 
-# this takes in all of our information and makes a feature table that actually should work
-# annotations for ribosomal slippage and RNA editing should be working now - as well as creation of a .pep file for rna
-# editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
+# this takes in all of our information and makes a feature table that contains correct annotations for for ribosomal slippage and RNA editing
+# - as well as creation of a .pep file for rna editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
 def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list, full_name ):
 
     tbl = open(strain + SLASH + strain + '.tbl', 'w')
@@ -405,7 +429,7 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             e_all = all_loc_list[x][1]
             p_all = all_product_list[x]
             if int(e_all) >= len(genome):
-                e_flag = '>'
+                e_flag = ''
             if int(s_all) < 1:
                 s_flag = '<'
                 s_all = '1'
@@ -437,9 +461,11 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             end_1 = str(location_info[1])
             start_2 = str(location_info[2])
             end_2 = str(location_info[3])
+
             tbl.write('\n' + start_1 + '\t' + end_1 + '\tCDS\n')
             tbl.write(start_2 + '\t' + end_2 + '\n')
             tbl.write('\t\t\tproduct\t' + product + '\n')
+
             if 'HEPATITIS B' not in name_o_vir and 'BK polyamavirus' not in name_o_vir:
                 tbl.write('\t\t\texception\tRibosomal Slippage\n')
 
@@ -447,24 +473,23 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             start = int(location_info[0])
             end = int(location_info[1])
 
-            if end >= len(genome) and genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG':
-                flag = '>'
-
-
             it_count = 0
             modifid_orf = False
-            # won't execute this block of code for complemented genes...
-            print(genome[end - 3:end].upper())
+            # won't execute this block of code for complemented genes
+            #print(genome[end - 3:end].upper())
             # this makes sure that our end is in frame, and will adjust hopefully this doesn't break everything 
             # added a check to only do this in the absence of RNA editing or ribosomal sliippage 
-            if xtra == '':
+            if xtra == '' and end != len(genome):
                 if ((end - start) + 1) % 3 != 0:
                     end +=1
                 if ((end - start) + 1) % 3 != 0:
                     end +=1
-            print(genome[end - 3:end].upper())
+
+            #print(genome[end - 3:end].upper())
             if end > start and 'IIIA' not in product.upper():
-                if genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG' and end < len(genome) - 3:
+                if (genome[end - 3:end].upper() not in 'TGA,TAA,TAG,UGA,UAA,UAG') and (end < len(genome) - 3):
+                    if re.search('^AUCTG',genome[end - 3:end].upper()):
+                        print('Ambiguous base detected in a putative stop codon, this can cause problems with VAPiD annotations')
                     print('Modifying ORF length for ' + str(product))
                     end = find_end_stop(genome, start, end)
             # This should now correctly annotate assemblies that come in with the very edges chopped off
@@ -494,12 +519,10 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
 
 
 # Takes a nucleotide sequence and a start and end position [1 indexed] and search for a stop codon from the start
-# to the end + 9 so every codon in the provided gene and then 3 after it. Return the first stop codon found or if no
+# to the end + 60 so every codon in the provided gene and then 3 after it. Return the first stop codon found or if no
 # stop codon is found return the original end value and print a warning
 def find_end_stop(genome, start, end):
     # save the provided end
-    # SUPER CRAZY CODE EDIt BECAUST THIS IS FAILING LIKE ALL ThE TIME RIGHT NOW
-    #TODO: CHECK THAT THIS ISN"T STUPID 
     start -= 1 
     old_end = end
     end = start + 3
@@ -517,20 +540,33 @@ def find_end_stop(genome, start, end):
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
 def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
-
+    did_we_reverse_complement = False 
     if not os.path.exists(strain):
         os.makedirs(strain)
 
+    if '_R_' in strain:
+        if strain[0:3] == '_R_':
+            print('WARNING: ' + strain + ' has _R_ as the first part of the sequence charachters YOU HAVE TO CHANGE THIS')
     write_fasta(strain, genome)
 
-    name_of_virus, our_seq, ref_seq, ref_accession = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
+    name_of_virus, our_seq, ref_seq, ref_accession, need_to_rc = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
+
+    if need_to_rc:
+        print('Input sequence needed to be reverse complemented to align properly.')
+        new_seq = Seq(genome)
+        # reverse complement input sequence and overwrite variable
+        genome = str(new_seq.reverse_complement())
+        did_we_reverse_complement = True
+        # overwrite our fasta and this happens before we call write fsa 
+        write_fasta(strain, genome)
+
+        name_of_virus, our_seq, ref_seq, ref_accession, need_to_rc = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
     gene_loc_list, gene_product_list, all_loc_list, all_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
 
-    write_cmt(strain, coverage,ref_accession)
+    write_cmt(strain, coverage,ref_accession, did_we_reverse_complement)
 
     write_fsa(strain, name_of_virus, genome, metadata, full_name)
-
     extra_stuff = ''
 
     # prime gene of interest so unless we're in one of the specific cases nothing will trigger
@@ -595,11 +631,14 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
 
     write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name)
 
-    cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb'
+    cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb 2>/dev/null'
     try:
         subprocess.call(cmd, shell=True)
     except:
         print('tbl2asn not installed, go to https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/ and download the appropriate version')
+    print('Done with: ' + strain)
+    print('')
+    print('')
     return name_of_virus
 
 
@@ -637,20 +676,19 @@ def pick_correct_frame(one, two):
 def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_interest, v):
     # Extract the gene protected because everything we throw in here are guaranteed to have the gene of interest
     print('Looks like this virus has RNA editing, fixing it now')
-    print(v)
+    #print(v)
 
     found_ = False
     print('gene of interest = '+ gene_of_interest)
     for g in range(0, len(gene_product_list)):
         # flipping this covers whack spacing in protein products
-        print('product = '+ gene_product_list[g])
+        #print('product = '+ gene_product_list[g])
         if gene_of_interest in gene_product_list[g]:
             nts_of_gene = genome[int(gene_loc_list[g][0]) - 1:int(gene_loc_list[g][1]) - 1]
             found_ = True
             break
 
     if found_:
-
         # add the correct number of Gs
         if v == 'HP3':
             start_of_poly_g = nts_of_gene.find('GGGGG', 700, 740)
@@ -658,7 +696,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
             nts_of_gene_2 = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
             nts_of_gene = pick_correct_frame(nts_of_gene_1, nts_of_gene_2)
 
-    # despite viral zone saying SENDAI adds 1 G adding two removes stop codon's - remains tbd if variable
+        # despite viral zone saying SENDAI adds 1 G adding two removes stop codon's - remains tbd if variable
         elif v == 'SENDAI':
             start_of_poly_g = nts_of_gene.find('AAAAGGG')
             nts_of_gene_1 = nts_of_gene[0:start_of_poly_g + 1] + 'G' + nts_of_gene[start_of_poly_g + 1:]
@@ -684,6 +722,7 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
         elif v == 'HPIV4a':
             start_of_poly_g = nts_of_gene.find('AAGAGG', 439, 460)
             nts_of_gene = nts_of_gene[0:start_of_poly_g + 1] + 'GG' + nts_of_gene[start_of_poly_g + 1:]
+
         elif v == 'HPIV2':
             print('HPIV2 is getting here correctly')
             start_of_poly_g = nts_of_gene.find('AAGAGG', 450, 490)
@@ -797,11 +836,13 @@ if __name__ == '__main__':
     parser.add_argument('--online',action='store_true', help='Force VAPiD to blast against online database.  This is good for machines that don\'t '
                                          'have blast+ installed or if the virus is really strange.'
                                          'Warning: this can be EXTREMELY slow, up to ~5-25 minutes a virus')
-    parser.add_argument('--no_spell_check', action='store_false', help='Turn off the automatic spellchecking for protein annoations ')
+    parser.add_argument('--spell_check', action='store_true', help='Turn on spellchecking for protein annoations ')
     parser.add_argument('--all', action='store_true', help='Use this flag to transfer ALL annotations from reference, this is largely untested')
-    parser.add_argument('--slashes', action='store_true', help='Use this flag to allow any characters in the name of your virus - This allows you to submit with a fasta file formated like >Sample1 (Human/USA/2016/A) Complete CDS'
-                        ' make sure that your metadata file only contains the first part of your name \'Sample1\' in the example above. You can also submit names with slashes by specifying in the metadata sheet under the header full_name, if you do that you do not need to use this flag')
-
+    parser.add_argument('--slashes', action='store_true', help='Use this flag to allow any characters in the name of your virus - This allows '
+                        'you to submit with a fasta file formated like >Sample1 (Human/USA/2016/A) Complete CDS'
+                        ' make sure that your metadata file only contains the first part of your name \'Sample1\' in the example above. '
+                        'You can also submit names with slashes by specifying in the metadata sheet under the header full_name, if you do that '
+                        'you do not need to use this flag')
 
     try:
         args = parser.parse_args()
