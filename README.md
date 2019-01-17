@@ -16,6 +16,8 @@ RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, H
 
 VAPiD currently does not support segmented viral genomes, although theoretically one could run individual segments one at a time. 
 
+Your FASTA sequence names shouldn't be more than 23 characters, although this won't crash the program your output .gbf files will be corrupted, VAPiD will print a warning when this happens so you can edit the names and resubmit. 
+
 As of VAPiD v1.3 support for custom virus names has been added and restrictions on slashes have been removed. For more information see the section below titled "Custom Names".
 
 # Quickstart Installation Guide
