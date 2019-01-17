@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.4.1'
+VERSION = 'v1.4.2'
 
 import subprocess
 import re
@@ -913,6 +913,8 @@ if __name__ == '__main__':
     for name in virus_strain_list:
         # now we've got a map of [strain] -> boolean value if there are stops or not
         strain2stops[name] = check_for_stops(name)
+        if len(name) > 23:
+            print('WARNING: ' + name + ' is over 23 characters, which means that your gbf file will be corrupted')
     time = str(timeit.default_timer() - start_time)
     newtime = time.split('.')[0] + '.' + time.split('.')[1][0:1]
     print('Done, did  ' + str(len(virus_strain_list)) + ' viruses in ' + newtime + ' seconds')
