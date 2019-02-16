@@ -25,7 +25,7 @@ As of VAPiD v1.3 support for custom virus names has been added and restrictions 
 1. Ensure you have python with numpy and biopython, mafft, and blast+ installed locally and on your path.
 2. Download and install [VAPiD](https://github.com/rcs333/VAPiD/archive/master.zip)
 3. Download [VAPiD Viral Database](https://github.com/rcs333/VAPiD/releases) and put it in the VAPiD folder
-4. Download and install [tbl2asn](https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/)
+4. Download and install [tbl2asn](https://www.ncbi.nlm.nih.gov/genbank/tbl2asn2/) this needs to be put on your path.
 
 # Quickstart Run Guide
 1. Put your viral genomes in a single fasta file, preferably with the strain name for each sequence as the sequence header.
