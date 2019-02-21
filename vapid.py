@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.4.2'
+VERSION = 'v1.5.0'
 
 import subprocess
 import re
@@ -336,12 +336,17 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
     # Experimental code for transferring 'gene' annotations from NCBI reference sequence
     if args.all:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
-            if 'gene' in line and '..' in line:
+            if ('gene' in line and '..' in line ) or ('repeat_region' in line and '..' in line):
                 # technically this should be gene list, but I already named the CDS stuff as if it were genes so we're just gonna roll with it
-                all_loc_list.append(re.findall(r'\d+', line))
+                if 'complement' in line:
+                    whack = re.findall(r'\d+', line)
+                    whack.reverse()
+                    all_loc_list.append(whack)
+                else:
+                    all_loc_list.append(re.findall(r'\d+', line))
                 # this lets us just read the next line because gene name will always be after nucleotide position
                 allow_one = True
-            if '/gene' in line and allow_one:
+            if ('/gene' in line and allow_one) or ('/note' in line and allow_one):
                 allow_one = False
                 px_all = line.split('=')[1][1:-2]
                 all_product_list.append(px_all)
@@ -427,6 +432,8 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
     # User put the -all flag
     if len(all_product_list) > 0:
         for x in range(0, len(all_product_list)):
+            print(all_product_list[x] + str(all_loc_list[x]))
+
             e_flag = ''
             s_flag = ''
             s_all = all_loc_list[x][0]
@@ -441,9 +448,17 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
             if int(e_all) < 1:
                 e_all = len(genome)
                 e_flag = '>'
-
-            tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\tgene\n')
-            tbl.write('\t\t\tgene\t' + p_all)
+            if p_all == 'inverted terminal repeat':
+                if int(s_all) <  (len(genome) / 2):
+                    s_all = 1
+                else:
+                    e_all = len(genome)
+                tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\trepeat_region\n')
+                tbl.write('\t\t\tnote\t' + p_all + '\n')
+                tbl.write('\t\t\trpt_type\tinverted')
+            else:
+                tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\tgene\n')
+                tbl.write('\t\t\tgene\t' + p_all)
 
     for x in range(0, len(gene_product_list)):
         print(gene_product_list[x] + ' ' + str(gene_locations[x]))
