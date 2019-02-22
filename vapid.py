@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.5.1'
+VERSION = 'v1.6'
 
 import subprocess
 import re
@@ -582,7 +582,7 @@ def find_end_stop(genome, start, end):
 
 # takes a single strain name and a single genome and annotates and save the entire virus and annotations package
 # returns the "species" of the virus for consolidated .sqn packaging
-def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
+def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name, nuc_a_type):
     did_we_reverse_complement = False 
     if not os.path.exists(strain):
         os.makedirs(strain)
@@ -609,7 +609,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name):
 
     write_cmt(strain, coverage,ref_accession, did_we_reverse_complement)
 
-    write_fsa(strain, name_of_virus, genome, metadata, full_name)
+    write_fsa(strain, name_of_virus, genome, metadata, full_name, nuc_a_type)
     extra_stuff = ''
 
     # prime gene of interest so unless we're in one of the specific cases nothing will trigger
@@ -787,10 +787,10 @@ def process_para(strain, genome, gene_loc_list, gene_product_list, gene_of_inter
 
 # Writes an fsa file based of the name, strain and genome, honestly we should allow for much more flexibility
 # and automation here
-def write_fsa(strain, name_of_virus, virus_genome, metadata, full_name):
+def write_fsa(strain, name_of_virus, virus_genome, metadata, full_name, nucleic_acid_type):
     fsa = open(strain + SLASH + strain + '.fsa', 'w')
     fsa.write('>' + full_name.strip() + ' [organism=' + name_of_virus + ']' + '[moltype=genomic] [host=Human] [gcode=1] '
-              '[molecule=RNA]' + metadata + '\n')
+              '[molecule=' + nucleic_acid_type + ']' + metadata + '\n')
     fsa.write(virus_genome)
     fsa.write('\n')
     fsa.close()
@@ -890,6 +890,7 @@ if __name__ == '__main__':
                         ' make sure that your metadata file only contains the first part of your name \'Sample1\' in the example above. '
                         'You can also submit names with slashes by specifying in the metadata sheet under the header full_name, if you do that '
                         'you do not need to use this flag')
+    parser.add_argument('--dna', action='store_true', help='Make all files annotated by this run be marked as DNA instead of the default (RNA)')
 
     try:
         args = parser.parse_args()
@@ -898,7 +899,11 @@ if __name__ == '__main__':
         sys.exit(0)
 
     fasta_loc = args.fasta_file
-
+    if args.dna:
+        nuc_acid_type = 'DNA'
+    else:
+        nuc_acid_type = 'RNA'
+        
     sbt_file_loc = args.author_template_file_loc
 
     virus_strain_list, virus_genome_list, full_name_list = read_fasta(fasta_loc, args.slashes)
@@ -922,7 +927,7 @@ if __name__ == '__main__':
 
     for x in range(0, len(virus_strain_list)):
         strain2species[virus_strain_list[x]] = annotate_a_virus(virus_strain_list[x], virus_genome_list[x],
-                                                                meta_list[x], coverage_list[x], sbt_file_loc, full_name_list[x])
+                                                                meta_list[x], coverage_list[x], sbt_file_loc, full_name_list[x],nuc_acid_type)
         # now we've got a map of [strain] -> name of virus (with whitespace)
 
     for name in virus_strain_list:
