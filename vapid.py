@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.6'
+VERSION = 'v1.6.1'
 
 import subprocess
 import re
@@ -56,7 +56,7 @@ def read_fasta(fasta_file_loc, slashes=False):
         else:
             dna_string += line.strip()
     # Just to make sure all our sequences are on the same page
-    genome_list.append(dna_string.replace('U', 'T'))
+    # genome_list.append(dna_string.replace('U', 'T'))
     return strain_list, genome_list, full_name_list
 
 
