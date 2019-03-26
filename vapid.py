@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.6.2'
+VERSION = 'v1.6.3'
 
 import subprocess
 import re
@@ -332,32 +332,56 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
 
     all_loc_list = []
     all_product_list = []
-
+    name_of_the_feature_list = []
     # Experimental code for transferring 'gene' annotations from NCBI reference sequence
     if args.all:
         for line in open(strain + SLASH + strain + '_ref.gbk'):
-            if ('gene' in line and '..' in line ) or ('repeat_region' in line and '..' in line):
-                # technically this should be gene list, but I already named the CDS stuff as if it were genes so we're just gonna roll with it
+            if ('..' in line) and ( ('gene' in line) or  ('mat_peptide' in line) or ('UTR' in line) or ('repeat_region' in line)  ):
+                name_of_the_feature_list.append(line.split()[0])
+
                 if 'complement' in line:
-                    whack = re.findall(r'\d+', line)
+                    whack = re.findall(r'\d+', line.split()[1])
                     whack.reverse()
                     all_loc_list.append(whack)
                 else:
-                    all_loc_list.append(re.findall(r'\d+', line))
-                # this lets us just read the next line because gene name will always be after nucleotide position
+                    all_loc_list.append(re.findall(r'\d+', line.split()[1]))
                 allow_one = True
-            if ('/gene' in line and allow_one) or ('/note' in line and allow_one):
-                allow_one = False
-                px_all = line.split('=')[1][1:-2]
-                all_product_list.append(px_all)
+                if 'UTR' in line:
+                    allow_one = Falseå
+                    all_product_list.append('')
+            elif allow_one : 
+                if '/product' in line:
+                    allow_one = False
+                    px_all = line.split('=')[1][1:-2]
+                    all_product_list.append(px_all)
+                elif '/gene' in line:
+                    allow_one = False
+                    px_all = line.split('=')[1][1:-2]
+                    all_product_list.append(px_all)
+                elif 'UTR' in name_of_the_feature_list[-1]:
+                    px_all = line.split('=')[1][1:-2]
+                    all_product_list.append(px_all)
+                    allow_one = False
+                elif '/rpt_type' in line:
+                    px_all = line.split('=')[1][0:-1]
+                    all_product_list.append(px_all)
+                    allow_one = False
+                elif '/db_xref' in line:
+                    name_of_the_feature_list.pop()
+                    all_loc_list.pop()
+                    allow_one = False
+
         # adjust gene list
+        #print(all_loc_list)
+        #print(all_product_list)
+        #print(name_of_the_feature_list)
         for entry in range(0, len(all_loc_list)):
             for y in range(0, len(all_loc_list[entry])):
                 all_loc_list[entry][y] = adjust(int(all_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
-
+    #print("DONE WITH THE ALL STUFF")
     allow_one = False
     for line in open(strain + SLASH + strain + '_ref.gbk'):
-        if ' CDS ' in line:
+        if ' CDS ' in line and '..' in line:
             # this is now going to be a list of numbers, start-stop start-stop
             # this line simply makes sure we read in reversed start-stops in the true reversed direction
             if 'complement' in line:
@@ -390,7 +414,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
     for entry in range(0, len(gene_loc_list)):
         for y in range(0, len(gene_loc_list[entry])):
             gene_loc_list[entry][y] = adjust(int(gene_loc_list[entry][y]), our_seq_num_array, ref_seq_num_array, genome)
-    return gene_loc_list, gene_product_list, all_loc_list, all_product_list
+    return gene_loc_list, gene_product_list, all_loc_list, all_product_list, name_of_the_feature_list
 
 
 # takes a strain name and a genome and writes and saves a fasta to the correct directory
@@ -419,7 +443,7 @@ def write_cmt(sample_name, coverage, ref_gb, did_we_rc):
 
 # this takes in all of our information and makes a feature table that contains correct annotations for for ribosomal slippage and RNA editing
 # - as well as creation of a .pep file for rna editing -- Now we also pass two possibly empty lists to write tbl so we can write gene annotations
-def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list, full_name ):
+def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest, note, name_o_vir, all_loc_list, all_product_list, full_name, name_of_the_feature_list):
     # covers the nipah situation where there's RNA editing on more than 1 protein - if this happens for more viruses I'll need to code a more
     # robust sollution, but for now this works 
     if 'nipah' in name_o_vir.lower():
@@ -457,9 +481,15 @@ def write_tbl(strain, gene_product_list, gene_locations, genome, gene_of_intrest
                 tbl.write('\t\t\tnote\t' + p_all + '\n')
                 tbl.write('\t\t\trpt_type\tinverted')
             else:
-                tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\tgene\n')
-                tbl.write('\t\t\tgene\t' + p_all)
-
+                tbl.write('\n' + s_flag + str(s_all) + '\t' + e_flag + str(e_all) + '\t' +name_of_the_feature_list[x] + '\n')
+                if 'UTR' in name_of_the_feature_list[x] or 'gene' in name_of_the_feature_list[x]:
+                    feat_des = 'gene'
+                elif 'mat_peptide' in name_of_the_feature_list[x] or 'CDS' in name_of_the_feature_list:
+                    feat_des = 'product'
+                else:
+                    feat_des =  'rpt_type'
+                tbl.write('\t\t\t' + feat_des + '\t' + p_all)
+    
     for x in range(0, len(gene_product_list)):
         print(gene_product_list[x] + ' ' + str(gene_locations[x]))
         flag = ''
@@ -605,7 +635,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name, nuc
 
         name_of_virus, our_seq, ref_seq, ref_accession, need_to_rc = blast_n_stuff(strain, strain + SLASH + strain + '.fasta')
 
-    gene_loc_list, gene_product_list, all_loc_list, all_product_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
+    gene_loc_list, gene_product_list, all_loc_list, all_product_list, name_of_the_feature_list = pull_correct_annotations(strain, our_seq, ref_seq, genome)
 
     write_cmt(strain, coverage,ref_accession, did_we_reverse_complement)
 
@@ -676,7 +706,7 @@ def annotate_a_virus(strain, genome, metadata, coverage, sbt_loc, full_name, nuc
     
 
 
-    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name)
+    write_tbl(strain, gene_product_list, gene_loc_list, genome, gene_of_interest, extra_stuff, name_of_virus, all_loc_list, all_product_list, full_name, name_of_the_feature_list)
 
     cmd = 'tbl2asn -p ' + strain + SLASH + ' -t ' + sbt_loc + ' -Y ' + strain + SLASH + 'assembly.cmt -V vb '
     try:
