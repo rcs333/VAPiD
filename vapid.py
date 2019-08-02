@@ -347,7 +347,7 @@ def pull_correct_annotations(strain, our_seq, ref_seq, genome):
                     all_loc_list.append(re.findall(r'\d+', line.split()[1]))
                 allow_one = True
                 if 'UTR' in line:
-                    allow_one = Falseå
+                    allow_one = False
                     all_product_list.append('')
             elif allow_one : 
                 if '/product' in line:
