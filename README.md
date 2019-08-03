@@ -4,7 +4,7 @@ VAPiD is a ultra-lightweight script for quickly annotating and preparing sequenc
 
 **If you use this program for research (or something else where you can put citations) I'd love a citation!** 
 
-BMC Bioinformatics Manuscript (https://rdcu.be/biOrD)!
+[BMC Bioinformatics Manuscript](https://doi.org/10.1186/s12859-019-2606-y)!
 
 VAPiD can perform three different types of viral annotation:
 1. Rapid search of a local compressed viral database for any set of viruses with a reference genome (recommended)
