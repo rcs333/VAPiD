@@ -2,6 +2,8 @@
 # Viral Annotation Pipeline and iDentification
 VAPiD is a ultra-lightweight script for quickly annotating and preparing sequences of human viruses for sending to NCBI Genbank.  VAPiD takes a fasta file of human viruses, an NCBI-generated author list, and sample metadata and exports Sequin files that are ready to submit to NCBI as well as human readable annotations which can be used for other analysis.
 
+If you use this program for research (or something else where you can put citations) I'd love a citation! 
+
 BMC Bioinformatics Manuscript (https://rdcu.be/biOrD)!
 
 VAPiD can perform three different types of viral annotation:
