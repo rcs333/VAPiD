@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.6.3'
+VERSION = 'v1.6.4'
 
 import subprocess
 import re
@@ -291,8 +291,10 @@ def build_num_arrays(our_seq, ref_seq):
 def adjust(given_num, our_num_array, ref_num_array, genome):
     found = False
     # Handles gene lengths that go off the end of the genome
-    if given_num >= len(genome):
-        return len(genome)
+    # 1.6.4 - this is obsolete and a bad implementation, the block at the end of this function takes care of this
+    # better, I'm leaving this in comments for a while just in case 
+    #if given_num >= len(genome):
+    #    return len(genome)
 
     # Go through our number array and search for the number of interest
     if our_num_array[given_num] == '-1':
