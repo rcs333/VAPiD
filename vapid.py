@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.6.5'
+VERSION = 'v1.6.6'
 
 import subprocess
 import re
@@ -315,10 +315,10 @@ def adjust(given_num, our_num_array, ref_num_array, genome):
 
     # now index is the absolute location of what we want
     if found:
-        if given_num >= len(genome):
+        if our_num_array[index] >= len(genome):
         # this is the new handling of when genes run off the end of the submitted genome 
-        return len(genome)
-            return str(our_num_array[index])
+            return len(genome)
+        return str(our_num_array[index])
     else:
         return str(len(genome))
 
