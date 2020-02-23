@@ -14,6 +14,8 @@ VAPiD can perform three different types of viral annotation:
 VAPiD is currently tested and working on Windows 10, Ubuntu 10.4, and Mac OS X.
 
 Viruses that VAPiD has been tested with:  
+*2019-nCov is tested and working as of 2/23/20.* However, the prebuilt local blast databases are from late 2018 and as such do not contain any references for this new virus. I reccomend either using  '--r NC_045512.2' or downloading novel sequences and adding them to your own local blast database, the releases page contains the fasta sequences used to generate the blast databases so simply append the new sequences and rebuild the blast database.
+
 RSV, Parainfluenzas, Metapneumovirus, Coronaviruses, Enterovirus/Rhinoviruses, Hepatitis A-E, Nipah, Sendai, Measles, Mumps, Rubella, Ebola, West Nile Virus, HTLV, HIV (The references for HIV can be a little variable), Norovirus, JC, BK, HPV. However, any non segmented virus that has been previously deposited on genbank or for which you posses a .gbf file ~should~ work. If you would like to use VAPiD for a virus not listed just go ahead and try running it - if you get bad annoations or errors then send an email to uwvirongs@gmail.com and I'll add support for your favorite virus. 
 
 VAPiD currently does not support segmented viral genomes, although theoretically one could run individual segments one at a time. 
