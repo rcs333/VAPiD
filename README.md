@@ -47,7 +47,7 @@ https://submit.ncbi.nlm.nih.gov/genbank/template/submission/
 
 1. Install all dependencies (Shout-out to the wonderful people who wrote these!)
 
-Python - tested almost exclusively on python 2.7.14. Python 3 and above have syntax issues and actually break when you try to manually enter metadata.
+Python - tested almost exclusively on python 2.7.14. Python 3 is now supported. Follow these exact steps except obviously install python pakcages for Python 3 not 2. Then at runtime simply exectue vapid3.py (`python3 vapid3.py` ect.) 
 https://www.python.org/downloads/
 
 If you're running Python < 2.7.4 follow this guide to install pip (You may need administrator privileges.)
