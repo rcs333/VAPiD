@@ -171,7 +171,11 @@ folder - that way you don't have to worry about typing paths.
 
 # Output
 
-The program will run for a bit and generate a folder for each sequence in your fasta file. The folder will be named the same as what you named the strain in the fasta file. (So if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf, .tbl, and ect files that you need and love.) 
+The program will run for a bit and generate a folder for each sequence in your fasta file. The folder will be named the same as what you named the strain in the fasta file. (So if the first line of your fasta file is >SC12309 then there will be a folder called SC12309 with all of the .gbf, .tbl, and ect files that you need and love.)
+
+Here's a picture of all the files that should be present if you run VAPiD on the example.fasta and examble.sbt included.
+
+![Example Output](https://github.com/rcs333/VAPiD/blob/master/.idea/Example_output.png) 
 
 tbl2asn will also spit out some errors and warnings onto the command line.
 
@@ -208,7 +212,3 @@ I do NOT reccomend batching submissions that mix these options. Also, if my solu
 # Implementation Details and Important Notes
 
 A large problem is actually inconsistent spelling in GenBank sequence records or sequence records that do not have every protein annotated. The ESpell utility from NCBI is currently being used to check spelling on protein names. However this can result in certain protein names losing capitilization (i.e. IIIa3 will get changed to iiia3). 
-
-# Future directions
-Preprint is avalible at (https://www.biorxiv.org/content/early/2018/09/18/420463) and paper is currently under review.
-Email uwvirongs@gmail.com for feature requests or bug reports.  
