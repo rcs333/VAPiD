@@ -2,7 +2,7 @@
 # producing files suitable for NCBI submission
 
 # Vapid Version
-VERSION = 'v1.6.6'
+VERSION = 'v1.6.7'
 
 import subprocess
 import re
@@ -14,6 +14,7 @@ from Bio.Blast import NCBIWWW
 import platform
 import sys
 from Bio import Entrez
+from Bio import SeqIO
 import time
 import shutil
 import re
@@ -209,10 +210,13 @@ def blast_n_stuff(strain, our_fasta_loc):
     print(name_of_virus + ' was the parsed name of the virus')
 
 
-    h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
-    d = open(strain + SLASH + strain + '_ref.fasta', 'w')
-    d.write(h.read())
-    d.close()
+    if args.f:
+        SeqIO.convert(args.f, "genbank", strain  + SLASH + strain + "_ref.fasta", "fasta")
+    else:
+        h = Entrez.efetch(db='nucleotide', id=record["IdList"][0], rettype='fasta', retmode='text')
+        d = open(strain + SLASH + strain + '_ref.fasta', 'w')
+        d.write(h.read())
+        d.close()
 
     # mafft rules and the developer of mafft is awesome
     z = open(strain + SLASH + strain + '_aligner.fasta', 'w')
